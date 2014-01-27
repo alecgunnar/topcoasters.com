@@ -1,0 +1,21 @@
+#trackrecord {
+    table tr{
+        td.editRecord {
+            .textRight;
+            
+            a {
+                display: none;
+                transition: 2s;
+            }
+        }
+        
+        &:hover {
+            td.editRecord {
+                a {
+                    display: inline-block;
+                    transition: 2s;
+                }
+            }
+        }
+    }
+}

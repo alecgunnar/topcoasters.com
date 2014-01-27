@@ -1,0 +1,88 @@
+<?php
+
+define('ROOT_PATH', __DIR__);
+
+/**
+ * Configuration for compiling LESS into CSS
+ */
+define('PATH_TO_LESS_FILE', ROOT_PATH . '/Assets/Less/main.less');
+define('COMPILE_LESS_TO',   ROOT_PATH . '/Public/assets/css/main.css');
+
+/**
+ * Configuration for compiling JS files
+ */
+define('PATH_TO_JS_FILES',  ROOT_PATH . '/Assets/JavaScript');
+define('COMPILE_JS_TO',     ROOT_PATH . '/Public/assets/javascript/main.js');
+
+/**
+ * The location of the build ID file
+ */
+define('BUILD_ID_FILE', ROOT_PATH . '/BUILD_ID');
+
+pake_desc('The general Pake task, does everything.');
+pake_task('default');
+
+function run_default() {
+    run_build_id();
+    run_compile_less();
+    run_compile_js();
+}
+
+pake_desc('Generates the Build ID');
+pake_task('build_id');
+
+function run_build_id() {
+    if(file_exists(BUILD_ID_FILE)) {
+        $uniqueId = uniqid();
+
+        file_put_contents(BUILD_ID_FILE, $uniqueId);
+
+        pake_echo('Generated the Build ID');
+    } else {
+        pake_echo('Unable to generate Build ID');
+    }
+}
+
+pake_desc('Compiles all of the LESS files into CSS');
+pake_task('compile_less');
+
+function run_compile_less() {
+    if(!file_exists(COMPILE_LESS_TO)) {
+        touch(COMPILE_LESS_TO);
+    }
+
+    $less = array();
+
+    exec('lessc ' . PATH_TO_LESS_FILE . ' -x', $less);
+
+    file_put_contents(COMPILE_LESS_TO, implode('', $less));
+
+    pake_echo('Compiled LESS');
+}
+
+pake_desc('Compiles all of the JavaScript files into one large file');
+pake_task('compile_js');
+
+function run_compile_js() {
+    $allJs        = '';
+    $allCleanedJs = '';
+    $jsDir        = opendir(PATH_TO_JS_FILES);
+
+    if($jsDir) {
+        while(($file = readdir($jsDir)) !== false) {
+            if($file[0] != '.') {
+                $allJs .= file_get_contents(PATH_TO_JS_FILES . '/' . $file);
+            }
+        }
+
+        $expLines = explode("\n", $allJs);
+
+        foreach($expLines as $n => $v) {
+            $allCleanedJs .= trim($v);
+        }
+    }
+
+    file_put_contents(COMPILE_JS_TO, $allJs);
+
+    pake_echo('Compiled JavaScript');
+}

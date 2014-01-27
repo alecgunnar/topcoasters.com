@@ -1,0 +1,121 @@
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http: //markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUp * {
+	margin: 0px; padding: 0px;
+	outline: none;
+}
+
+.markItUp a:link,
+.markItUp a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+.markItUp  { }
+
+.markItUpContainer  {
+	.plainBox;
+    .lighterBox;
+    
+	padding: 5px 10px 10px;
+}
+
+.markItUpEditor {
+    font-family: courier;
+    font-size: .8em;
+    height: 200px;
+    padding: 5px;
+}
+
+.markItUpHeader ul {
+    li	{
+    	list-style: none;
+    	float: left;
+    	position: relative;
+	}
+	
+	.markItUpSeparator, a {
+    	margin: 7px 7px 10px 0;
+	}
+	
+	.markItUpSeparator {
+    	background: #CCC;
+    	width: 1px;
+    	height: 24px;
+    	overflow: hidden;
+    }
+    
+    a {
+        .plainBox;
+        .darkBox;
+        background-position: center center;
+    	background-repeat: no-repeat;
+    	display: block;
+    	width: 16px;
+    	height: 16px;
+    	text-indent: -10000px;
+    	padding: 3px;
+    	
+    	&:hover {
+    	    .lighterBox;
+    	}
+    }
+}
+
+/* -------------------------------------------------------------------
+// markItUp!
+// By Jay Salvat - http: //markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUp .markItUpButton1 a {
+	background-image: url('@{images}editor_icons/bold.png');
+}
+
+.markItUp .markItUpButton2 a {
+	background-image: url('@{images}editor_icons/italic.png');
+}
+
+.markItUp .markItUpButton3 a {
+	background-image: url('@{images}editor_icons/underline.png');
+}
+
+.markItUp .markItUpButton4 a {
+	background-image: url('@{images}editor_icons/stroke.png');
+}
+
+.markItUp .markItUpButton5 a {
+	background-image: url('@{images}editor_icons/text_align_left.png');
+}
+
+.markItUp .markItUpButton6 a {
+	background-image: url('@{images}editor_icons/text_align_center.png');
+}
+
+.markItUp .markItUpButton7 a {
+	background-image: url('@{images}editor_icons/text_align_right.png');
+}
+
+.markItUp .markItUpButton8 a {
+	background-image: url('@{images}editor_icons/text_superscript.png');
+}
+
+.markItUp .markItUpButton9 a {
+	background-image: url('@{images}editor_icons/text_subscript.png');
+}
+
+.markItUp .markItUpButton10 a {
+	background-image: url('@{images}editor_icons/list-bullet.png'); 
+}
+
+.markItUp .markItUpButton11 a {
+	background-image: url('@{images}editor_icons/picture.png'); 
+}
+
+.markItUp .markItUpButton12 a {
+	background-image: url('@{images}editor_icons/film.png');
+}
+
+.markItUp .markItUpButton13 a {
+	background-image: url('@{images}editor_icons/link.png');
+}

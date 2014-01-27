@@ -1,0 +1,291 @@
+@images: "/assets/images/";
+@image-path:    "/assets/images/themes/maverick/";
+@wrapper-width: 960px;
+@standard-padding: 10px;
+@header-height: 50px;
+
+@import "colors.less";
+@import "fonts.less";
+@import "mixins.less";
+@import "typography.less";
+@import "boxes.less";
+
+* {
+    outline: none;
+    word-break: break-word;
+}
+
+body {
+    background: #FFF;
+    font-family: Helvetica;
+    color: #000;
+    font-size: 16px;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: @wrapper-width;
+    margin: 0 auto;
+}
+
+#memberBar {
+    background: #242424;
+    color: #FFF;
+    font-size: .9em;
+    padding: 10px 0;
+    position: relative;
+    
+    .options {
+        .menu;
+        
+        li {
+            margin-right: 10px;
+            
+            a {
+                color: #FFF;
+                padding: 10px 0;
+                
+                .profilePicture {
+                    width: 25px;
+                    position: relative;
+                    margin-right: 5px;
+                    float: left;
+                    
+                    img {
+                        margin-top: -2px;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            
+            &.facebookLoginMini {
+                width: 125px;
+                display: block;
+                
+                a {
+                    background: url("@{image-path}facebook/login_mini.png") no-repeat;
+                    background-position: center center;
+                    text-indent: -99999px;
+                    width: 135px;
+                    height: 29px;
+                    padding: 0;
+                    margin-top: -7px;
+                    position: absolute;
+                }
+            }
+        }
+        
+        .right li {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+}
+
+#header {
+    background: @base;
+    height: @header-height;
+    
+    #logo {
+        background: url('@{image-path}logo.png') no-repeat;
+        background-position: center center;
+        text-indent: -99999px;
+        width: 198px;
+        height: @header-height;
+        display: block;
+    }
+    
+    #mainNavigation {
+        float: right;
+        
+        .menu;
+        
+        ul {
+            li {
+                a {
+                    color: #FFF;
+                    font-weight: 400;
+                    text-decoration: none;
+                    line-height: @header-height;
+                    display: inline-block;
+                    padding: 0 20px;
+                    margin-left: -10px;
+                    height: @header-height;
+                
+                    &:hover,
+                    &.active {
+                        background: @dark;
+                    }
+                }
+            }
+        }
+    }
+    
+    #search {
+        position: relative;
+        float: right;
+        margin: 10px 0 0 20px;
+        
+        .clearField {
+            background: url("@{image-path}clearField.png") no-repeat;
+            background-position: center center;
+            width: 20px;
+            height: 20px;
+            margin: 5px 5px 0 0;
+            cursor: pointer;
+            right: 0;
+            position: absolute;
+            display:none;
+        }
+        
+        input {
+            background: #FFF;
+            font-size: .8em;
+            padding: 5px 25px 5px 5px;
+            border: 0;
+            width: 160px;
+            max-width: 250px;
+            transition: .5s;
+        }
+    }
+}
+
+#redirectWrapper {
+    position: fixed;
+    top: 3px;
+    z-index: 105;
+    width: 100%;
+    height: 1px;
+    
+    #redirectMessage {
+        background: #FFFF8A;
+        border: 2px solid darken(#FFFF8A, 30%);
+        text-align: center;
+        font-size: .8em;
+        width: 400px;
+        margin: 0 auto;
+        padding: 5px;
+    }
+}
+
+#content {
+    background: transparent;
+    padding: 10px 0;
+    
+    div:last-child {
+        margin-bottom: 0;
+    }
+    
+    a.button {
+        background: @dark;
+        color: #FFF;
+        text-decoration: none;
+        padding: 5px 10px;
+    }
+    
+    a.facebookLogin {
+        background: url("@{image-path}facebook/login_active.png") no-repeat;
+        text-indent: -99999px;
+        display: block;
+        width: 150px;
+        height: 34px;
+        margin: 0 auto;
+        
+        &:active {
+            background: url("@{image-path}facebook/login_pressed.png") no-repeat;
+        }
+    }
+    
+    .alphabetNavigation {
+        background: @dark;
+        text-align: center;
+        padding: 10px;
+        .menu;
+        .box;
+        .boxBorder;
+        
+        a {
+            color: #FFF;
+            padding: 0 5px;
+        }
+    }
+}
+
+.profilePicture {
+    &.extraSmall {
+        img {
+            max-width: 45px;
+            max-height: 45px;
+        }
+    }
+    
+    &.small {
+        img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+    }
+    
+    &.medium {
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    }
+    
+    &.large {
+        img {
+            max-width: 150px;
+            max-height: 150px;
+        }
+    }
+    
+    &.bordered {
+        img {
+            border: 1px solid #CCC;
+        }
+    }
+}
+
+#footer {
+    background: transparent;
+    font-size: .9em;
+    color: #666;
+    padding: 10px 0 20px;
+    
+    .menu {
+        float: right;
+        
+        .menu;
+    }
+    
+    a {
+        color: #666;
+    }
+}
+
+#scrollToTop {
+    background: transparent url('@{image-path}jump_to_top.png') no-repeat;
+    background-position: center center;
+    text-indent: -99999px;
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    opacity: .5;
+    display: none;
+}
+
+@import "ratings.less";
+@import "forms.less";
+@import "tabs.less";
+
+@import "pages.less";
+@import "bbcode.less";
+
+@import "markItUp.less";

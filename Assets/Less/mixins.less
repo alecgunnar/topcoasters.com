@@ -1,0 +1,68 @@
+.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+    background-color: @start;
+    background-image: -webkit-linear-gradient(@origin, @start, @stop);
+    background-image: -moz-linear-gradient(@origin, @start, @stop);
+    background-image: -o-linear-gradient(@origin, @start, @stop);
+    background-image: -ms-linear-gradient(@origin, @start, @stop);
+    background-image: linear-gradient(@origin, @start, @stop);
+}
+
+.wrapperWidth(@percent) {
+    width: @wrapper-width * @percent;
+}
+
+.menu,
+.verticalMenu {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.menu {
+    ul {
+        li {
+           list-style: none;
+           display: inline;
+           
+           a {
+               margin: 0 3px;
+           }
+           
+           &:first-child {
+               a {
+                   margin-left: 0;
+               }
+           }
+           
+           &:last-child {
+               a {
+                   margin-right: 0;
+               }
+           }
+        }
+    }
+    
+    &.buttons {
+        a {
+            background: @dark;
+            color: #FFF;
+            font-size: .8em;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+    }
+}
+
+.verticalMenu {
+    ul {
+        li {
+           margin: 0 0 10px 15px;
+           list-style: none;
+           
+           &last-child {
+               margin-bottom: 0;
+           }
+        }
+    }
+}

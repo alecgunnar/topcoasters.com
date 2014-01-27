@@ -1,0 +1,41 @@
+@base: #069;
+
+@facebook-blue: #3D579D;
+
+@light: lighten(@base, 5%);
+@lighter: lighten(@base, 10%);
+@dark: darken(@base, 5%);
+@darker: darken(@base, 10%);
+
+@fbBlue: #3b5998;
+
+#colorTable {
+    border-collapse: collapse;
+    
+    tr {
+        td {
+            width: 100px;
+            height: 100px;
+            
+            &:first-child {
+                background: @base;
+            }
+            
+            &:nth-child(2) {
+                background: @light;
+            }
+            
+            &:nth-child(3) {
+                background: @lighter;
+            }
+            
+            &:nth-child(4) {
+                background: @dark;
+            }
+            
+            &:nth-child(5) {
+                background: @darker;
+            }
+        }
+    }
+}

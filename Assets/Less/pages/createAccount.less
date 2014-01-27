@@ -1,0 +1,45 @@
+#createanaccount{
+    .create {
+        background: darken(#FFF, 5%);
+        border: 1px solid darken(#FFF, 20%);
+        padding: 10px;
+        margin-top: 20px;
+        
+        form {
+            #password input {
+                width: 46%;
+                
+                &:last-child {
+                    float:right;
+                }
+            }
+            
+            #terms {
+                margin: 10px 0;
+            }
+            
+            .field {
+                label {
+                    font-size: 1.25em;
+                }
+                
+                .error {
+                    color: #A00;
+                    
+                    a {
+                        color: #A00;
+                    }
+                }
+                
+                input {
+                    width: 98%;
+                }
+            }
+        }
+    }
+    
+    .connect {
+        padding-top: 100px;
+        text-align: center;
+    }
+}

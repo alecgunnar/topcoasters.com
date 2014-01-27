@@ -1,0 +1,37 @@
+#database-amusementparks {
+    .fieldGroup {
+        padding-bottom: 0;
+        
+        .groupLabel {
+            &.lightWeight {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: 0;
+            }
+            
+            .minimax {
+                font-size: .8em;
+                font-weight: 100;
+                cursor: pointer;
+            }
+        }
+        
+        .locations {
+            .field {
+                display: none;
+                margin: 0 0 10px;
+                
+                &.noHide,
+                &.dontHide {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+#database-rollercoaster {
+    #locationInfo {
+        margin-bottom: 10px;
+    }
+}

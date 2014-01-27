@@ -1,0 +1,12 @@
+/vendor
+composer.lock
+BUILD_ID
+/Logs
+ENVIRONMENT
+/Config/Master/Database.php
+/Config/Master/SMTP.php
+/Config/Master/Facebook.php
+/Config/Dev
+.DS_Store
+/Application/Cache/*
+/Public/assets/uploads/profile_pictures/*
