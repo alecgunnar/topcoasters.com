@@ -4,10 +4,11 @@ a {
     &:hover {
         text-decoration: none;
     }
-    
-    &.redLink {
-        color: #A00;
-    }
+}
+
+a.redLink,
+.redText {
+    color: #A00 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -22,6 +23,12 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-weight: 400;
+    position: relative;
+    z-index: 1;
+}
+
+.h1Description {
+    margin: -10px 0 10px;
 }
 
 .grayWrap h1 {
@@ -45,5 +52,11 @@ h1 {
 }
     
 .description {
+    color: #666;
     font-size: .8em;
+    margin-top: 3px;
+    
+    a {
+        color: #666;
+    }
 }

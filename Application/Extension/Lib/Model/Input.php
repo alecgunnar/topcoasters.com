@@ -4,21 +4,12 @@ namespace Maverick\Lib;
 
 class Model_Input extends Model {
     /**
-     * The database connection
-     *
-     * @var \Maverick\Lib\DataSource_MySql | null
-     */
-    private $db = null;
-
-    /**
      * Gets the input and cleans it up
      *
      * @param  array $input
      * @return null
      */
     public function __construct($input) {
-        $this->db = new \Maverick\Lib\DataSource_MySql;
-
         $this->process($input);
     }
 
@@ -47,7 +38,7 @@ class Model_Input extends Model {
         if(is_object($value)) {
             parent::set($name, $value);
         } else {
-            $value = htmlentities(strip_tags($value), ENT_QUOTES);
+            $value = htmlentities($value, ENT_QUOTES);
 
             parent::set($name, $value);
         }

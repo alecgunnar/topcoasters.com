@@ -24,7 +24,7 @@ class Layouts_Default extends \Maverick\Lib\Controller {
 
         $this->setVariable('navigationLinks', $navigationLinks);
 
-        $searchForm = new \Application\Form\Search;
+        $searchForm = new \Application\Form\Search(Output::getGlobalVariable('search_box_text'), Output::getGlobalVariable('search_box_what'));
 
         $this->setVariable('searchForm', $searchForm->render());
     }

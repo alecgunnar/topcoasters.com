@@ -179,11 +179,34 @@ body {
         margin-bottom: 0;
     }
     
-    a.button {
+    a.button,
+    .dummyButton {
         background: @dark;
         color: #FFF;
         text-decoration: none;
         padding: 5px 10px;
+        
+        &.gray {
+            background: #CCC;
+            color: #333;
+        }
+        
+        &.red {
+            background: #A00;
+            color: #FFF;
+        }
+        
+        &.green {
+            background: #0A0;
+            color: #FFF;
+        }
+    }
+    
+    .postingOptions {
+        margin-top: 10px;
+        position: relative;
+        z-index: 2;
+        .right;
     }
     
     a.facebookLogin {
@@ -250,6 +273,18 @@ body {
     }
 }
 
+img {
+    &.thumbnail {
+        max-width: 175px;
+        max-height: 175px;
+    }
+    
+    &.fit {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
 #footer {
     background: transparent;
     font-size: .9em;
@@ -288,4 +323,5 @@ body {
 @import "pages.less";
 @import "bbcode.less";
 
+@import "flexslider.less";
 @import "markItUp.less";

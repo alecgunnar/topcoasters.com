@@ -24,6 +24,7 @@ class Index extends \Maverick\Lib\Controller {
         Output::setGlobalVariable('title_suffix', '');
 
         $this->setupFlexslider();
+        $this->getRecentNews();
     }
 
     private function setupFlexslider() {
@@ -38,14 +39,18 @@ class Index extends \Maverick\Lib\Controller {
     
             if(is_dir($dir)) {
                 $openDir = opendir($dir);
-    
+
+                $coasters = new \Application\Service\RollerCoasters;
+
                 while(($file = readdir($openDir)) !== false) {
                     if($file[0] != '.') {
                         $expFile = explode('.', $file);
                         $expData = explode('-', $expFile[0]);
-    
-                        $images[] = array($file,
-                                          ucwords(str_replace('_', ' ', $expData[0])) . ' at ' . ucwords(str_replace('_', ' ', $expData[1])));
+
+                        $theCoaster = ucwords(str_replace('_', ' ', $expData[0]));
+                        $thePark    = ucwords(str_replace('_', ' ', $expData[1]));
+
+                        $images[] = array($file, $theCoaster, $thePark);
                     }
                 }
     
@@ -56,7 +61,18 @@ class Index extends \Maverick\Lib\Controller {
                     $idx = rand(0, $max);
     
                     if(array_key_exists($idx, $images)) {
-                        $toShow[$i] = $images[$idx];
+                        $theCoaster = $images[$idx][1];
+                        $thePark    = $images[$idx][2];
+
+                        $coaster = $coasters->getForFlex($theCoaster, $thePark);
+                        $msg     = '%s at %s';
+
+                        if(!is_null($coaster)) {
+                            $theCoaster = $coaster->getLink();
+                            $thePark    = $coaster->getPark()->getLink();
+                        }
+
+                        $toShow[$i] = array($images[$idx][0], sprintf($msg, $theCoaster, $thePark));
     
                         unset($images[$idx]);
     
@@ -70,5 +86,19 @@ class Index extends \Maverick\Lib\Controller {
 
         $this->setVariable('urlToImage', self::PATH_TO_FLEX_IMAGES . '/');
         $this->setVariable('flexImages', $toShow);
+    }
+
+    private function getRecentNews() {
+        $featuredTopicsCache = new \Maverick\Lib\Cache('featuredTopics');
+        $recentNews          = $featuredTopicsCache->get();
+
+        if(!is_array($recentNews)) {
+            $topics     = new \Application\Service\Topics;
+            $recentNews = $topics->getRecentNews();
+
+            $featuredTopicsCache->set($recentNews);
+        }
+
+        $this->setVariable('recentNews', $recentNews);
     }
 }

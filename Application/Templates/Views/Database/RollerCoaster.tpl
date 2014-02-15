@@ -5,7 +5,7 @@
 {% endif %}
 
 <h1>{% if coaster.get('name') is empty %}<em>{{ coaster.getName() }}</em>{% else %}{{ coaster.getName() }}{% endif %}</h1>
-<div id="locationInfo">
+<div class="h1Description">
   at {{ park.getLink()|raw }} {% if park.getLocation() is not empty %} in {{ park.getLocation()|raw }}{% endif %}
 </div>
 <div class="left seventy">

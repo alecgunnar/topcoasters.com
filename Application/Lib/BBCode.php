@@ -21,14 +21,23 @@ class BBCode {
                           'img'     => '<img src="{content}" />',
                           'url'     => '<a href="{option}" target="_blank">{content}</a>',
                           'youtube' => '<iframe width="560" height="315" src="//www.youtube.com/embed/{content}" frameborder="0" allowfullscreen></iframe>',
-                          'quote'   => '<div class="quote">{content}</div>');
+                          'quote'   => '<div class="quote">{content}</div>',
+                          'title'   => '<div style="margin-bottom: 5px; {option}">{content}</div>',
+                          'code'    => '<div class="code">{content}</div>');
 
     /**
      * Tags which should not be immediately followed by a new line
      *
      * @var array
      */
-    private $noNewLinesAround = array('left', 'center', 'right', 'list', 'quote');
+    private $noNewLinesAround = array('left', 'center', 'right', 'list', 'quote', 'title');
+
+    /**
+     * Tags which will not have nested bbcodes parsed
+     *
+     * @var array
+     */
+    private $noNestedTags = array('code');
 
     /**
      * The tree of the tags
@@ -82,19 +91,22 @@ class BBCode {
     /** 
      * Calls methods which are needed to parse the BBCode message, then returns the parsed message
      *
-     * @param  string $str
+     * @param  string  $str
+     * @param  boolean $serialize=true
      * @return string
      */
     public function parse($str) {
-        $str = $str;
-
         $str = $this->removeIllegalNewLines($str);
 
         $this->tokenize($str);
-
-        return $this->render();
     }
 
+    /**
+     * Removes new lines from around certain tags that shouldn't have them
+     *
+     * @param  string $str
+     * @return string
+     */
     private function removeIllegalNewLines($str) {
         $allTags = implode('|', $this->noNewLinesAround);
 
@@ -105,36 +117,115 @@ class BBCode {
         return $str;
     }
 
-    private function removeNewLines($str) {
-        return preg_replace('~[\r\n]~', '', $str);
+    /**
+     * Renders the bbcode from the serialized form
+     *
+     * @param string $serialized
+     * @return string
+     */
+    public function render($serialized) {
+        $this->parse($serialized);
+
+        return $this->toHtml();
     }
 
-    private function checkTag_list($option, $content, $html) {
-        $tag     = $option == 'num' ? 'ol' : 'ul';
-        $content = $this->removeNewLines(preg_replace('~\[\*\](.+)~', '<li>$1</li>', $content));
-
-        return str_replace(array('{tag}', '{content}'), array($tag, $content), $html);
-    }
-
-    private function checkTag_quote($option, $content, $html) {
-        $title        = 'Quote';
-        $quoteContent = '';
-        $quoting      = '';
-
-        if(is_numeric($option)) {
-            $posts = new \Application\Service\Posts;
-            $post  = $posts->get($option);
-
-            if($post) {
-                $quoting = '<a href="' . $post->getUrl() . '">Go to Post &rarr;</a>';
-            }
+    /**
+     * Takes the node tree and creates a bbcode string for editing
+     *
+     * @param  string $serialized
+     * @return string
+     */
+    public function decode($serialized) {
+        if(($unserialized = @unserialize($serialized)) !== false) {
+            $this->nodes = $unserialized;
         } else {
-            $quoting = 'By: ' . $option;
+            return $serialized;
         }
 
-        $quoteContent = '<div class="quoting">' . $quoting . '</div><h3>' . $title . '</h3>' . $content;
+        return $this->toBBCode();
+    }
 
-        return str_replace('{content}', $quoteContent, $html);
+    /**
+     * Converts the BBCode tree to HTML
+     *
+     * @param  string|null $content=null
+     * @param  boolean     $dontPArse=false
+     * @return string
+     */
+    private function toHtml($content=null, $dontParse=false) {
+        if(is_null($content)) {
+            $content = $this->nodes[0]->getContent();
+        }
+
+        $rendered = '';
+
+        if(count($content)) {
+            foreach($content as $c) {
+                if(is_array($c)) {
+                    $node = $this->nodes[$c[0]];
+
+                    $dontParseChildren = false;
+
+                    if(array_key_exists($node->getTag(), array_flip($this->noNestedTags)) || $dontParse) {
+                        $dontParseChildren = true;
+                    }
+
+                    $option  = $node->getOption();
+                    $content = $this->toHtml($node->getContent(), $dontParseChildren);
+
+                    if($dontParse) {
+                        $rendered = '[' . $node->getTag() . ($option ? '=' . $option : '') . ']' . $content . '[/' . $node->getTag() . ']';
+                    } else {
+                        $content       = trim($content);
+                        $checkFunction = 'checkTag_' . $node->getTag();
+            
+                        if(method_exists(new BBCodeSpecialTags, $checkFunction)) {
+                            $html = BBCodeSpecialTags::$checkFunction($option, $content, $this->tags[$node->getTag()]);
+                        } else {
+                            $html = str_replace(array('{option}', '{content}'), array($option, $content), $this->tags[$node->getTag()]);
+                        }
+    
+                        $rendered .= $html;
+                    }
+                } else {
+                    $rendered .= $c;
+                }
+            }
+        }
+
+        return $rendered;
+    }
+
+    /**
+     * Converts the BBCode tree to BBCode
+     *
+     * @param  string|null $content=null
+     * @param  boolean     $dontPArse=false
+     * @return string
+     */
+    private function toBBCode($content=null, $dontParse=false) {
+        if(is_null($content)) {
+            $content = $this->nodes[0]->getContent();
+        }
+
+        $rendered = '';
+
+        if(count($content)) {
+            foreach($content as $c) {
+                if(is_array($c)) {
+                    $node = $this->nodes[$c[0]];
+
+                    $option  = $node->getOption();
+                    $content = $this->toBBCode($node->getContent());
+
+                    $rendered .= '[' . $node->getTag() . ($option ? '=' . $option : '') . ']' . $content . '[/' . $node->getTag() . ']';
+                } else {
+                    $rendered .= $c;
+                }
+            }
+        }
+
+        return $rendered;
     }
 
     private function tokenize($str) {
@@ -146,26 +237,23 @@ class BBCode {
 
         $this->nodes[] = $this->node;
 
-        $chars  = str_split($str);
-        $state  = 0;
+        $length = strlen($str);
 
-        foreach($chars as $char) {
+        for($i = 0; $i < $length; $i++) {
             switch($this->state) {
                 case 0:
-                    $this->parseChar($char);
+                    $this->parseChar($str[$i]);
                     break;
                 case 1:
-                    $this->parseOpenTag($char);
+                    $this->parseOpenTag($str[$i]);
                     break;
                 case 2:
-                    $this->parseOpenTagOption($char);
+                    $this->parseOpenTagOption($str[$i]);
                     break;
                 case 3:
-                    $this->parseClosingTag($char);
+                    $this->parseClosingTag($str[$i]);
                     break;
             }
-
-            array_shift($chars);
         }
     }
 
@@ -179,6 +267,8 @@ class BBCode {
 
         $this->node->addContent(count($this->nodes) - 1, true);
         $this->node = $tag;
+
+        $this->openTags[count($this->nodes) - 1] = $this->openTag;
     } 
 
     private function setTagOption() {
@@ -186,13 +276,12 @@ class BBCode {
         $this->option = '';
     }
 
-    private function closeTag() {
+    private function closeTag($nodeIndex=null) {
         $parentNode    = $this->node->getParent();
         $this->openTag = '';
 
         if($parentNode >= 0) {
-            $this->node    = $this->nodes[$parentNode];
-            $this->openTag = $this->node->getTag();
+            $this->node = $this->nodes[$parentNode];
         }
     }
 
@@ -209,7 +298,7 @@ class BBCode {
     }
 
     private function parseOpenTag($char) {
-        if($char == '=' || $char == ']') {
+        if(($char == '=' || $char == ']')) {
             if(array_key_exists($this->openTag, $this->tags)) {
                 if($char == '=') {
                     $this->state = 2;
@@ -227,7 +316,7 @@ class BBCode {
         } elseif($char == '/') {
             $this->state = 3;
         } else {
-            $this->openTag .= $char;
+            $this->openTag .= strtolower($char);
         }
     }
 
@@ -245,45 +334,15 @@ class BBCode {
         if($char == ']') {
             if($this->closingTag == $this->node->getTag()) {
                 $this->closeTag();
-
-                $this->state      = 0;
-                $this->closingTag = '';
+            } else {
+                $this->addToContent('[/' . $this->closingTag . $char);
             }
+
+            $this->state      = 0;
+            $this->closingTag = '';
         } else {
-            $this->closingTag .= $char;
+            $this->closingTag .= strtolower($char);
         }
-    }
-
-    private function render($content=null) {
-        if(is_null($content)) {
-            $content = $this->nodes[0]->getContent();
-        }
-
-        $rendered = '';
-
-        if(count($content)) {
-            foreach($content as $c) {
-                if(is_array($c)) {
-                    $node    = $this->nodes[$c[0]];
-                    $option  = $node->getOption();
-                    $content = $this->render($node->getContent());
-
-                    $checkFunction = 'checkTag_' . $node->getTag();
-        
-                    if(method_exists(get_class(), $checkFunction)) {
-                        $html = self::$checkFunction($option, $content, $this->tags[$node->getTag()]);
-                    } else {
-                        $html = str_replace(array('{option}', '{content}'), array($option, $content), $this->tags[$node->getTag()]);
-                    }
-
-                    $rendered .= $html;
-                } else {
-                    $rendered .= $c;
-                }
-            }
-        }
-
-        return $rendered;
     }
 }
 

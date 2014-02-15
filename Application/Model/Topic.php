@@ -3,8 +3,9 @@
 namespace Application\Model;
 
 class Topic extends Standard {
-    protected $forum    = null;
-    protected $lastPost = null;
+    protected $forum          = null;
+    protected $lastPost       = null;
+    protected $linkToLastPost = null;
 
     protected function setUp() { }
 
@@ -28,7 +29,13 @@ class Topic extends Standard {
     }
 
     public function setUrl() {
-        $this->url = '/forums/topic/' . $this->get('topic_id') . '/' . $this->get('seo_title');
+        $id = $this->get('topic_id');
+
+        if($this->get('moved_to')) {
+            $id = $this->get('moved_to');
+        }
+
+        $this->url = '/forums/topic/' . $id . '/' . $this->get('seo_title');
     }
 
     private function setLastPost() {
@@ -48,5 +55,17 @@ class Topic extends Standard {
         }
 
         return $this->lastPost;
+    }
+
+    private function setLinkToLastPost() {
+        $this->linkToLastPost = $this->getLastPost()->getLink($this->getName());
+    }
+
+    public function getLinkToLastPost() {
+        if(is_null($this->linkToLastPost)) {
+            $this->setLinkToLastPost();
+        }
+
+        return $this->linkToLastPost;
     }
 }

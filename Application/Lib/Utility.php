@@ -21,7 +21,7 @@ class Utility {
         $seoTitle  = '';
         $maxLength = 50;
 
-        $name = preg_replace(array('~[^a-z0-9 ]~i', '~&#?[a-z0-9]+;~i'), '', $name);
+        $name = preg_replace(array('~[^a-z0-9 ]~i', '~&#?[a-z0-9]+;~i'), '', html_entity_decode($name, ENT_QUOTES));
 
         $expName = explode(' ', $name);
         $length  = 0;
@@ -37,17 +37,6 @@ class Utility {
         $seoTitle = trim($seoTitle, '-');
 
         return strtolower($seoTitle);
-    }
-
-    /**
-     * Redirects the user
-     *
-     * @param string $location
-     */
-    public static function location($location) {
-        header('Location: ' . $location);
-
-        exit;
     }
 
     /**
@@ -72,7 +61,7 @@ class Utility {
      *
      * @param  integer $totalResults
      * @param  integer $maxPerPage
-     8 @param  integer $currentPage
+     * @param  integer $currentPage
      * @return array
      */
     public static function calculatePagination($totalResults, $maxPerPage, $currentPage) {

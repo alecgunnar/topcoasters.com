@@ -28,7 +28,8 @@ class Database_AmusementParks extends \Maverick\Lib\Controller {
 
             if(!$sortedParks) {
                 $amusementParks = new \Application\Service\AmusementParks;
-                $amusementParkCache->set($amusementParks->getAll());
+                $sortedParks    = \Application\Lib\Database::sortResults($amusementParks->getAll(), $this->minimizedData);
+                $amusementParkCache->set($sortedParks);
             }
         }
 

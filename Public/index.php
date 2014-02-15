@@ -4,7 +4,7 @@ session_start();
 
 date_default_timezone_set('America/Detroit');
 
-define('MAVERICK_VERSION', 120);
+define('MAVERICK_VERSION', 130);
 
 define('DS',               DIRECTORY_SEPARATOR);
 

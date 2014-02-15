@@ -15,10 +15,9 @@ class Forums_View extends \Maverick\Lib\Controller {
 
         Output::setPageTitle($forum->getName());
 
-        $topics = new \Application\Service\Topics;
+        $topics    = new \Application\Service\Topics;
         $allTopics = $topics->getForForum($forum->get('forum_id'));
-
-        $limit = \Maverick\Maverick::getConfig('Forums')->get('topics_per_page');
+        $limit     = \Maverick\Maverick::getConfig('Forums')->get('topics_per_page');
 
         list($pages, $page, $start) = \Application\Lib\Utility::calculatePagination(count($allTopics), $limit, $page);
 

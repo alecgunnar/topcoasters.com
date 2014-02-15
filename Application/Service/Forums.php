@@ -38,4 +38,38 @@ class Forums extends Standard {
                                     'where'  => 'parent_id = ' . $forumId,
                                     'order'  => 'placement asc'), 'forum');
     }
+
+    public function getForMove($currentForum) {
+        $options         = array();
+        $categoryOptions = array();
+
+        foreach($this->getAllInOrder() as $category) {
+            foreach($category[1] as $forum) {
+                if($currentForum != $forum->get('forum_id')) {
+                    $categoryOptions[$forum->get('forum_id')] = $forum->getName();
+                }
+            }
+
+            $options[$category[0]->getName()] = $categoryOptions;
+            $categoryOptions               = array();
+        }
+
+        return $options;
+    }
+
+    public function determineMostRecentPost($forum) {
+        $topics = new \Application\Service\Topics;
+
+        $forumTopics = $topics->getForForum($forum->get('forum_id'), null, null, true);
+
+        $lastPost = null;
+
+        if(array_key_exists(0, $forumTopics)) {
+            $lastPost = $forumTopics[0]->get('last_post');
+        }
+
+        $forum->update('last_post', $lastPost);
+
+        $this->commitChanges($forum);
+    }
 }

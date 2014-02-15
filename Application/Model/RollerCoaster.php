@@ -35,8 +35,8 @@ class RollerCoaster extends Standard {
         $rollerCoasters = new \Application\Service\RollerCoasters;
         $coaster        = $rollerCoasters->get($this->get('previous_id'));
 
-        if(count($coaster) == 1) {
-            $this->previousCoaster = $coaster[0];
+        if($coaster) {
+            $this->previousCoaster = $coaster;
         }
     }
 
@@ -52,8 +52,8 @@ class RollerCoaster extends Standard {
         $rollerCoasters = new \Application\Service\RollerCoasters;
         $coaster        = $rollerCoasters->get($this->get('coaster_id'), 'previous_id');
 
-        if(count($coaster) == 1) {
-            $this->newLocation = $coaster[0];
+        if($coaster) {
+            $this->newLocation = $coaster;
         }
     }
 

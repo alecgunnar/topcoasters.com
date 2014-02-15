@@ -161,7 +161,7 @@ abstract class Standard {
      * @return self
      */
     public function increase($field, $amount=1) {
-        if(!is_integer($amount)) {
+        if(!is_numeric($amount)) {
             throw new \Exception('Parameter 2 for ' . get_class($this) . '::increase must be an integer.');
         }
 
@@ -170,6 +170,29 @@ abstract class Standard {
         }
 
         $this->update($field, $this->get($field) + $amount);
+
+        return $this;
+    }
+
+    /**
+     * Toggles the value of a bool field
+     *
+     * @param string $field
+     * @return self
+     */
+    public function toggle($field) {
+        $value    = $this->get($field);
+        $toggleTo = '1';
+
+        if(!is_null($field)) {
+            if($value == 1) {
+                $toggleTo = '0';
+            }
+        }
+
+        $this->update($field, $toggleTo);
+
+        return $this;
     }
 
     /**
@@ -273,9 +296,18 @@ abstract class Standard {
         $this->link = $anchor->render();
     }
 
-    public function getLink() {
+    public function getLink($label='') {
         if(is_null($this->link)) {
             $this->setLink();
+        }
+
+        if($label) {
+            $anchor = new \Maverick\Lib\Builder_Tag('a');
+
+            $anchor->addAttribute('href', $this->getUrl())
+                ->addContent($label);
+
+            return $anchor->render();
         }
 
         return $this->link;
@@ -330,6 +362,12 @@ abstract class Standard {
         $members = new \Application\Service\Members;
 
         return $members->get($this->get($field), 'member_id');
+    }
+
+    public function getParsed($field) {
+        $bbcode = new \Application\Lib\BBCode;
+
+        return $bbcode->render($this->get($field));
     }
 
     /**

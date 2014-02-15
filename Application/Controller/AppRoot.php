@@ -6,10 +6,7 @@ use Maverick\Lib\Output;
 
 class AppRoot {
     public function preload() {
-        Output::addJsFile('jquery');
-        Output::addJsFile('facebook');
         Output::addJsFile('main');
-        
         Output::addCssFile('main');
         
         Output::setGlobalVariable('title_suffix', ' - Top Coasters');

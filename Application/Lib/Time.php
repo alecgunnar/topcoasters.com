@@ -78,6 +78,8 @@ class Time extends \DateTime {
 
     /**
      * Switches the timezone to the user's timezone
+     *
+     * @return self
      */
     public function switchToUsersTime() {
         $timezone = 'US/Eastern';
@@ -87,6 +89,8 @@ class Time extends \DateTime {
         }
 
         $this->setTimeZone(new \DateTimeZone($timezone ?: \Maverick\Maverick::getConfig('System')->get('timezone')));
+
+        return $this;
     }
 
     /** 
@@ -114,7 +118,7 @@ class Time extends \DateTime {
                     return 'yesterday at ' . $this->format('g:i a');
                 }
             } else {
-                return 'on ' . $this->format('F j \a\t g:i a');
+                return 'on ' . $this->format('F jS \a\t g:i a');
             }
         } else {
             return 'on ' . $this->getStandardDateTime();

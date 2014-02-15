@@ -138,14 +138,17 @@
     }
 }
 
+.dataTable table,
+table.invisible {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .dataTable {
     .box;
     .boxBorder;
     
     table {
-        width: 100%;
-        border-collapse: collapse;
-        
         tr {
             th, td {
                 padding: 10px;
@@ -159,24 +162,32 @@
                 text-align: left;
             }
             
-            td li {
-                margin: 10px 0;
+            td {
+                border-bottom: 1px solid darken(#FFF, 20%);
                 
-                &:first-child {
-                    margin-top: 0;
-                }
-                
-                &:last-child {
-                    margin-bottom: 0;
+                li {
+                    margin: 10px 0;
+                    
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
             
-            &:nth-child(odd) {
+            &:nth-child(odd) td {
                 .lightBox;
             }
             
-            &:nth-child(even) {
+            &:nth-child(even) td {
                 .darkBox;
+            }
+            
+            &:last-child td {
+                border-bottom: none;
             }
         }
     }
@@ -204,7 +215,6 @@
 }
 
 .pagination {
-    font-size: .9em;
     margin-top: 20px;
     
     * {

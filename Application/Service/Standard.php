@@ -48,7 +48,11 @@ abstract class Standard {
         $dataEscaped = array();
 
         foreach($data as $column => $value) {
-            $dataEscaped[$column] = $this->db->escape($value);
+            if(@unserialize($value) !== false) {
+                $dataEscaped[$column] = addslashes(addslashes($value));
+            } else {
+                $dataEscaped[$column] = $this->db->escape($value);
+            }
         }
 
         $id = $this->db->put($dataEscaped, $this->dbTable);
@@ -70,18 +74,27 @@ abstract class Standard {
      * @param  mixed   $value
      * @param  string  $column=''
      * @param  integer $start=0
-     * @param  integer $max=0
+     * @param  integer $limit=0
      * @param  boolean $asArray=false
      * @return array
      */
-    public function get($value, $column='', $start=0, $max=0, $asArray=false) {
-        if(!$column) {
-            $column = $this->primaryKey;
+    public function get($value, $column='', $start=null, $limit=null, $asArray=false, $extraQuery=array()) {
+        $query = array('select' => '*',
+                       'from'   => $this->dbTable);
+
+        if($value != '*') {
+            if(!$column) {
+                $column = $this->primaryKey;
+            }
+
+            $query['where']  = $column . ' = "' . $value . '"';
         }
 
-        $objs = $this->db->get(array('select' => '*',
-                                     'from'   => $this->dbTable,
-                                     'where'  => $column . ' = "' . $value . '"'), $this->model);
+        if(!is_null($start) && !is_null($limit)) {
+            $query['limit'] = $start . ', ' . $limit;
+        }
+
+        $objs = $this->db->get(array_merge($query, $extraQuery), $this->model);
 
         if(($ct = count($objs))) {
             if($ct > 1 || $asArray) {
@@ -123,7 +136,11 @@ abstract class Standard {
         $data = $model->getDataToUpdate();
 
         foreach($data as $key => $value) {
-            $data[$key] = $this->db->escape($value);
+            if(@unserialize($value) !== false) {
+                $data[$key] = addslashes(addslashes($value));
+            } else {
+                $data[$key] = $this->db->escape($value);
+            }
         }
 
         $this->db->post($data, array($this->primaryKey => $model->get($this->primaryKey)), $this->dbTable);

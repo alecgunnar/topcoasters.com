@@ -1,6 +1,4 @@
-#forums {
-    
-}
+#forums { }
 
 #forums-post {
     h1 {
@@ -8,11 +6,41 @@
     }
 }
 
-#forums-view,
-#forums-topic {
-    .postingOptions {
-        margin-top: 10px;
-        .right;
+#forums-view .dataTable {
+    tr td:nth-child(2) {
+        padding-left: 0;
+    }
+
+    tr {
+        td {
+            /*.lightBox;
+            border-bottom: 1px solid darken(#FFF, 20%);*/
+            
+            &.status {
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+        }
+        
+        &.featured {
+            td {
+                &:nth-child(2) > a {
+                    font-weight: bold;
+                }
+                
+                &.status {
+                    background-image: url('@{image-path}topic_icons/topic_featured.png');
+                }
+            }
+        }
+        
+        &.closed td.status {
+            background-image: url('@{image-path}topic_icons/topic_closed.png');
+        }
+        
+        &.pinned td {
+            background-color: #FFFFE7 !important;
+        }
     }
 }
 
@@ -21,7 +49,8 @@
         .grayWrap;
         
         .postOptions {
-            .textCenter;
+            margin-top: 10px;
+            .textRight;
             .menu;
             .buttons;
             
@@ -33,6 +62,21 @@
         
         .plainTable tr td:last-child {
             padding-left: 10px;
+        }
+        
+        .postNumber {
+            font-size: .9em;
+            
+            a {
+                text-decoration: none;
+            }
+        }
+        
+        .postDate {
+            font-size: .9em;
+            margin-bottom: 10px;
+            padding-bottom: 7px;
+            border-bottom: 1px dotted #E1E1E1;
         }
     }
 }

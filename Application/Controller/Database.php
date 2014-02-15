@@ -5,10 +5,13 @@ namespace Application\Controller;
 use \Maverick\Lib\Output;
 
 class Database extends \Maverick\Lib\Controller {
+    public static function rootSetup() {
+        Output::setGlobalVariable('search_box_text', 'Search the database');
+        Output::setGlobalVariable('search_box_what', 'database');
+    }
+
     public function main() {
         Output::setPageTitle('Database');
-
-        Output::setGlobalVariable('search_box_text', 'Search the database');
 
         $topCoastersCache = new \Maverick\Lib\Cache('topRatedCoasters', 3600);
         $topCoasters      = $topCoastersCache->get();

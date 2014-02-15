@@ -4,7 +4,7 @@
   {% for img in flexImages %}
     <li style="background: url('{{ urlToImage }}{{ img.0 }}') no-repeat;">
     {% if img.1 %}
-      <span>{{ img.1 }}</span>
+      <span>{{ img.1|raw }}</span>
     {% endif %}
     </li>
   {% endfor %}

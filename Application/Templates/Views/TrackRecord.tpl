@@ -1,6 +1,6 @@
 <h1>Managing my Track Record</h1>
 <div class="grayWrap">
-  You track record is a list you can create of the roller coasters you have ridden. To add roller coasters to your track record, find it in the database, and then click the "Add to Track Record" link.
+  Your track record is a list you can create of the roller coasters you have ridden, and also the amusement parks you have visited. To add roller coasters and amusement parks to your track record, find it in the database, and then click the "Add to Track Record" link.
 </div>
 {% if favoriteCoasterExists %}
 <div class="alert">

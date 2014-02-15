@@ -9,7 +9,21 @@ class Post extends Standard {
     protected function setUp() { }
 
     public function setUrl() {
-        $this->url = $this->getTopic()->getUrl();
+        $posts         = new \Application\Service\Posts;
+        $postsForTopic = $posts->getForTopic($this->getTopic()->get('topic_id'));
+        $page          = 1;
+        $number        = 0;
+
+        foreach($postsForTopic as $index => $post) {
+            if($post->get('post_id') == $this->post_id) {
+                $number = $index + 1;
+                break;
+            }
+        }
+
+        $page = ceil(($number / \Maverick\Maverick::getConfig('Forums')->get('posts_per_page')));
+
+        $this->url = $this->getTopic()->getUrl() . '/' . $page . '#' . $number;
     }
 
     private function setTopic() {
@@ -34,7 +48,7 @@ class Post extends Standard {
     private function setParsedMessage() {
         $bbcode = new \Application\Lib\BBCode;
 
-        $this->parsedMessage = $bbcode->parse($this->get('message'));
+        $this->parsedMessage = $bbcode->render($this->get('message'));
     }
 
     public function getParsedMessage() {

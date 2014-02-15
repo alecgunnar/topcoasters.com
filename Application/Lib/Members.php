@@ -54,7 +54,7 @@ class Members {
      * @return boolean
      */
     public static function checkUsername($username) {
-        if(preg_match('~[^A-Za-z0-9\.]~i', $username)) {
+        if(preg_match('~[^A-Za-z0-9\.]~', $username)) {
             return false;
         }
 
@@ -212,6 +212,31 @@ class Members {
         }
 
         return true;
+    }
+
+    /**
+     * Checks to see if the user is a moderator or not
+     *
+     * @param  boolean $showError=false
+     * @param  string  $customErrorMessage
+     * @return boolean|null
+     */
+    public static function checkUserIsMod($showError=false, $customErrorMessage='') {
+        if(self::$member instanceof \Application\Model\Member) {
+            if(self::$member->get('is_mod')) {
+                return true;
+            }
+        }
+
+        if($showError) {
+            if(\Maverick\Lib\Output::getGlobalVariable('ajaxRequest')) {
+                \Maverick\Lib\Output::printJson(array('status' => 'signin'));
+            }
+
+            \Application\Lib\Utility::showError($customErrorMessage ?: 'You do not have permission to view this page.');
+        }
+
+        return false;
     }
 
     /**

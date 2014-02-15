@@ -10,6 +10,27 @@ class RollerCoasters extends Standard {
     }
 
     /**
+     * Gets a roller coaster for the flex slider
+     *
+     * @param  string $coaster
+     * @param  string $park
+     * @return \Application\Model\RollerCoaster | null
+     */
+    public function getForFlex($coaster, $park) {
+        $coasters = $this->get($coaster, 'name', null, null, true);
+
+        if(!is_null($coasters)) {
+            foreach($coasters as $c) {
+                if($c->getPark()->getName() == $park) {
+                    return $c;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Gets the highest rated roller coasters
      *
      * @param  mixed  $value

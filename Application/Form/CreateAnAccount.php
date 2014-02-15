@@ -17,6 +17,7 @@ class CreateAnAccount extends \Maverick\Lib\Form {
         $this->addField('Input_Text', 'username')
             ->setLabel('Username')
             ->required('You must enter an username')
+            ->setMaxLength(20)
             ->setDescription('Only letters, numbers, and periods are allowed in usernames.');
 
         $this->addField('Input_Email', 'email')

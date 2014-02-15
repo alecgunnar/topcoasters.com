@@ -25,8 +25,8 @@ class Database_AmusementPark extends \Maverick\Lib\Controller {
 
         $parkIsClosed = false;
         $time         = new \Application\Lib\Time;
-        $start        = $park->get('season_start') ? new \Application\Lib\Time($park->get('season_start')) : null;
-        $end          = $park->get('season_end')   ? new \Application\Lib\Time($park->get('season_end'))   : null;
+        $start        = $park->get('season_start') ? $park->getDate('season_start') : null;
+        $end          = $park->get('season_end')   ? $park->getDate('season_end')   : null;
 
         if($start && $end) {
             if($time < $start && $time->format('Y') <= $park->get('season_year')) {
@@ -57,10 +57,6 @@ class Database_AmusementPark extends \Maverick\Lib\Controller {
         if(count($coasters)) {
             foreach($coasters as $num => $coaster) {
                 switch($coaster->get('status')) {
-                    case "running":
-                    case "sbno":
-                        $currentCoasters[] = $coaster;
-                        break;
                     case "defunc":
                     case "relocated":
                         $pastCoasters[] = $coaster;
@@ -68,6 +64,9 @@ class Database_AmusementPark extends \Maverick\Lib\Controller {
                     case "building":
                     case "rumored":
                         $futureCoasters[] = $coaster;
+                        break;
+                   default:
+                        $currentCoasters[] = $coaster;
                 }
             }
         }

@@ -17,7 +17,7 @@
     </tr>
     {% else %}
     <tr>
-      <td colspan="3" class="textCenter"><em>{{ showMember.get('username') }} has not added any roller coasters to their track record.</em></td>
+      <td colspan="3" class="textCenter"><em>{{ showMember.getName() }} has not added any roller coasters to their track record.</em></td>
     </tr>
     {% endfor %}
   </table>

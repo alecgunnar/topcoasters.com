@@ -13,6 +13,10 @@ class Forums_Topic extends \Maverick\Lib\Controller {
             \Maverick\Lib\Router::throw404();
         }
 
+        if($topic->get('moved_to')) {
+            \Maverick\Lib\Http::location($topic->getUrl());
+        }
+
         Output::setPageTitle($topic->getName());
 
         $posts    = new \Application\Service\Posts;

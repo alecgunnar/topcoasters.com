@@ -9,4 +9,4 @@ ENVIRONMENT
 /Config/Dev
 .DS_Store
 /Application/Cache/*
-/Public/assets/uploads/profile_pictures/*
+/Public/assets/uploads/*

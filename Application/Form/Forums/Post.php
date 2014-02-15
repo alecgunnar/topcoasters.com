@@ -2,7 +2,7 @@
 
 namespace Application\Form;
 
-class ForumPost extends \Maverick\Lib\Form {
+class Forums_Post extends \Maverick\Lib\Form {
     private $obj     = null;
     private $replyTo = null;
 
@@ -32,15 +32,17 @@ class ForumPost extends \Maverick\Lib\Form {
                 ->setMaxLength(80);
         }
 
-        $messageValue = $this->obj->get('message');
+        $bbcode = new \Application\Lib\BBCode;
+
+        $messageValue = $bbcode->decode($this->obj->get('message'));
 
         if(!is_null($this->replyTo)) {
-            $messageValue = '[quote=' . $this->replyTo->get('post_id') . ']' . $this->replyTo->get('message') . '[/quote]';
+            $messageValue = '[quote=' . $this->replyTo->get('post_id') . ']' . $bbcode->decode($this->replyTo->get('message')) . '[/quote]';
         }
 
         $this->addField('Editor', 'message')
             ->setLabel('Post Message')
-            ->setDescription('Use the space above to enter your message, be clear, and use proper grammar. Raw HTML code is not allowed; use BBCode to format your message.')
+            ->setDescription(\Maverick\Maverick::getConfig('Posting')->get('postDescription'))
             ->required('You must enter a message for this post.')
             ->setValue($messageValue);
 
@@ -72,7 +74,8 @@ class ForumPost extends \Maverick\Lib\Form {
             $topic  = $topics->create($input->get('name'), $this->obj);
 
             if($topic instanceof \Application\Model\Topic) {
-                $posts = new \Application\Service\Posts;
+                $posts  = new \Application\Service\Posts;
+
                 return $posts->create($input->get('message'), $topic, true);
             }
         } elseif($this->obj instanceof \Application\Model\Post) {

@@ -1,6 +1,10 @@
-.quote {
+.quote,
+.code {
     .plainBox;
-    .box;
+    margin: 10px 0 !important;
+}
+
+.quote {
     .lighterBox;
     
     border-style: dashed;
@@ -9,8 +13,11 @@
         .right;
         font-size: .8em;
     }
-    
-    .quote {
-        margin-bottom: 10px !important;
-    }
+}
+
+.code {
+    background: #FFF;
+    font-family: courier;
+    border: 1px dashed #999;
+    padding: 10px;
 }

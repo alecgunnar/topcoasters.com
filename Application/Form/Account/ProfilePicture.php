@@ -32,17 +32,23 @@ class Account_ProfilePicture extends \Maverick\Lib\Form {
     }
 
     public function validate() {
-        $file = $_FILES['uploadPicture'];
+        $file = $this->getFilesModel()->get('profilePicture');
+
+        if(is_null($file) || !$file->get('name')) {
+            $this->setFieldError('profilePicture', 'You must choose a picture');
+
+            return;
+        }
 
         $okTypes = array('gif', 'png', 'jpg', 'jpeg');
 
-        $expFile = explode('.', $file['name']['profilePicture']);
+        $expFile = explode('.', $file->get('name'));
 
         if(!array_key_exists($expFile[count($expFile) - 1], array_flip($okTypes))) {
             $this->setFieldError('profilePicture', 'That file was not a valid type.');
         }
 
-        list($width, $height) = getimagesize($file['tmp_name']['profilePicture']);
+        list($width, $height) = getimagesize($file->get('tmp_name'));
 
         if($width > 200 || $height > 200) {
             $this->setFieldError('profilePicture', 'That image is too large.');

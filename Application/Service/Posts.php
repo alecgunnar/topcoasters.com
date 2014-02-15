@@ -14,7 +14,7 @@ class Posts extends Standard {
 
         $id = $this->db->put(array('topic_id'      => $topic->get('topic_id'),
                                    'member_id'     => \Maverick\Lib\Output::getGlobalVariable('member')->get('member_id'),
-                                   'message'       => $message,
+                                   'message'       => addslashes(addslashes($message)),
                                    'post_date'     => $time->getTimestamp(),
                                    'is_first_post' => $postAsFirst ? '1' : '0'), 'posts');
 
@@ -42,6 +42,23 @@ class Posts extends Standard {
 
         $posts = $this->db->get($query, 'post');
 
+        if(!is_null($start)) {
+            $numberedPosts = array();
+            $index         = $start + 1;
+
+            foreach($posts as $post) {
+                $numberedPosts[$index] = $post;
+
+                $index++;
+            }
+
+            return $numberedPosts;
+        }
+
         return $posts;
+    }
+
+    public function deleteForTopic($topicId) {
+        $this->db->delete(array('topic_id' => $topicId), 'posts');
     }
 }

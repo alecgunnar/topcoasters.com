@@ -28,6 +28,7 @@ class Forums_Post extends \Maverick\Lib\Controller {
                 $topic   = $replyTo->getTopic();
                 break;
             case "edit":
+            case "delete":
                 $posts = new \Application\Service\Posts;
                 $post  = $posts->get(intval($id));
                 break;
@@ -46,18 +47,30 @@ class Forums_Post extends \Maverick\Lib\Controller {
             $title    = 'Posting a Topic';
             $redirect = 'Your topic has been posted.';
         } elseif($topic) {
+            if($topic->get('closed') && !Output::getGlobalVariable('member')->get('is_mod')) {
+                \Application\Lib\Utility::showError('This topic is closed, you may not post a reply.');
+            }
+
             $title    = 'Posting a Reply';
             $redirect = 'Your reply has been posted.';
         } else {
-            $title    = 'Editing a Post';
-            $redirect = 'Your changes have been saved.';
+            if($what == 'delete') {
+                $this->doDelete($post);
+            } else {
+                if($post->getTopic()->get('closed') && !Output::getGlobalVariable('member')->get('is_mod')) {
+                    \Application\Lib\Utility::showError('The topic this post is in has been closed, you may not edit the post.');
+                }
+    
+                $title    = 'Editing a Post';
+                $redirect = 'Your changes have been saved.';
+            }
         }
 
         Output::setPageTitle($title);
 
         $obj = $forum ?: ($topic ?: $post);
 
-        $postTopicForm = new \Application\Form\ForumPost($obj, $replyTo);
+        $postTopicForm = new \Application\Form\Forums_Post($obj, $replyTo);
 
         if($postTopicForm->isSubmissionValid()) {
             if(($newObj = $postTopicForm->submit()) instanceof \Application\Model\Standard) {
@@ -69,5 +82,27 @@ class Forums_Post extends \Maverick\Lib\Controller {
 
         $this->setVariable('form', $postTopicForm->render());
         $this->setVariable('obj', $obj);
+    }
+
+    private function doDelete($post) {
+        \Application\Lib\Members::checkUserIsMod(true);
+
+        if($post->get('is_first_post')) {
+            \Application\Lib\Utility::showError('This post cannot be deleted.');
+        }
+
+        $forums = new \Application\Service\Forums;
+        $topics = new \Application\Service\Topics;
+        $posts  = new \Application\Service\Posts;
+
+        $posts->delete($post);
+
+        $post->getTopic()->increase('num_replies', -1);
+        $post->getTopic()->getForum()->increase('num_posts', -1);
+
+        $topics->determineMostRecentPost($post->getTopic());
+        $forums->determineMostRecentPost($post->getTopic()->getForum());
+
+        \Maverick\Lib\Http::location($post->getTopic()->getUrl(), 'The post has been deleted.');
     }
 }

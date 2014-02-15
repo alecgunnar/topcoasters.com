@@ -22,7 +22,7 @@
         <td class="textCenter">{{ forum.get('num_posts') }}</td>
         <td>
           {% if forum.getLastPost() %}
-          In {{ forum.getLastPost.getTopic.getLink()|raw }} by {{ forum.getLastPost().getMember.getLink()|raw }}
+          In {{ forum.getLastPost().getTopic().getLinkToLastPost()|raw }} by {{ forum.getLastPost().getMember().getLink()|raw }}
           {% else %}
           <em>No recent post.</em>
           {% endif %}

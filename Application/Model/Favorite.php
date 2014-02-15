@@ -11,7 +11,7 @@ class Favorite extends Standard {
     protected function setUrl() {
         $type = 'coasters';
 
-        if(!is_null($this->get('parks_id'))) {
+        if(is_numeric($this->get('park_id'))) {
             $type = 'parks';
         }
 

@@ -165,7 +165,7 @@ class Database_Contribute_RollerCoaster extends \Maverick\Lib\Form {
             }
 
             $transports->addField('Select', 'transport_type_' . $i)
-                ->setLabel('Launch / Lift')
+                ->setLabel('Launches & Lifts')
                 ->setValue($typeValue)
                 ->toggleAutoFill()
                 ->addOption(0, '-')

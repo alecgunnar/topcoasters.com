@@ -59,8 +59,6 @@
     <div class="menu">
       <ul>
         <li><a href="/terms-of-use">Terms of Use & Privacy Policy</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/about">About</a></li>
       </ul>
     </div>
     Top Coasters &copy; 2009 - {{ "now"|date('Y') }} <a href="http://www.aleccarpenter.me/" target="_blank">Alec Carpenter</a>

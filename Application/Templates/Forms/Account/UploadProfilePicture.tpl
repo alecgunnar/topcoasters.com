@@ -1,7 +1,9 @@
-<div class="textCenter">
+<div class="field textCenter">
   {% if fields.profilePicture.getError() is not empty %}
-  <div class="box fieldError textCenter">
-    {{ fields.profilePicture.getError() }}
+  <div class="box textCenter">
+    <div class="error">
+      {{ fields.profilePicture.getError() }}
+    </div>
   </div>
   {% endif %}
   <strong>{{ fields.profilePicture.getLabel() }}:</strong> {{ fields.profilePicture.render()|raw }}

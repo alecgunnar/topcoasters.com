@@ -27,19 +27,22 @@ class Topics extends Standard {
         return false;
     }
 
-    public function getForForum($forumId, $start=null, $limit=null) {
+    public function getForForum($forumId, $start=null, $limit=null, $noPinned=false) {
         $query = array('select' => '*',
                        'from'   => 'topics',
-                       'where'  => 'forum_id = ' . $forumId,
-                       'order'  => 'last_post_date desc');
+                       'where'  => 'forum_id = ' . $forumId . ($noPinned ? ' && moved_to IS NULL' : ''),
+                       'order'  => ($noPinned ? '' : 'pinned desc, ') . 'last_post_date desc');
 
         if(!is_null($start) && !is_null($limit)) {
             $query['limit'] = $start . ', ' . $limit;
         }
 
-        $topics = $this->db->get($query, 'topic');
+        return $this->db->get($query, 'topic');
+    }
 
-        return $topics;
+    public function getForMember($memberId, $start=null, $limit=null) {
+        $query = array('order' => 'post_date desc');
+        return $this->get($memberId, 'member_id', $start, $limit, true, $query);
     }
 
     public function postTo(\Application\Model\Post $post, \Application\Model\Topic $topic, $first=false) {
@@ -58,6 +61,33 @@ class Topics extends Standard {
 
         $forums = new \Application\Service\Forums;
         $forums->commitChanges($forum);
+
+        $this->commitChanges($topic);
+    }
+
+    public function getRecentNews() {
+        $topics = $this->db->get(array('select' => '*',
+                                       'from'   => 'topics',
+                                       'where'  => '`featured` = "1"',
+                                       'order'  => 'post_date desc',
+                                       'limit'  => '7'), 'topic');
+
+        return $topics;
+    }
+
+    public function clearOldMovedLinks($topic) {
+        $this->db->delete(array('moved_to' => $topic->get('topic_id')), 'topics');
+    }
+
+    public function determineMostRecentPost($topic) {
+        $posts = new \Application\Service\Posts;
+
+        $topicPosts = $posts->getForTopic($topic->get('topic_id'));
+
+        $lastPost = $topicPosts[count($topicPosts) - 1];
+
+        $topic->update('last_post_date', $lastPost->getDate('post_date')->getTimestamp());
+        $topic->update('last_post', $lastPost->get('post_id'));
 
         $this->commitChanges($topic);
     }

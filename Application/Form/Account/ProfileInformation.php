@@ -185,7 +185,9 @@ class Account_ProfileInformation extends \Maverick\Lib\Form {
         $preferences->addField('Input_Text', 'username')
             ->setLabel('Username')
             ->setValue($this->member->get('name'))
-            ->setDescription('Only letters, numbers, and periods are allowed in usernames.');
+            ->setDescription('Only letters, numbers, and periods are allowed in usernames. (max. 20 characters)')
+            ->setMaxLength(20)
+            ->required('You must enter an username!');
 
         $preferences->addField('Select', 'measures')
             ->setLabel('Units of Measure')
@@ -292,15 +294,15 @@ class Account_ProfileInformation extends \Maverick\Lib\Form {
      * Validates the form
      */
     public function validate() {
-        $input = $this->getModel();
+        $input = $this->getModel()->get('preferences');
 
-        if($input->get('username') != $this->member->get('username')) {
+        if($this->member->get('name') != $input->get('username')) {
             if(\Application\Lib\Members::checkUsername($input->get('username'))) {
                 $members = new \Application\Service\Members;
-                $member  = $members->get($input->get('username'), 'username');
+                $member  = $members->get($input->get('username'), 'name');
     
                 if($member) {
-                    $this->setFieldError('username', 'That username is already taken.');
+                    $this->setFieldError('username', 'This username is already taken.');
                 }
             } else {
                 $this->setFieldError('username', 'This username contains characters that are not allowed.');

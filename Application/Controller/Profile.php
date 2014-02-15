@@ -9,8 +9,8 @@ class Profile extends \Maverick\Lib\Controller {
 
     private $panes = array(''               => 'About',
                            'track-record'   => 'Track Record',
-                           'exchange-files' => 'Exchange Files',
-                           'topics'         => 'Forum Topics');
+                           'topics'         => 'Forum Topics',
+                           'exchange-files' => 'Exchange Files');
 
     private $paneTplVars = array();
 
@@ -43,6 +43,11 @@ class Profile extends \Maverick\Lib\Controller {
         $args = func_get_args();
         array_splice($args, 0, 2);
 
+        if(!method_exists($this, $method)) {
+            $method     = 'showAboutPane';
+            $activeName = 'About';
+        }
+
         call_user_func_array(array($this, $method), $args);
 
         $tpl = Output::getTplEngine()->getTemplate('ProfilePanes/' . $activeName, $this->paneTplVars);
@@ -63,10 +68,10 @@ class Profile extends \Maverick\Lib\Controller {
     private function showAboutPane() {
         $data = array();
 
+        $data['General Info'] = array();
+        $generalInfo          =& $data['General Information'];
+
         if(\Application\Lib\Members::checkUserStatus()) {
-            $data['General Info'] = array();
-            $generalInfo          =& $data['General Information'];
-    
             $generalInfo['Location']   = $this->member->get('location');
             $generalInfo['Education']  = $this->member->get('education');
             $generalInfo['Occupation'] = $this->member->get('occupation');
@@ -74,8 +79,11 @@ class Profile extends \Maverick\Lib\Controller {
             $generalInfo['Website']    = $this->member->getWebsiteLink();
         }
 
-        $data['Favorite Amusement Parks'] = array();
-        $favParks               =& $data['Favorite Amusement Parks'];
+        $generalInfo['Joined']      = ucfirst($this->member->getDate('reg_date')->getShortTime());
+        $generalInfo['Last Active'] = ucfirst($this->member->getDate('last_active')->getShortTime());
+
+        $data['Top Amusement Parks'] = array();
+        $favParks                    =& $data['Top Amusement Parks'];
 
         $amusementParks = new \Application\Service\AmusementParks;
 
@@ -91,8 +99,8 @@ class Profile extends \Maverick\Lib\Controller {
         $favParks['Favorite Park'] = $getParkName($this->member->get('favorite_park'));
         $favParks['Home Park']     = $getParkName($this->member->get('home_park'));
 
-        $data['Favorite Roller Coasters'] = array();
-        $favCoasters                      =& $data['Favorite Roller Coasters'];
+        $data['Top Roller Coasters'] = array();
+        $favCoasters                 =& $data['Top Roller Coasters'];
 
         $rollerCoasters = new \Application\Service\RollerCoasters;
 
@@ -128,6 +136,23 @@ class Profile extends \Maverick\Lib\Controller {
 
             $this->setPaneTplVar('favorites', $memberFavs);
             $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/track-record/%d#tabs', $page, $pages));
+        }
+    }
+
+    private function showForumTopicsPane($page=1) {
+        $topics    = new \Application\Service\Topics;
+        $allTopics = $topics->getForMember($this->member->get('member_id'));
+
+        if($allTopics) {
+            $totalTopics = count($allTopics);
+            $limit       = 15;
+
+            list($pages, $page, $start) = \Application\Lib\Utility::calculatePagination($totalTopics, $limit, $page);
+
+            $memberTopics = $topics->getForMember($this->member->get('member_id'), $start, $limit);
+
+            $this->setPaneTplVar('topics', $memberTopics);
+            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/topics/%d#tabs', $page, $pages));
         }
     }
 }
