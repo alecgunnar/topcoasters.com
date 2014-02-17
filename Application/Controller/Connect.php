@@ -72,9 +72,9 @@ class Connect extends \Maverick\Lib\Controller {
                 $appendUn .= '.' . $count;
             }
 
-            $checkUn = $members->get($username . $appendUn, 'username');
+            $checkUn = $members->get($username . $appendUn, 'name');
 
-            if(!count($checkUn)) {
+            if($checkUn === false) {
                 $unExists = false;
             }
 

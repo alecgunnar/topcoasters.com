@@ -25,6 +25,7 @@ class Index extends \Maverick\Lib\Controller {
 
         $this->setupFlexslider();
         $this->getRecentNews();
+        $this->getHighestRated();
     }
 
     private function setupFlexslider() {
@@ -100,5 +101,30 @@ class Index extends \Maverick\Lib\Controller {
         }
 
         $this->setVariable('recentNews', $recentNews);
+    }
+
+    private function getHighestRated() {
+        $topCoastersCache = new \Maverick\Lib\Cache('topRatedCoasters', 3600);
+        $topCoasters      = $topCoastersCache->get();
+
+        if(!$topCoasters) {
+            $rollerCoasters = new \Application\Service\RollerCoasters;
+            $topCoasters    = $rollerCoasters->getHighestRated();
+
+            $topCoastersCache->set($topCoasters);
+        }
+
+        $topParksCache = new \Maverick\Lib\Cache('topRatedParks', 3600);
+        $topParks      = $topParksCache->get();
+
+        if(!$topParks) {
+            $amusementParks = new \Application\Service\AmusementParks;
+            $topParks    = $amusementParks->getHighestRated();
+
+            $topParksCache->set($topParks);
+        }
+
+        $this->setVariable('topRatedTabs', array('Roller Coasters' => array(true,  Output::getTplEngine()->getTemplate('Tabs/TopCoasters', array('topCoasters' => $topCoasters))),
+                                                 'Amusement Parks' => array(false, Output::getTplEngine()->getTemplate('Tabs/TopParks', array('topParks' => $topParks)))));
     }
 }

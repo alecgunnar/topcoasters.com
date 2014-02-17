@@ -10,7 +10,7 @@ class Layouts_Default extends \Maverick\Lib\Controller {
 
         $navigationLinksConfig = \Maverick\Maverick::getConfig('MainNavigation')->getAsArray();
         $navigationLinks       = array();
-        $urlPath               = '/' . trim(\Maverick\Lib\Router::getUri()->getResourcePath(), '/');
+        $urlPath               = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
 
         foreach($navigationLinksConfig as $label => $path) {
             $isActive = (strpos($urlPath, $path) === 0);
@@ -22,10 +22,9 @@ class Layouts_Default extends \Maverick\Lib\Controller {
             $navigationLinks[$label] = array($path, $isActive);
         }
 
-        $this->setVariable('navigationLinks', $navigationLinks);
+        $get = new \Maverick\Lib\Model_Input($_GET);
 
-        $searchForm = new \Application\Form\Search(Output::getGlobalVariable('search_box_text'), Output::getGlobalVariable('search_box_what'));
-
-        $this->setVariable('searchForm', $searchForm->render());
+        $this->setVariables(array('navigationLinks'  => $navigationLinks,
+                                  'search_box_value' => $get->get('q')));
     }
 }

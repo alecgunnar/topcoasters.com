@@ -20,7 +20,10 @@ class Search extends \Maverick\Lib\Form {
      */
     public function build() {
         $this->setName('search');
+        $this->setMethod('get');
         $this->setAction('/search' . ($this->searchWhat ? '/' . $this->searchWhat : ''));
+
+        $this->toggleSubmissionToken();
 
         $this->addField('Input', 'q')
             ->setPlaceholder($this->placeholder)

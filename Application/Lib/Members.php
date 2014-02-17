@@ -184,7 +184,7 @@ class Members {
         $message = \Maverick\Lib\Output::getTplEngine()->getTemplate('Emails/Activation', array('code' => $member->get('activation_code')));
         $emailer = new \Application\Lib\Email;
 
-        return $emailer->sendIt($member->get('username'), $member->get('email_address'), 'Activate Your Account', $message);
+        return $emailer->sendIt($member->get('name'), $member->get('email_address'), 'Activate Your Account', $message);
     }
 
     /**

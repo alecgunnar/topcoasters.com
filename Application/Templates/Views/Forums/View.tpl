@@ -24,7 +24,7 @@
       <td>
         {{ topic.getLink()|raw }}
         <div class="description">
-          Started by {{ topic.getMember().getLink()|raw }} on {{ topic.getDate('post_date').getStandardDateTime() }}.
+          started by {{ topic.getMember().getLink()|raw }} on {{ topic.getDate('post_date').getStandardDateTime() }}.
         </div>
       </td>
       <td class="textCenter">{{ topic.get('num_replies') }}</td>

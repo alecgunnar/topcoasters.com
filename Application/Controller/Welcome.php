@@ -11,7 +11,7 @@ class Welcome extends \Maverick\Lib\Controller {
         $member = \Application\Lib\Members::getMember();
 
         if(!$member || $member->get('activation_key') != 'reg' || $member->get('reg_ip') != $_SERVER['REMOTE_ADDR']) {
-            \Application\Lib\Utility::location('/');
+            \Maverick\Lib\Http::location('/');
         }
     }
 }

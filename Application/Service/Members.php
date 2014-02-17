@@ -22,7 +22,7 @@ class Members extends Standard {
         }
 
         if(!array_key_exists('seo_title', $values)) {
-            $values['seo_title'] = \Application\Lib\Utility::generateSeoTitle($values['username']);
+            $values['seo_title'] = \Application\Lib\Utility::generateSeoTitle($values['name']);
         }
 
         if(!array_key_exists('reg_date', $values)) {

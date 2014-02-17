@@ -24,6 +24,4 @@
 </div>
 
 {% import 'Macros/Pagination.tpl' as pagination %}
-<div class="textCenter">
-  {{ pagination.build(paginationLinks) }}
-</div>
+{{ pagination.build(paginationLinks) }}

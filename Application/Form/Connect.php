@@ -60,23 +60,33 @@ class Connect extends \Maverick\Lib\Form {
 
             return false;
         }
+
+        $members = new \Application\Service\Members;
+
+        if(\Application\Lib\Members::checkUsername($input->get('username'))) {
+            if($members->get($input->get('username'), 'name')) {
+                $this->setFieldError('username', 'That username is already taken');
+            }
+        } else {
+            $this->setFieldError('username', 'This username contains characters that are not allowed');
+        }
+
+        if($members->get($input->get('email'), 'email_address')) {
+            $this->setFieldError('email', 'That email address is already in use (<a href="/sign-in">Sign In</a>)');
+        }
     }
 
     /**
      * Submits the form
      */
     public function submit($user=null, $token='') {
-        if(is_null($user) || !$token) {
-            throw new \InvalidParameterException('\Application\Form\Connect::submit expects two parameters, \Application\Model\FacebookUser $user, String $token!');
-        }
-
         $input   = $this->getModel();
         $members = new \Application\Service\Members;
 
         $passwordSalt = \Application\Lib\Members::getPasswordSalt();
         $passwordMd5  = \Application\Lib\Members::getPasswordMd5($input->get('password'), $passwordSalt);
 
-        return $members->create(array('username'             => $input->get('username'),
+        return $members->create(array('name'                 => $input->get('username'),
                                       'email_address'        => $user->get('email'),
                                       'password_salt'        => $passwordSalt,
                                       'password_md5'         => $passwordMd5,

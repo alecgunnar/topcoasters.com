@@ -88,7 +88,7 @@ class CreateAnAccount extends \Maverick\Lib\Form {
             \Application\Lib\Members::createSession($member);
             \Application\Lib\Members::sendActivationEmail($member);
 
-            \Application\Lib\Utility::location('/welcome');
+            \Maverick\Lib\Http::location('/welcome');
         }
 
         return false;

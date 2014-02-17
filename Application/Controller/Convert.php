@@ -20,11 +20,17 @@ class Convert extends \Maverick\Lib\Controller {
             case 'parks':
                 //$this->convertParks();
                 break;
-            //case 'lifts':
-                $this->convertLifts();
+            case 'lifts':
+                //$this->convertLifts();
                 break;
-            //case "favs":
-                $this->convertFavs();
+            case "favs":
+                //$this->convertFavs();
+                break;
+            case "forums":
+                //$this->convertForums();
+                break;
+            case "members":
+                $this->convertMembers();
                 break;
             default:
                 \Application\Lib\Utility::showError('Uhhhhh...');
@@ -181,6 +187,59 @@ class Convert extends \Maverick\Lib\Controller {
                                    'rates'       => $rates));
 
             $coasters->commitChanges($coaster);
+        }
+    }
+    
+    private function convertForums() {
+        $map = array('forum_id' => 'forum_id',
+                     'placement' => 'placement',
+                     'title' => 'name',
+                     'desc' => 'description',
+                     'parent' => 'parent_id');
+
+        $forums = $this->fromDb->get(array('select' => '*', 'from' => 'forums_forums'));
+
+        foreach($forums as $num => $forum) {
+            $insert = array();
+
+            foreach($map as $from => $to) {
+                $insert[$to] = $this->toDb->escape($forum[$from]);
+            }
+
+            $insert['seo_title'] = \Application\Lib\Utility::generateSeoTitle($insert['name']);
+
+            $this->toDb->put($insert, 'forums');
+        }
+    }
+
+    private function convertMembers() {
+        $map = array('member_id' => 'member_id',
+                     'email' => 'email_address',
+                     'pass_md5' => 'password_md5',
+                     'pass_salt' => 'password_salt',
+                     'seo_title' => 'seo_title',
+                     'username' => 'name',
+                     'last_active' => 'last_active',
+                     'reg_ip' => 'ip_address',
+                     'activated' => 'activated',
+                     'reg_date' => 'reg_date');
+
+        $records = $this->fromDb->get(array('select' => '*', 'from' => 'users_accounts'));
+
+        foreach($records as $num => $record) {
+            $insert = array();
+
+            foreach($map as $from => $to) {
+                $insert[$to] = $this->toDb->escape($record[$from]);
+            }
+
+            $time = new \Application\Lib\Time('@' . $insert['last_active'], true);
+            $insert['last_active'] = $time->getTimestamp();
+
+            $time = new \Application\Lib\Time('@' . $insert['reg_date'], true);
+            $insert['reg_date'] = $time->getTimestamp();
+
+            $this->toDb->put($insert, 'members');
         }
     }
 }

@@ -166,7 +166,7 @@ class Account extends \Maverick\Lib\Controller {
             $message = \Maverick\Lib\Output::getTplEngine()->getTemplate('Emails/EmailActivation', array('code' => $this->member->get('activation_code')));
             $emailer = new \Application\Lib\Email;
 
-            $emailer->sendIt($this->member->get('username'), $newEmailAddress, 'Email Address Confirmation', $message);
+            $emailer->sendIt($this->member->get('name'), $newEmailAddress, 'Email Address Confirmation', $message);
         }
 
         if(!is_null($sendActivationEmail)) {

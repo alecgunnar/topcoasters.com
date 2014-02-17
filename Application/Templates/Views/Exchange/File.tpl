@@ -44,7 +44,7 @@
         </div>
         <div class="textCenter" style="margin-top: 30px;">
           {% if member %}
-          <a href="{{ file.getDownloadUrl() }}" class="button green">Download this File</a>
+          <a href="{{ file.getDownloadUrl() }}" class="button green">Download this File &#8595;</a>
           {% endif %}
         </div>
       </td>

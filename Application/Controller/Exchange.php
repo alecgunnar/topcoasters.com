@@ -49,12 +49,15 @@ class Exchange extends \Maverick\Lib\Controller {
 
         $exchangeFiles = new \Application\Service\Exchange;
 
-        $allFiles = $exchangeFiles->get($catId, $column, 0, 10, true);
-        $limit    = 10;
+        $allFiles = $exchangeFiles->get($catId, $column, null, null, true);
 
-        list($pages, $page, $start) = \Application\Lib\Utility::calculatePagination(count($allFiles), $limit, $page);
+        if($allFiles) {
+            $limit = \Maverick\Maverick::getConfig('Exchange')->get('files_per_page');
 
-        $this->setVariable('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/exchange/' . ($category ?: 'all') . '/%d', $page, $pages));
-        $this->setVariable('files', $exchangeFiles->get($catId, $column, $start, $limit, true));
+            list($pages, $page, $start) = \Application\Lib\Utility::calculatePagination(count($allFiles), $limit, $page);
+
+            $this->setVariable('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/exchange/' . ($category ?: 'all') . '/%d', $page, $pages));
+            $this->setVariable('files', $exchangeFiles->get($catId, $column, $start, $limit, true));
+        }
     }
 }

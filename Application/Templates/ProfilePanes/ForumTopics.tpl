@@ -9,7 +9,7 @@
     <tr>
       <td>
         {{ topic.getLink()|raw }}
-        <div class="description">in {{ topic.getForum().getLink()|raw }} {{ topic.getDate('post_date').getShortTime() }}</div>
+        <div class="description">posted in {{ topic.getForum().getLink()|raw }} {{ topic.getDate('post_date').getShortTime() }}</div>
       </td>
       <td class="textCenter">{{ topic.get('num_replies') }}</td>
     </tr>
@@ -22,6 +22,4 @@
 </div>
 
 {% import 'Macros/Pagination.tpl' as pagination %}
-<div class="textCenter">
-  {{ pagination.build(paginationLinks) }}
-</div>
+{{ pagination.build(paginationLinks) }}

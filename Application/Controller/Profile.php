@@ -10,11 +10,13 @@ class Profile extends \Maverick\Lib\Controller {
     private $panes = array(''               => 'About',
                            'track-record'   => 'Track Record',
                            'topics'         => 'Forum Topics',
-                           'exchange-files' => 'Exchange Files');
+                           'track-exchange' => 'Track Exchange');
 
     private $paneTplVars = array();
 
     public function main($seoTitle='', $pane='') {
+        Output::setGlobalVariable('search_box_text', 'Search the members');
+
         $members = new \Application\Service\Members;
         $member  = $members->get($seoTitle, 'seo_title');
 
@@ -135,7 +137,7 @@ class Profile extends \Maverick\Lib\Controller {
             $memberFavs = $favorites->getCoastersForMember($this->member->get('member_id'), null, $start, $limit);
 
             $this->setPaneTplVar('favorites', $memberFavs);
-            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/track-record/%d#tabs', $page, $pages));
+            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/track-record/%d', $page, $pages));
         }
     }
 
@@ -152,7 +154,22 @@ class Profile extends \Maverick\Lib\Controller {
             $memberTopics = $topics->getForMember($this->member->get('member_id'), $start, $limit);
 
             $this->setPaneTplVar('topics', $memberTopics);
-            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/topics/%d#tabs', $page, $pages));
+            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/topics/%d', $page, $pages));
+        }
+    }
+
+    private function showTrackExchangePane($page=1) {
+        $exchangeFiles = new \Application\Service\Exchange;
+
+        $allFiles = $exchangeFiles->get($this->member->get('member_id'), 'member_id', null, null, true);
+
+        if($allFiles) {
+            $limit = \Maverick\Maverick::getConfig('Exchange')->get('files_per_page');
+    
+            list($pages, $page, $start) = \Application\Lib\Utility::calculatePagination(count($allFiles), $limit, $page);
+    
+            $this->setPaneTplVar('paginationLinks', \Application\Lib\Utility::getPaginationLinks('/profile/' . $this->member->get('seo_title') . '/track-exchange/%d', $page, $pages));
+            $this->setPaneTplVar('files', $exchangeFiles->get($this->member->get('member_id'), 'member_id', $start, $limit, true));
         }
     }
 }

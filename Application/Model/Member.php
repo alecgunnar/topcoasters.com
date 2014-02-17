@@ -44,7 +44,7 @@ class Member extends Standard {
             $imgTag = new \Maverick\Lib\Builder_Tag('img');
 
             $imgTag->addAttributes(array('src'   => $url,
-                                         'title' => $this->get('username') . '\'s Profile Picture'));
+                                         'title' => $this->get('name') . '\'s Profile Picture'));
 
             return $imgTag->render();
         }

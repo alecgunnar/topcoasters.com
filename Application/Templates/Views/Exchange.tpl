@@ -26,9 +26,9 @@
         {% if file.getScreenshot() is not empty %}
         <td width="30%"><img src="{{ file.getScreenshot() }}" class="thumbnail" /></td>
         <td>{% else %}<td colspan="2">{% endif %}
-          {{ file.getLink()|raw }}
+          {{ file.getLink()|raw }}{% if active == 0 %} <span class="description">({{ file.getCategoryName() }})</span>{% endif %} 
           <div class="description">
-            Uploaded by {{ file.getMember().getLink()|raw }}{% if active == 0 %} in {{ file.getCategoryName() }}{% endif %}
+            uploaded by {{ file.getMember().getLink()|raw }} {{ file.getDate('upload_date').getShortTime() }}
           </div>
         </td>
         <td class="textCenter">{{ file.get('num_downloads') }}</td>

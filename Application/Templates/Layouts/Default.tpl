@@ -13,9 +13,6 @@
           {% else %}
           {% endif %}
           <li><a href="/account">Account Settings</a></li>
-          {% if member.get('is_admin') %}
-          <li><a href="/admin">Admin CP</a></li>
-          {% endif %}
           <li><a href="/sign-out">Sign Out</a></li>
         </ul>
       </div>
@@ -39,7 +36,9 @@
 <div id="header">
   <div class="wrapper">
     <div id="search">
-      {{ searchForm|raw }}
+      <form name="search" action="/search{% if search_box_what is not empty %}/{{ search_box_what }}{% endif %}">
+        <div class="clearField"></div><input type="text" placeholder="{{ search_box_text }}" name="q" value="{{ search_box_value }}" />
+      </form>
     </div>
     <div id="mainNavigation">
       <ul>

@@ -9,7 +9,7 @@
 {% endif %}
 <h1>{{ pageTitle|raw }}</h1>
 <div class="h1Description">
-  posted in {{ topic.getForum().getLink()|raw }}
+  Posted in {{ topic.getForum().getLink()|raw }}
 </div>
 {% for number,post in posts %}
 <div class="postWrap">
