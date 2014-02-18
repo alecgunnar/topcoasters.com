@@ -65,9 +65,11 @@ class Exchange_Download extends \Maverick\Lib\Controller {
             if(strpos($member->get('exchange_downloads'), $file->get('file_id') . ',') === false) {
                 $member->update('exchange_downloads', $member->get('exchange_downloads') . $file->get('file_id') . ',');
 
-                $exchangeFiles = new \Application\Service\Exchange;
-                $file->increase('num_downloads');
-                $exchangeFiles->commitChanges($file);
+                if($file->get('member_id') != $member->get('member_id')) {
+                    $exchangeFiles = new \Application\Service\Exchange;
+                    $file->increase('num_downloads');
+                    $exchangeFiles->commitChanges($file);
+                }
             }
 
             $members = new \Application\Service\Members;

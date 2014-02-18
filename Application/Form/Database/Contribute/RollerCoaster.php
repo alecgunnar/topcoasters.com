@@ -257,7 +257,7 @@ class Database_Contribute_RollerCoaster extends \Maverick\Lib\Form {
             ->addOptions(\Application\Lib\RollerCoasters::getRestraints())
             ->setValue($this->coaster->get('restraints'));
 
-        $this->addField('Textarea', 'description')
+        $this->addField('TextArea', 'description')
             ->setLabel('Additional Information')
             ->setDescription('Add any additional information here, that may not have been covered in one of the fields above.')
             ->setValue($this->coaster->get('description'));
