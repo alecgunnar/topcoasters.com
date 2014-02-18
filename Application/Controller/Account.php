@@ -59,7 +59,7 @@ class Account extends \Maverick\Lib\Controller {
 
         call_user_func_array(array($this, $paneMethod), $args);
 
-        $paneView = Output::getTplEngine()->getTemplate('AccountSettingsPanes/' . $paneName, $this->paneTplVars);
+        $paneView = Output::getTplEngine()->getTemplate('AccountSettingsPanes/' . $standardPaneName, $this->paneTplVars);
 
         $this->setVariable('activePane', $showPane);
         $this->setVariable('panes', $this->settingsPanes);
