@@ -70,7 +70,7 @@ class Topics extends Standard {
                                        'from'   => 'topics',
                                        'where'  => '`featured` = "1"',
                                        'order'  => 'post_date desc',
-                                       'limit'  => '7'), 'topic');
+                                       'limit'  => '7'), 'Topic');
 
         return $topics;
     }

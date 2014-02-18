@@ -6,7 +6,7 @@ class Members extends Standard {
     protected function setUp() {
         $this->dbTable    = 'members';
         $this->primaryKey = 'member_id';
-        $this->model      = 'Memebr';
+        $this->model      = 'Member';
     }
 
     /**

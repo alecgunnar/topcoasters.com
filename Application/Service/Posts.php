@@ -40,7 +40,7 @@ class Posts extends Standard {
             $query['limit'] = $start . ', ' . $limit;
         }
 
-        $posts = $this->db->get($query, 'post');
+        $posts = $this->db->get($query, 'Post');
 
         if(!is_null($start)) {
             $numberedPosts = array();

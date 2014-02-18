@@ -36,7 +36,7 @@ class Forums extends Standard {
         return $this->db->get(array('select' => '*',
                                     'from'   => 'forums',
                                     'where'  => 'parent_id = ' . $forumId,
-                                    'order'  => 'placement asc'), 'forum');
+                                    'order'  => 'placement asc'), 'Forum');
     }
 
     public function getForMove($currentForum) {
