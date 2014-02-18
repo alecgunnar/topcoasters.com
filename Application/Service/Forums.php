@@ -13,7 +13,7 @@ class Forums extends Standard {
         $forums = $this->db->get(array('select' => '*',
                                        'from'   => 'forums',
                                        'where'  => 'parent_id IS NULL',
-                                       'order'  => 'placement asc'), 'forum');
+                                       'order'  => 'placement asc'), 'Forum');
 
         $categories = array();
 
