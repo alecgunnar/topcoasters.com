@@ -6,7 +6,7 @@ class Posts extends Standard {
     protected function setUp() {
         $this->primaryKey = 'post_id';
         $this->dbTable    = 'posts';
-        $this->model      = 'post';
+        $this->model      = 'Post';
     }
 
     public function create($message, \Application\Model\Topic $topic, $postAsFirst=false) {

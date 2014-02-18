@@ -6,7 +6,7 @@ class Forums extends Standard {
     protected function setUp() {
         $this->primaryKey = 'forum_id';
         $this->dbTable    = 'forums';
-        $this->model      = 'forum';
+        $this->model      = 'Forum';
     }
 
     public function getAllInOrder() {

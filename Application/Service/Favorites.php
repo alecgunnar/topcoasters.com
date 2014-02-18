@@ -6,7 +6,7 @@ class Favorites extends Standard {
     protected function setUp() {
         $this->dbTable    = 'favorites';
         $this->primaryKey = 'favorite_id';
-        $this->model      = 'favorite';
+        $this->model      = 'Favorite';
     }
 
     public function getCoastersForMember($memberId, $coasterId=0, $start=null, $end=null) {

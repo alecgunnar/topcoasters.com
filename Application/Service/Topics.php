@@ -6,7 +6,7 @@ class Topics extends Standard {
     protected function setUp() {
         $this->primaryKey = 'topic_id';
         $this->dbTable    = 'topics';
-        $this->model      = 'topic';
+        $this->model      = 'Topic';
     }
 
     public function create($title, \Application\Model\Forum $forum) {

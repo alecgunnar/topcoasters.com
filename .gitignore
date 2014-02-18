@@ -10,3 +10,5 @@ ENVIRONMENT
 .DS_Store
 /Application/Cache/*
 /Public/assets/uploads/*
+/Public/assets/javascript/main.js
+/Public/assets/css/main.css
