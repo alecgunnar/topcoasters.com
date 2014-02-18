@@ -37,7 +37,7 @@ class Topics extends Standard {
             $query['limit'] = $start . ', ' . $limit;
         }
 
-        return $this->db->get($query, 'topic');
+        return $this->db->get($query, 'Topic');
     }
 
     public function getForMember($memberId, $start=null, $limit=null) {
