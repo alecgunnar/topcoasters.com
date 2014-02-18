@@ -29,8 +29,6 @@ class Index extends \Maverick\Lib\Controller {
     }
 
     private function setupFlexslider() {
-        Output::addCssFile('flexslider');
-
         $flexImagesCache  = new \Maverick\Lib\Cache('homepageFlexImages', 1800);
         $toShow           = $flexImagesCache->get();
 
