@@ -6,6 +6,7 @@ use Maverick\Lib\Output;
 
 class AppRoot {
     public function preload() {
+        Output::addJsFile('http://code.jquery.com/jquery-2.1.0.min.js');
         Output::addJsFile('main');
         Output::addCssFile('main');
         
