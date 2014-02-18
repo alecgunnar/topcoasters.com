@@ -22,7 +22,7 @@ class Database_AmusementParkFilters extends \Maverick\Lib\Form {
                     ->setLabel($country);
 
                 foreach($regions as $region => $count) {
-                    $group->addField('Input_Checkbox', base64_encode($region))
+                    $group->addField('Input_CheckBox', base64_encode($region))
                         ->setLabel($region)
                         ->setValue(1);
                 }

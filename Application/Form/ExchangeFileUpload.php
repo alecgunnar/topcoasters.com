@@ -46,7 +46,7 @@ class ExchangeFileUpload extends \Maverick\Lib\Form {
             ->setDescription('You may upload a screenshot of the park/coaster you have created.<br /><strong>This must be an in-game screenshot</strong>, if you choose to upload a picture.' . $onlyIfNeeded);
 
         if(!is_null($this->file) && $this->file->get('screenshot')) {
-            $this->addField('Input_Checkbox', 'removeScreenshot')
+            $this->addField('Input_CheckBox', 'removeScreenshot')
                 ->setLabel('Remove Screenshot')
                 ->setDescription('Check the box to delete the screenshot for this file.');
         }

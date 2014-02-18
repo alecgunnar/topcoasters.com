@@ -37,7 +37,7 @@ class Database_RollerCoasterFilters extends \Maverick\Lib\Form {
                 ->setLabel(ucwords(str_replace('_', ' ', $column)));
 
             foreach($values as $db => $label) {
-                $group->addField('Input_Checkbox', $db)
+                $group->addField('Input_CheckBox', $db)
                     ->setLabel($label)
                     ->setValue(1);
             }

@@ -16,7 +16,7 @@ class Forums_Moderate_MoveTopic extends \Maverick\Lib\Form {
         $this->setTpl('Standard');
         $this->renderFieldsWithFormTpl();
 
-        $this->addField('Input_Checkbox', 'add_moved_link')
+        $this->addField('Input_CheckBox', 'add_moved_link')
             ->setLabel('Add a "Moved to Link"')
             ->setDescription('This will add a link in the current forum of this topic to its new location.')
             ->setValue('1')
