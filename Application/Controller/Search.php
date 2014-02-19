@@ -8,7 +8,7 @@ class Search extends \Maverick\Lib\Controller {
     private $searchAreas = array(''         => array('Forums',   '(SELECT topic_id, forum_id, 0 as post_id, seo_title, name FROM topics WHERE MATCH(name) AGAINST("%1$s")) UNION (SELECT topic_id, 0 as forum_id, post_id, 0 as seo_title, 0 as name FROM posts WHERE MATCH(message) AGAINST("%1$s"))'),
                                  'database' => array('Database', '(SELECT park_id, 0 as coaster_id, seo_title, name, city, region, country FROM amusement_parks WHERE MATCH(name) AGAINST("%1$s")) UNION (SELECT park_id, coaster_id, seo_title, name, NULL as city, NULL as region, NULL as country FROM roller_coasters WHERE MATCH(name) AGAINST("%1$s"))'),
                                  'exchange' => array('Exchange', 'SELECT file_id, name, category, screenshot FROM exchange_files WHERE MATCH(name,description) AGAINST("%1$s")'),
-                                 'members'  => array('Members',  'SELECT member_id, seo_title, name, profile_picture_type FROM members WHERE name LIKE "%s"'));
+                                 'members'  => array('Members',  'SELECT member_id, seo_title, name, profile_picture_type, email_address FROM members WHERE name LIKE "%s"'));
 
     private $db = null;
 

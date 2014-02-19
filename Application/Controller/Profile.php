@@ -16,6 +16,7 @@ class Profile extends \Maverick\Lib\Controller {
 
     public function main($seoTitle='', $pane='') {
         Output::setGlobalVariable('search_box_text', 'Search the members');
+        Output::setGlobalVariable('search_box_what', 'members');
 
         $members = new \Application\Service\Members;
         $member  = $members->get($seoTitle, 'seo_title');

@@ -82,7 +82,7 @@ class Database {
         if($measures == 'english') {
             $units = 'mph';
         } else {
-            $units     = 'kph';
+            $units     = 'km/h';
             $quantity *= 1.60934;
         }
 

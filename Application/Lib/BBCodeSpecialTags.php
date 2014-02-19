@@ -9,12 +9,16 @@ class BBCodeSpecialTags {
 
     public static function checkTag_url($option, $content, $html) {
         if(strpos(trim($option), 'javascript') === 0) {
-            return $content;
+            $span = new \Maverick\Lib\Builder_Tag('span');
+            $span->addAttribute('style', 'background:#A00;color:#FFF;')
+                ->addContent($content);
+
+            return $span->render();
         }
 
         $a = new \Maverick\Lib\Builder_Tag('a');
 
-        if(!preg_match('~^(http(s)?://)?((.*)+\.)?topcoasters.com~', $option)) {
+        if(!preg_match('~^(http://)?(([a-z0-9]+)\.)?topcoasters.com~', $option)) {
             $a->addAttribute('target', '_blank');
         }
 
