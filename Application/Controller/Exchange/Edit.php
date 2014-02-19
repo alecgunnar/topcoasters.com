@@ -13,6 +13,12 @@ class Exchange_Edit extends \Maverick\Lib\Controller {
             \Maverick\Lib\Router::throw404();
         }
 
+        \Application\Lib\Members::checkUserStatus(true);
+
+        if(!\Application\Lib\Members::checkUserIsMod() && (\Application\Lib\Members::getMember()->get('member_id') != $file->getMember()->get('member_id'))) {
+            \Application\Lib\Utility::showError('You do not have permission to view this page.');
+        }
+
         Output::setPageTitle('Editing ' . $file->getName());
 
         $this->setVariable('file', $file);

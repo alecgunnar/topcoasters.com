@@ -13,6 +13,12 @@ class Exchange_Delete extends \Maverick\Lib\Controller {
             \Maverick\Lib\Router::throw404();
         }
 
+        \Application\Lib\Members::checkUserStatus(true);
+
+        if(!\Application\Lib\Members::checkUserIsMod() && (\Application\Lib\Members::getMember()->get('member_id') != $file->getMember()->get('member_id'))) {
+            \Application\Lib\Utility::showError('You do not have permission to view this page.');
+        }
+
         $trackFile = \Maverick\Maverick::getConfig('Exchange')->get('paths')->get('files') . $file->get('file');
         $imageFile = \Maverick\Maverick::getConfig('Exchange')->get('paths')->get('screenshot') . $file->get('screenshot');
 

@@ -12,6 +12,8 @@ class Exchange_Upload extends \Maverick\Lib\Controller {
             \Application\Lib\Utility::showError('The URL you have followed is invalid.');
         }
 
+        \Application\Lib\Members::checkUserStatus(true);
+
         Output::setPageTitle('Upload a File');
 
         $excahngeFileUploadForm = new \Application\Form\ExchangeFileUpload($categories, $category);
