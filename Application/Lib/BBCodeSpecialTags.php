@@ -7,6 +7,27 @@ class BBCodeSpecialTags {
         return preg_replace('~[\r\n]~', '', $str);
     }
 
+    public static function checkTag_url($option, $content, $html) {
+        if(strpos(trim($option), 'javascript') === 0) {
+            return $content;
+        }
+
+        $a = new \Maverick\Lib\Builder_Tag('a');
+
+        if(!preg_match('~^(http(s)?://)?((.*)+\.)?topcoasters.com~', $option)) {
+            $a->addAttribute('target', '_blank');
+        }
+
+        if(!preg_match('~^(http(s)?:)//~', $option)) {
+            $option = 'http://' . $option;
+        }
+
+        $a->addAttribute('href', $option)
+            ->addContent($content);
+
+        return $a->render();
+    }
+
     public static function checkTag_list($option, $content, $html) {
         $tag     = $option == 'num' ? 'ol' : 'ul';
         $content = self::removeNewLines(preg_replace('~\[\*\](.+)~', '<li>$1</li>', $content));
