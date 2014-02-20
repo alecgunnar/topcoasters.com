@@ -6,7 +6,7 @@ use \Maverick\Lib\Output;
 
 class Database_Contribute_AmusementPark extends \Maverick\Lib\Controller {
 	public function main($parkIn='') {
-		\Application\Lib\Members::checkUserStatus(true);
+		\Application\Lib\Members::checkUserIsMod(true);
 
 	    $title    = 'Adding an Amusement Park';
         $parkId   = intval($parkIn);
