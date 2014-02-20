@@ -13,6 +13,14 @@ class Forums_View extends \Maverick\Lib\Controller {
             \Maverick\Lib\Router::throw404();
         }
 
+        if(!is_numeric($forum->get('parent_id'))) {
+            \Application\Lib\Utility::showError('You cannot view this forum.');
+        }
+
+        if($forum->get('staff_view') && !\Application\Lib\Members::checkUserIsMod()) {
+            \Application\Lib\Utility::showError('You do not have permission to view this forum.');
+        }
+
         Output::setPageTitle($forum->getName());
 
         $topics    = new \Application\Service\Topics;

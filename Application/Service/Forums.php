@@ -10,16 +10,22 @@ class Forums extends Standard {
     }
 
     public function getAllInOrder() {
+        $staffView = '';
+
+        if(!\Application\Lib\Members::checkUserIsMod()) {
+            $staffView = 'staff_view != "1" AND ';
+        }
+
         $forums = $this->db->get(array('select' => '*',
                                        'from'   => 'forums',
-                                       'where'  => 'parent_id IS NULL',
+                                       'where'  => $staffView . 'parent_id IS NULL',
                                        'order'  => 'placement asc'), 'Forum');
 
         $categories = array();
 
         if(count($forums)) {
             foreach($forums as $num => $forum) {
-                if(count(($children = $this->getChildren($forum->get('forum_id'))))) {
+                if(count(($children = $this->getChildren($forum->get('forum_id'), $staffView)))) {
                     $categories[] = array($forum, $children);
                 }
             }
@@ -32,10 +38,10 @@ class Forums extends Standard {
         return false;
     }
 
-    public function getChildren($forumId) {
+    public function getChildren($forumId, $staffView) {
         return $this->db->get(array('select' => '*',
                                     'from'   => 'forums',
-                                    'where'  => 'parent_id = ' . $forumId,
+                                    'where'  => $staffView . 'parent_id = ' . $forumId,
                                     'order'  => 'placement asc'), 'Forum');
     }
 

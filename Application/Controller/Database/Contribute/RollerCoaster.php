@@ -6,7 +6,7 @@ use \Maverick\Lib\Output;
 
 class Database_Contribute_RollerCoaster extends \Maverick\Lib\Controller {
 	public function main($what='', $parkIdIn=0) {
-		\Application\Lib\Members::checkUserStatus(true);
+		\Application\Lib\Members::checkUserIsMod(true);
 
 	    $title       = 'Adding a Roller Coaster';
         $editCoaster = null;

@@ -39,7 +39,7 @@
     {{ coaster.get('description')|nl2br }}
   </div>
   {% endif %}
-  {% if member.get('member_id') %}
+  {% if member.get('is_mod') %}
   <div class="plainBox lighterBox textCenter">
     <a href="/database/contribute/roller-coaster/{{ coaster.get('coaster_id') }}">Edit this Roller Coaster</a>
   </div>

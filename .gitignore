@@ -1,6 +1,7 @@
 /vendor
 composer.lock
 BUILD_ID
+OFFLINE
 /Logs
 ENVIRONMENT
 /Config/Master/Database.php

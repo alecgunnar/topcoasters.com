@@ -1,4 +1,4 @@
-{% if member %}
+{% if member and (member.get('is_mod') == 1 or (member.get('is_mod') == 0 and (forum.get('staff_start') == 0 and forum.get('staff_post') == 0))) %}
 <div class="postingOptions">
   <a href="/forums/post/topic/{{ forum.get('forum_id') }}" class="button">Post a Topic</a>
 </div>

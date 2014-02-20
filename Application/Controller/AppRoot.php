@@ -18,6 +18,17 @@ class AppRoot {
         $this->checkForAjaxRequest();
         $this->setBuildId();
         $this->setUserStatus();
+
+        if(file_exists(ROOT_PATH . 'OFFLINE') && !\Application\Lib\Members::checkUserIsMod()) {
+            $path = \Maverick\Lib\Router::getUri()->getPath();
+
+            if($path != 'sign-out' && $path != 'sign-in') {
+                \Maverick\Lib\Router::forceLoadController('Errors_Offline');
+
+                Output::setPageLayout('Offline');
+                Output::setGlobalVariable('offline', true);
+            }
+        }
     }
 
     private function checkForAjaxRequest() {

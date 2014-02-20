@@ -46,9 +46,21 @@ class Forums_Post extends \Maverick\Lib\Controller {
         if($forum) {
             $title    = 'Posting a Topic';
             $redirect = 'Your topic has been posted.';
+
+            if(!is_numeric($forum->get('parent_id'))) {
+                \Application\Lib\Utility::showError('You cannot view this forum.');
+            }
+    
+            if(($forum->get('staff_view') || $forum->get('staff_post') || $forum->get('staff_start')) && !\Application\Lib\Members::checkUserIsMod()) {
+                \Application\Lib\Utility::showError('You do not have permission to post in this forum.');
+            }
         } elseif($topic) {
             if($topic->get('closed') && !Output::getGlobalVariable('member')->get('is_mod')) {
                 \Application\Lib\Utility::showError('This topic is closed, you may not post a reply.');
+            }
+
+            if(($topic->getForum()->get('staff_view') || $topic->getForum()->get('staff_post')) && !\Application\Lib\Members::checkUserIsMod()) {
+                \Application\Lib\Utility::showError('You do not have permission to post in this topic.');
             }
 
             $title    = 'Posting a Reply';
@@ -59,6 +71,10 @@ class Forums_Post extends \Maverick\Lib\Controller {
             } else {
                 if($post->getTopic()->get('closed') && !Output::getGlobalVariable('member')->get('is_mod')) {
                     \Application\Lib\Utility::showError('The topic this post is in has been closed, you may not edit the post.');
+                }
+
+                if(($post->getTopic()->getForum()->get('staff_view') || $post->getTopic()->getForum()->get('staff_post')) && !\Application\Lib\Members::checkUserIsMod()) {
+                    \Application\Lib\Utility::showError('You do not have permission to edit this post.');
                 }
     
                 $title    = 'Editing a Post';

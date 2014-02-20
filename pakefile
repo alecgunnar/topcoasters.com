@@ -29,7 +29,7 @@ function run_default() {
 }
 
 pake_desc('Generates the Build ID');
-pake_task('build_id');
+pake_task('build-id');
 
 function run_build_id() {
     if(file_exists(BUILD_ID_FILE)) {
@@ -44,7 +44,7 @@ function run_build_id() {
 }
 
 pake_desc('Compiles all of the LESS files into CSS');
-pake_task('compile_less');
+pake_task('compile-less');
 
 function run_compile_less() {
     if(!file_exists(COMPILE_LESS_TO)) {
@@ -61,7 +61,7 @@ function run_compile_less() {
 }
 
 pake_desc('Compiles all of the JavaScript files into one large file');
-pake_task('compile_js');
+pake_task('compile-js');
 
 function run_compile_js() {
     $allJs        = '';
@@ -85,4 +85,25 @@ function run_compile_js() {
     file_put_contents(COMPILE_JS_TO, $allJs);
 
     pake_echo('Compiled JavaScript');
+}
+
+pake_desc('Turns the website offline');
+pake_task('go-offline');
+
+function run_go_offline() {
+    $file = ROOT_PATH . '/OFFLINE';
+
+    if(file_exists($file)) {
+        if(unlink($file)) {
+            pake_echo('The website is online');
+        } else {
+            pake_echo('FAILED to bring the website back online');
+        }
+    } else {
+        if(touch($file)) {
+            pake_echo('The website is offline');
+        } else {
+            pake_echo('FAILED to take the website offline');
+        }
+    }
 }

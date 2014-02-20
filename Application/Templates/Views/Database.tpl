@@ -9,6 +9,7 @@
         <li><strong><a href="/track-record">Update my Track Record</a></strong></li>
       </ul>
     </div>
+    {% if member.get('is_mod') %}
     <h3>Contribute</h3>
     <div class="verticalMenu">
       <ul>
@@ -16,6 +17,7 @@
         <li><a href="/database/contribute/amusement-park">Add an Amusement Park</a></li>
       </ul>
     </div>
+    {% endif %}
   </div>
 </div>
 <div class="right seventy">

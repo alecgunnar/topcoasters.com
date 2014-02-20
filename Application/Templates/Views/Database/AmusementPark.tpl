@@ -29,10 +29,9 @@
 
 <div class="left fourty">
   {{ dataTable.build('About the Park', data) }}
-  {% if member.get('member_id') %}
+  {% if member %}
   <div class="plainBox lighterBox textCenter">
-    <a href="/database/contribute/amusement-park/{{ park.get('park_id') }}">Edit this Amusement Park</a> &middot; <a href="/database/contribute/roller-coaster/park/{{ park.get('park_id') }}">Add a Roller Coaster</a>
-    <div style="margin-top: 10px;">
+    {% if member.get('is_mod') %}<a href="/database/contribute/amusement-park/{{ park.get('park_id') }}">Edit this Amusement Park</a> &middot; <a href="/database/contribute/roller-coaster/park/{{ park.get('park_id') }}">Add a Roller Coaster</a><div style="margin-top: 10px;">{% else %}<div>{% endif %}
       {% if favorite is not null %}<a href="{{ favorite.getUrl() }}">Edit Track Record</a>{% else %}<a href="/track-record/parks/add/{{ park.get('park_id') }}">Add Park to Track Record</a>{% endif %}
     </div>
   </div>

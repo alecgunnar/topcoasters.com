@@ -17,6 +17,10 @@ class Forums_Topic extends \Maverick\Lib\Controller {
             \Maverick\Lib\Http::location($topic->getUrl());
         }
 
+        if($topic->getForum()->get('staff_view') && !\Application\Lib\Members::checkUserIsMod()) {
+            \Application\Lib\Utility::showError('You do not have permission to view this topic.');
+        }
+
         Output::setPageTitle($topic->getName());
 
         $posts    = new \Application\Service\Posts;

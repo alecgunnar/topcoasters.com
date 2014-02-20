@@ -1,12 +1,19 @@
+{% macro replyOpt(member, topic) %}
+{% if topic.get('closed') and not member.get('is_mod') %}
+  <span class="dummyButton red">Topic Closed</span>
+{% elseif member.get('is_mod') == 1 or (member.get('is_mod') == 0 and topic.getForum().get('staff_post') == 0)%}
+  <a href="/forums/post/reply/{{ topic.get('topic_id') }}" class="button">Post a Reply</a>
+{% endif %}
+{% endmacro %}
+
+{% import _self as btn %}
+
 {% if member %}
 <div class="postingOptions">
-  {% if topic.get('closed') and not member.get('is_mod') %}
-  <span class="dummyButton red">Topic Closed</span>
-  {% else %}
-  <a href="/forums/post/reply/{{ topic.get('topic_id') }}" class="button">Post a Reply</a>
-  {% endif %}
+  {{ btn.replyOpt(member, topic) }}
 </div>
 {% endif %}
+
 <h1>{{ pageTitle|raw }}</h1>
 <div class="h1Description">
   Posted in {{ topic.getForum().getLink()|raw }}
@@ -39,12 +46,12 @@
       </td>
     </tr>
   </table>
-  {% if member %}
+  {% if member and (member.get('is_mod') == 1 or topic.getForum().get('staff_post') == 0) %}
   <div class="postOptions">
     <ul>
-      {% if member.get('is_mod') or member.get('is_admin') or member.get('member_id') == post.getMember().get('member_id') %}
+      {% if member.get('is_mod') or member.get('member_id') == post.getMember().get('member_id') %}
       <li><a href="/forums/post/edit/{{ post.get('post_id') }}">Edit Post</a>
-      {% if (member.get('is_mod') or member.get('is_admin')) and post.get('is_first_post') == '0' %}
+      {% if member.get('is_mod') and post.get('is_first_post') == "0" %}
       <li><a href="/forums/post/delete/{{ post.get('post_id') }}" confirm-click="true">Delete Post</a>
       {% endif %}
       {% endif %}
@@ -57,17 +64,9 @@
 {% if member %}
 <div class="postingOptions">
   {% if member.get('is_mod') %}
-  <!--<a href="/forums/moderate/delete/{{ topic.get('topic_id') }}" class="button grey redText">Delete Topic</a>
-  <a href="/forums/moderate/close/{{ topic.get('topic_id') }}" class="button grey">Close Topic</a>
-  <a href="/forums/moderate/move/{{ topic.get('topic_id') }}" class="button grey">Move Topic</a>
-  <a href="/forums/moderate/status/{{ topic.get('topic_id') }}" class="button grey">Pin Topic</a>-->
   <a href="/forums/moderate/{{ topic.get('topic_id') }}" class="button gray">Moderation Options</a>
   {% endif %}
-  {% if topic.get('closed') and not member.get('is_mod') %}
-  <span class="dummyButton red">Topic Closed</span>
-  {% else %}
-  <a href="/forums/post/reply/{{ topic.get('topic_id') }}" class="button">Post a Reply</a>
-  {% endif %}
+  {{ btn.replyOpt(member, topic) }}
 </div>
 {% endif %}
 
