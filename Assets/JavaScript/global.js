@@ -61,6 +61,16 @@ function setupSearchField() {
     });
 }
 
+function checkMessage() {
+    if($('#redirectWrapper #redirectMessage').text() != '') {
+        $('#redirectWrapper').show();
+
+        setTimeout(function() {
+            $('#redirectWrapper').fadeOut();
+        }, 5000);
+    }
+}
+
 function hideMessage() {
     if($('#redirectWrapper #redirectMessage').text() != '') {
         setTimeout(function() {
@@ -93,7 +103,7 @@ function lookForRatings() {
 
 $(document).ready(function() {
     setupSearchField();
-    hideMessage();
+    checkMessage();
     lookForFacebookLoginButtons();
     lookForRatings();
     lookForMiniMaxes();

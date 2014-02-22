@@ -60,22 +60,6 @@ body {
                     }
                 }
             }
-            
-            &.facebookLoginMini {
-                width: 125px;
-                display: block;
-                
-                a {
-                    background: url("@{image-path}facebook/login_mini.png") no-repeat;
-                    background-position: center center;
-                    text-indent: -99999px;
-                    width: 135px;
-                    height: 29px;
-                    padding: 0;
-                    margin-top: -7px;
-                    position: absolute;
-                }
-            }
         }
         
         .right li {
@@ -154,6 +138,7 @@ body {
 }
 
 #redirectWrapper {
+    display: none;
     position: fixed;
     top: 3px;
     z-index: 105;
