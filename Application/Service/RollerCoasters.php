@@ -19,7 +19,7 @@ class RollerCoasters extends Standard {
     public function getForFlex($coaster, $park) {
         $coasters = $this->get($coaster, 'name', null, null, true);
 
-        if(!is_null($coasters)) {
+        if(is_array($coasters)) {
             foreach($coasters as $c) {
                 if($c->getPark()->getName() == $park) {
                     return $c;
@@ -27,7 +27,7 @@ class RollerCoasters extends Standard {
             }
         }
 
-        return null;
+        return false;
     }
 
     /**

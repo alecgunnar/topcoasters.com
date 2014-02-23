@@ -66,7 +66,7 @@ class Index extends \Maverick\Lib\Controller {
                         $coaster = $coasters->getForFlex($theCoaster, $thePark);
                         $msg     = '%s at %s';
 
-                        if(!is_null($coaster)) {
+                        if($coaster) {
                             $theCoaster = $coaster->getLink();
                             $thePark    = $coaster->getPark()->getLink();
                         }
