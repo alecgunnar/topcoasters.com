@@ -11,7 +11,7 @@
     <div class="plainBox borderless darkBox textRight" style="margin-bottom: 10px;">
       <div class="rating"rating="{{ park.get('rating') }}">{{ park.get('rating') }} / 5.0</div>
     </div>
-    {{ park.get('tag_line') }}
+    {{ park.get('tag_line')|raw }}
   </div>
   <div class="clear"></div>
 </div>
