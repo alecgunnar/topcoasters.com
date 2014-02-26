@@ -24,7 +24,7 @@
       {% for file in files %}
       <tr>
         {% if file.getScreenshot() is not empty %}
-        <td width="30%"><img src="{{ file.getScreenshot() }}" class="thumbnail" /></td>
+        <td width="30%"><img src="{{ file.getScreenshot() }}" class="thumbnail" show-lightbox="true" /></td>
         <td>{% else %}<td colspan="2">{% endif %}
           {{ file.getLink()|raw }}{% if active == 0 %} <span class="description">({{ file.getCategoryName() }})</span>{% endif %} 
           <div class="description">

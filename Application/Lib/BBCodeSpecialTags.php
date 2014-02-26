@@ -101,10 +101,11 @@ class BBCodeSpecialTags {
             list($height, $width) = $checkDimension($height, $width, \Maverick\Maverick::getConfig('Posting')->get('images')->get('maxHeight'));
 
             $tag = new \Maverick\Lib\Builder_Tag('img');
-            $tag->addAttributes(array('src'    => $content,
-                                      'width'  => $width,
-                                      'height' => $height,
-                                      'title'  => 'Posted Image'));
+            $tag->addAttributes(array('src'           => $content,
+                                      'width'         => $width,
+                                      'height'        => $height,
+                                      'title'         => 'Posted Image',
+                                      'show-lightbox' => 'true'));
 
             return $tag->render();
         }

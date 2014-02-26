@@ -15,7 +15,7 @@
     <tr>
       <td class="fifty textCenter">
         {% if file.getScreenshot() %}
-        <img src="{{ file.getScreenshot() }}" class="screenshot" />
+        <img src="{{ file.getScreenshot() }}" class="screenshot" show-lightbox="true" />
         {% else %}
         <em>No Screenshot &#9785;</em>
         {% endif %}
