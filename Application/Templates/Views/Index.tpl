@@ -14,7 +14,7 @@
     {% endfor %}
   </div>
 </div>
-<div class="right sixty">
+<div class="right sixty dataTable borderless">
   {{ tabs.build('topRated', 'Top Rated', topRatedTabs) }}
 </div>
 <div class="clear"></div>

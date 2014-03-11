@@ -122,7 +122,7 @@ class Index extends \Maverick\Lib\Controller {
             $topParksCache->set($topParks);
         }
 
-        $this->setVariable('topRatedTabs', array('Roller Coasters' => array(true,  Output::getTplEngine()->getTemplate('Tabs/TopCoasters', array('topCoasters' => $topCoasters))),
-                                                 'Amusement Parks' => array(false, Output::getTplEngine()->getTemplate('Tabs/TopParks', array('topParks' => $topParks)))));
+        $this->setVariable('topRatedTabs', array('Roller Coasters' => array(true,  Output::getTplEngine()->getTemplate('Blocks/TopRatedCoasters', array('topCoasters' => $topCoasters))),
+                                                 'Amusement Parks' => array(false, Output::getTplEngine()->getTemplate('Blocks/TopRatedParks', array('topParks' => $topParks)))));
     }
 }
