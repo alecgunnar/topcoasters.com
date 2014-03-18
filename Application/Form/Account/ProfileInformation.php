@@ -328,6 +328,12 @@ class Account_ProfileInformation extends \Maverick\Lib\Form {
     public function submit() {
         $this->runThroughFields($this->getModel()->getAsArray());
 
+        $website = strtolower($this->getModel()->get('profileInfo')->get('website'));
+
+        if(strpos($website, 'http://') !== 0 && strpos($website, 'https://') !== 0 && $website) {
+            $this->member->update('website', 'http://' . $website, true);
+        }
+
         $this->member->update('seo_title', \Application\Lib\Utility::generateSeoTitle($this->getModel()->get('preferences')->get('username')));
 
         $members = new \Application\Service\Members;
