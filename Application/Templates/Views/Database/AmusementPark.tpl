@@ -18,7 +18,7 @@
 
 {% if parkIsClosed %}
   <div class="alert">
-    {{ park.get('name') }} is closed for the off-season{% if park.getDaysUntilOpen() %}, it will reopen in {{ park.getDaysUntilOpen() }} days on {{ park.getDate('season_start').format('F jS') }}.{% else %}.{% endif %}
+    {{ park.get('name') }} is closed for the off-season{% if park.getDaysUntilOpen() >= 1 %}, it will reopen in {{ park.getDaysUntilOpen() }} days on {{ park.getDate('season_start').format('F jS') }}.{% elseif park.getDaysUntilOpen() == -1 %}, it will reopen tomorrow.{% else %}.{% endif %}
   </div>
 {% endif %}
 {% if park.get('approved') == 0 %}

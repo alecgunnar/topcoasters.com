@@ -94,12 +94,16 @@ class AmusementPark extends Standard {
 
         if($this->get('season_start')) {
             $time  = new \Application\Lib\Time(null, true);
-            $start = new \Application\Lib\Time($this->get('season_start'), true);
+            $start = $this->getDate('season_start');
 
             if($start > $time) {
                 $diff = $time->diff($start);
 
-                $this->daysUntilOpen = $diff->format('%a');
+                if($diff->d >= 1) {
+                    $this->daysUntilOpen = $diff->format('%a');
+                } elseif($diff->s || $diff->m) {
+                    $this->daysUntilOpen = -1;
+                }
             }
         }
     }
