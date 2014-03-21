@@ -13,6 +13,9 @@
           {% else %}
           {% endif %}
           <li><a href="/account">Account Settings</a></li>
+          {% if member.get('is_admin') %}
+          <li><a href="/admin">Admin</a></li>
+          {% endif %}
           <li><a href="/sign-out">Sign Out</a></li>
         </ul>
       </div>

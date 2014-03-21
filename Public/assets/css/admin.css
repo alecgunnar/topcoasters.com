@@ -1,0 +1,26 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    background: #E1E1E1;
+    font-family: Helvetica;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background: #069;
+    height: 50px;
+    padding-left: 10px;
+}
+
+#header #logo {
+    background: url('/assets/images/themes/maverick/logo.png') no-repeat;
+    background-position: center center;
+    display: block;
+    text-indent: -99999px;
+    width: 198px;
+    height: 50px;
+}

@@ -8,14 +8,20 @@ class Layouts_Default extends \Maverick\Lib\Controller {
     public function main($variables) {
         $this->setVariables($variables);
 
-        $navigationLinksConfig = \Maverick\Maverick::getConfig('MainNavigation')->getAsArray();
-        $navigationLinks       = array();
-        $urlPath               = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
+        $navigationLinksSet = 'public';
+        $navigationLinks    = array();
+        $urlPath            = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
+
+        if(strpos($urlPath, '/admin') === 0) {
+            $navigationLinksSet = 'admin';
+        }
+
+        $navigationLinksConfig = \Maverick\Maverick::getConfig('MainNavigation')->get($navigationLinksSet)->getAsArray();
 
         foreach($navigationLinksConfig as $label => $path) {
             $isActive = (strpos($urlPath, $path) === 0);
 
-            if($path == '/' && $urlPath != '/') {
+            if(($path == '/' && $urlPath != '/') || ($path == '/admin' && $urlPath != '/admin')) {
                 $isActive = false;
             }
 

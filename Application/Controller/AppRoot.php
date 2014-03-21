@@ -9,7 +9,14 @@ class AppRoot {
         Output::addJsFile('http://code.jquery.com/jquery-2.1.0.min.js');
         Output::addJsFile('main');
         Output::addCssFile('main');
-        
+
+        if(strpos(\Maverick\Lib\Router::getUri()->getPath(), 'admin') === 0) {
+            Output::addCssFile('admin');
+            Output::setPageLayout('Admin');
+        } else {
+            Output::addJsFile('main');
+            Output::addCssFile('main');
+        }
         Output::setGlobalVariable('url', \Maverick\Maverick::getConfig('System')->get('url'));
         Output::setGlobalVariable('redirect_msg', \Maverick\Lib\Http::getRedirectMessage());
         Output::setGlobalVariable('search_box_text', 'Search Top Coasters');

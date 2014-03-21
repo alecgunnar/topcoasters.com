@@ -241,6 +241,31 @@ class Members {
     }
 
     /**
+     * Checks to see if the user is an administrator or not
+     *
+     * @param  boolean $showError=false
+     * @param  string  $customErrorMessage
+     * @return boolean|null
+     */
+    public static function checkUserIsAdmin($showError=false, $customErrorMessage='') {
+        if(self::$member instanceof \Application\Model\Member) {
+            if(self::$member->get('is_admin')) {
+                return true;
+            }
+        }
+
+        if($showError) {
+            if(\Maverick\Lib\Output::getGlobalVariable('ajaxRequest')) {
+                \Maverick\Lib\Output::printJson(array('status' => 'signin'));
+            }
+
+            \Application\Lib\Utility::showError($customErrorMessage ?: 'You do not have permission to view this page.');
+        }
+
+        return false;
+    }
+
+    /**
      * Gets the profile picture types
      *
      * @return array
