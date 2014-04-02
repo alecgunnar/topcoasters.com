@@ -25,19 +25,19 @@
         <div class="dataTable">
           <table>
             <tr>
-              <td class="twenty">Uploaded By</td>
+              <td class="fourty">Uploaded By</td>
               <td>{{ file.getMember().getLink()|raw }}</td>
             </tr>
             <tr>
-              <td class="twenty">Uploaded On</td>
+              <td>Uploaded On</td>
               <td>{{ file.getDate('upload_date').format('F j, Y g:i a') }}</td>
             </tr>
             <tr>
-              <td class="twenty">Category</td>
+              <td>Category</td>
               <td>{{ file.getCategoryLink()|raw }}</td>
             </tr>
             <tr>
-              <td class="twenty">Total Downloads</td>
+              <td>Total Downloads</td>
               <td>{{ file.get('num_downloads') }}</td>
             </tr>
           </table>
