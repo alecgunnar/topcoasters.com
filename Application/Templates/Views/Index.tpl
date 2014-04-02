@@ -5,7 +5,7 @@
   <span class="label"><a href="/featured-topics" title="View all featured topics.">Featured Topics</a></span><div id="newsreel">We don't have any recent news or updates to show you... &#9785;</div>
 </div>
 <script>
-var recentNewsTopics = new Array({% for topic in recentNews %}{'title': '{{ topic.getName() }}', 'url': '{{ topic.getUrl() }}'}{% if loop.last == false %},{% endif %}{% endfor %});
+var recentNewsTopics = new Array({% for topic in recentNews %}{'title': '{{ topic.getName()|raw }}', 'url': '{{ topic.getUrl() }}'}{% if loop.last == false %},{% endif %}{% endfor %});
 $('#newsreel').composeNewsreel(recentNewsTopics);
 </script>
 <div class="left fifty">

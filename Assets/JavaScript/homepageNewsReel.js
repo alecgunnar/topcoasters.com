@@ -12,7 +12,7 @@
             }
         },
         showNext: function() {
-            newsreelLink.text(topics[currentPos].title)
+            newsreelLink.html(topics[currentPos].title)
                 .attr('href', topics[currentPos].url);
             
             if(newsreelLink.parent().length == 0) {
