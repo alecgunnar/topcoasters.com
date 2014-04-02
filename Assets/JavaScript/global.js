@@ -12,55 +12,6 @@ var ratings = {
     zero: 0
 };
 
-function setupSearchField() {
-    var $clearField       = $('#header #search .clearField'),
-        showingClearField = false,
-        clickedClear      = false,
-        $searchField      = $('#header #search input'),
-        searchStartWidth  = $searchField.css('width'),
-        searchMaxWidth    = $searchField.css('max-width');
-
-    $clearField.on('mousedown', function() {
-        clickedClear = true;
-    }).on('click', function(e) {
-        $searchField.val('').focus().keyup();
-    });
-
-    $searchField.on('click', function(e) {
-        if($searchField.attr('expanded') != 'true') {
-            $searchField.css('width', searchMaxWidth).attr('expanded', 'true');
-        }
-
-        if($searchField.val()) {
-            $searchField.keyup();
-        }
-    }).on('keyup', function(e) {
-        if(!showingClearField) {
-            $clearField.fadeIn(200);
-
-            showingClearField = true;
-        } else if(!$searchField.val()) {
-            $clearField.fadeOut(200);
-
-            showingClearField = false;
-        }
-    });
-
-    $searchField.on('blur', function(e) {
-        if($searchField.attr('expanded') != 'false' && !clickedClear) {
-            if(showingClearField) {
-                $clearField.fadeOut(200);
-
-                showingClearField = false;
-            }
-
-            $searchField.css('width', searchStartWidth).attr('expanded', 'false');
-        }
-
-        clickedClear = false;
-    });
-}
-
 function checkMessage() {
     if($('#redirectWrapper #redirectMessage').text() != '') {
         $('#redirectWrapper').show();
@@ -102,7 +53,6 @@ function lookForRatings() {
 }
 
 $(document).ready(function() {
-    setupSearchField();
     checkMessage();
     lookForFacebookLoginButtons();
     lookForRatings();

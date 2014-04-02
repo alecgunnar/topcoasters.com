@@ -26,6 +26,7 @@ class Index extends \Maverick\Lib\Controller {
         $this->setupFlexslider();
         $this->getRecentNews();
         $this->getHighestRated();
+        $this->getRecentExchangeFiles();
     }
 
     private function setupFlexslider() {
@@ -124,5 +125,19 @@ class Index extends \Maverick\Lib\Controller {
 
         $this->setVariable('topRatedTabs', array('Roller Coasters' => array(true,  Output::getTplEngine()->getTemplate('Blocks/TopRatedCoasters', array('topCoasters' => $topCoasters))),
                                                  'Amusement Parks' => array(false, Output::getTplEngine()->getTemplate('Blocks/TopRatedParks', array('topParks' => $topParks)))));
+    }
+
+    private function getRecentExchangeFiles() {
+        $recentExchangeFilesCache = new \Maverick\Lib\Cache('recentExchangeFiles', 86400);
+        $recentFiles              = $recentExchangeFilesCache->get();
+
+        if(!$recentFiles) {
+            $exchange    = new \Application\Service\Exchange;
+            $recentFiles = $exchange->getRecentFiles();
+
+            $recentExchangeFilesCache->set($recentFiles);
+        }
+
+        $this->setVariable('exchangeFiles', $recentFiles);
     }
 }

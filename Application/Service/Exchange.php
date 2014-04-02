@@ -21,6 +21,9 @@ class Exchange extends Standard {
                                    'upload_date' => $time->getTimestamp()), $this->dbTable);
 
         if($id) {
+            $recentExchangeFilesCache = new \Maverick\Lib\Cache('recentExchangeFiles');
+            $recentExchangeFilesCache->clear();
+
             $file = $this->get($id);
             $file->update('seo_title', \Application\Lib\Utility::generateSeoTitle($file->getName(), $file->get('file_id')));
 
@@ -28,5 +31,12 @@ class Exchange extends Standard {
         }
 
         return false;
+    }
+
+    public function getRecentFiles() {
+        return $this->db->get(array('select' => '*',
+                                    'from'   => 'exchange_files',
+                                    'order'  => 'upload_date DESC',
+                                    'limit'  => 7), $this->model);
     }
 }

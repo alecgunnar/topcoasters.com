@@ -1,22 +1,23 @@
 .tabs {
     .tabMenu {
-        background: @base;
-        padding: 17px 7px 10px;
-        border-bottom: 2px solid @darker;
+        background: @old-base;
+        padding: 10px;
         
         .menu;
         
-        ul li a {
-            background: #FFF;
-            color: @darker;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
+        ul li {
+            margin-left: -5px;
             
-            &.active {
-                background: @darker;
+            a {
+                font-size: .8em;
                 color: #FFF;
+                text-decoration: none;
+                padding: 7px 7px 11px;
+                
+                &.active {
+                    background: @darker;
+                    color: #FFF;
+                }
             }
         }
     }

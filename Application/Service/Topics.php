@@ -65,12 +65,17 @@ class Topics extends Standard {
         $this->commitChanges($topic);
     }
 
-    public function getRecentNews() {
-        $topics = $this->db->get(array('select' => '*',
-                                       'from'   => 'topics',
-                                       'where'  => '`featured` = "1"',
-                                       'order'  => 'post_date desc',
-                                       'limit'  => '7'), 'Topic');
+    public function getRecentNews($start=0, $limit=7) {
+        $query = array('select' => '*',
+                       'from'   => 'topics',
+                       'where'  => '`featured` = "1"',
+                       'order'  => 'post_date desc');
+
+        if(is_numeric($limit)) {
+            $query['limit'] = $start . ', ' . $limit;
+        }
+
+        $topics = $this->db->get($query, 'Topic');
 
         return $topics;
     }

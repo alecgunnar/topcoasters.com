@@ -13,6 +13,8 @@ class Forums extends \Maverick\Lib\Controller {
     public function main($forumId=0, $forum='', $page=1) {
         if($forumId) {
             \Maverick\Lib\Router::loadController('Forums_View', array($forumId, $forum, $page));
+            
+            return;
         }
 
         Output::setPageTitle('Discussion Forums');

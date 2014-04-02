@@ -79,11 +79,19 @@ class Member extends Standard {
     }
 
     private function setMemberTitle() {
-        $this->memberTitle = '';
+        $this->memberTitle = 'Member';
 
         if($this->get('member_id') == 1) {
             $this->memberTitle = 'Site Owner';
-        } 
+        } else {
+            if($this->get('is_admin')) {
+                $this->memberTitle = 'Administrator';
+            } else {
+                if($this->get('is_mod')) {
+                    $this->memberTitle = 'Moderator';
+                }
+            }
+        }
     }
 
     public function getMemberTitle() {

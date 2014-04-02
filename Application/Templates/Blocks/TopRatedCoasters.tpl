@@ -1,7 +1,7 @@
 <table>
   <tr>
-    <th width="65%">Roller Coaster & Amusement Park</th>
-    <th width="30%">Rating</th>
+    <th width="60%">Roller Coaster</th>
+    <th width="40%">Rating</th>
   </tr>
   {% for c in topCoasters %}
   <tr>

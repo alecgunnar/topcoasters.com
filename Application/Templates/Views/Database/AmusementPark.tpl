@@ -29,13 +29,6 @@
 
 <div class="left fourty">
   {{ dataTable.build('About the Park', data) }}
-  {% if member %}
-  <div class="plainBox lighterBox textCenter">
-    {% if member.get('is_mod') %}<a href="/database/contribute/amusement-park/{{ park.get('park_id') }}">Edit this Amusement Park</a> &middot; <a href="/database/contribute/roller-coaster/park/{{ park.get('park_id') }}">Add a Roller Coaster</a><div style="margin-top: 10px;">{% else %}<div>{% endif %}
-      {% if favorite is not null %}<a href="{{ favorite.getUrl() }}">Edit Track Record</a>{% else %}<a href="/track-record/parks/add/{{ park.get('park_id') }}">Add Park to Track Record</a>{% endif %}
-    </div>
-  </div>
-  {% endif %}
 </div>
 
 {% import 'Macros/Tabs.tpl' as tabs %}
@@ -50,3 +43,9 @@
   {% endif %}
 </div>
 <div class="clear"></div>
+{% if member %}
+<div class="padding textCenter" style="margin-top: 10px;">
+  {% if member.get('is_mod') %}<a href="/database/contribute/amusement-park/{{ park.get('park_id') }}" class="button">Edit this Amusement Park</a> <a href="/database/contribute/roller-coaster/park/  {{ park.get('park_id') }}" class="button">Add a Roller Coaster</a>{% else %}{% endif %}
+  {% if favorite is not null %}<a href="{{ favorite.getUrl() }}" class="button">Edit Track Record</a>{% else %}<a href="/track-record/parks/add/{{ park.get('park_id') }}" class="button">Add Park to Track Record</a>{% endif %}
+</div>
+{% endif %}

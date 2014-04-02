@@ -18,40 +18,52 @@
     clear: both;
 }
 
+.ten,
+.twenty,
+.thirty,
+.fourty,
+.fifty,
+.sixty,
+.seventy,
+.eighty,
+.ninety {
+    box-sizing: border-box;
+}
+
 .ten {
-    .wrapperWidth(.09);
+    width: 9.5%;
 }
 
 .twenty {
-    .wrapperWidth(.19);
+    width: 19.5%;
 }
 
 .thirty {
-    .wrapperWidth(.29);
+    width: 29.5%;
 }
 
 .fourty {
-    .wrapperWidth(.39);
+    width: 39.5%;
 }
 
 .fifty {
-    .wrapperWidth(.49);
+    width: 49.5%;
 }
 
 .sixty {
-    .wrapperWidth(.59);
+    width: 59.5%;
 }
 
 .seventy {
-    .wrapperWidth(.69);
+    width: 69.5%;
 }
 
 .eighty {
-    .wrapperWidth(.79);
+    width: 79.5%;
 }
 
 .ninety {
-    .wrapperWidth(.89);
+    width: 89.5%;
 }
 
 .marginTop {
@@ -63,7 +75,7 @@
 }
 
 .box {
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
 
     h3 {
         font-weight: 400;
@@ -71,7 +83,7 @@
 }
 
 .boxBorder {
-    border: 1px solid darken(#FFF, 20%);
+    border: 1px solid darken(#FFF, 15%);
 }
 
 .borderless {
@@ -133,7 +145,7 @@
         background: @dark;
         color: #FFF;
         font-size: 1.1em;
-        padding: 7px 10px;
+        padding: 7px;
         margin: 0;
     }
 }
@@ -163,7 +175,7 @@ table.invisible {
             }
             
             td {
-                border-bottom: 1px solid darken(#FFF, 20%);
+                border-bottom: 1px solid darken(#FFF, 15%);
                 
                 li {
                     margin: 10px 0;
@@ -229,6 +241,7 @@ table.invisible {
     .label {
         .lightBox;
         padding: 5px 10px;
+        border-radius: 3px;
     }
     
     ul {
@@ -243,6 +256,7 @@ table.invisible {
                 text-decoration: none;
                 color: #FFF;
                 padding: 5px 10px;
+                border-radius: 3px;
                 
                 &:hover {
                     background: @dark;

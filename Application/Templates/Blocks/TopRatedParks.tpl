@@ -1,7 +1,7 @@
 <table>
   <tr>
-    <th width="65%">Amusement Park & Location</th>
-    <th width="30%">Rating</th>
+    <th width="60%">Amusement Park</th>
+    <th width="40%">Rating</th>
   </tr>
   {% for p in topParks %}
   <tr>
