@@ -2,9 +2,10 @@
     var obj          = null,
         topics       = new Array(),
         currentPos   = 0,
-        newsreelLink = $('<a></a>');
+        newsreelLink = $('<a></a>'),
+        methods      = {};
     
-    var methods = {
+    methods = {
         compose: function() {
             if(topics.length) {
                 obj.text('');

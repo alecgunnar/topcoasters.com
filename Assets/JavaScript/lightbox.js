@@ -10,7 +10,7 @@
             setup: function() {
                 image        = new Image();
                 image.onload = function() {
-                    var resized = methods.checkDimensions(this.width, this.height, $(window).width() - 200);
+                    var resized = methods.checkDimensions(this.width, this.height, $('#content').width() - 20);
                     resized     = methods.checkDimensions(resized.b, resized.a, $(window).height() - 200);
 
                     imgView = $('<img id="lightbox-image" />').attr({
@@ -32,12 +32,14 @@
                 });
             },
             prepLightbox: function() {
+                $('html').css({'min-height': '100%'});
+                $('body').css({'height': '100%'});
+
                 var fade = $('<div id="lightbox-body-fade"></div>').css({
+                    background:   '#000',
                     position:     'absolute',
-                    'min-height': '100%',
                     width:        '100%',
                     height:       $('body').height(),
-                    background:   '#000',
                     opacity:      '.6',
                     display:      'none',
                     'z-index':    '10000'
@@ -95,7 +97,7 @@
                     $('#lightbox-viewer').animate({
                         height: openToHeight,
                         top:    goUp + $(window).scrollTop()
-                    }, 500, function() {
+                    }, 100, function() {
                         $('#lightbox-image').fadeIn();
                         $('#lightbox-close').show();
                     });
