@@ -32,13 +32,11 @@
                 });
             },
             prepLightbox: function() {
-                $('html').css({'min-height': '100%'});
-                $('body').css({'height': '100%'});
-
                 var fade = $('<div id="lightbox-body-fade"></div>').css({
                     background:   '#000',
                     position:     'absolute',
                     width:        '100%',
+                    'min-height': '100%',
                     height:       $('body').height(),
                     opacity:      '.6',
                     display:      'none',
@@ -59,13 +57,13 @@
                     height:       0,
                     'box-sizing': 'border-box',
                     'z-index':    '10001'
-                }), closeButton = $('<a href="#" id="lightbox-close">Close Window</a>').css({
-                    'line-height':     '30px',
-                    display:           'none',
-                    color:             '#000',
-                    'text-decoration': 'none',
-                    'font-weight':     '400',
-                    'float':           'right'
+                }), closeButton = $('<a href="#" id="lightbox-close"></a>').css({
+                    background: 'url(/assets/images/themes/2014/lightboxClose.png) no-repeat',
+                    width:      '30px',
+                    height:     '30px',
+                    display:    'none',
+                    position:   'absolute',
+                    'z-index':  '10002',
                 });
 
                 lightbox.centerOnScreen().on('click', function(event) {
@@ -86,7 +84,7 @@
             },
             openLightbox: function() {
                 var openToWidth  = imgView.width() + (padding * 2),
-                    openToHeight = imgView.height() + (padding * 2) + 30,
+                    openToHeight = imgView.height() + (padding * 2),
                     goUp         = ($(window).height() - openToHeight) / 2,
                     goLeft       = ($(window).width() - openToWidth) / 2; 
 
@@ -99,7 +97,10 @@
                         top:    goUp + $(window).scrollTop()
                     }, 100, function() {
                         $('#lightbox-image').fadeIn();
-                        $('#lightbox-close').show();
+                        $('#lightbox-close').css({
+                            top:  -1 * ($('#lightbox-close').height() / 2),
+                            left: $('#lightbox-viewer').width() + 3
+                        }).fadeIn();
                     });
                 });
             },
