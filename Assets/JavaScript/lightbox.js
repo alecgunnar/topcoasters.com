@@ -37,7 +37,7 @@
                     position:     'absolute',
                     width:        '100%',
                     'min-height': '100%',
-                    height:       $('body').height(),
+                    height:       $('html').height(),
                     opacity:      '.6',
                     display:      'none',
                     'z-index':    '10000'
