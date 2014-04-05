@@ -15,6 +15,14 @@ class Database_RollerCoaster extends \Maverick\Lib\Controller {
 
         $park = $coaster->getPark();
 
+        $parkLocation = '';
+
+        if($park->get('city') && $park->get('region')) {
+            $parkLocation = $park->get('city') . ', ' . $park->get('region') . ($park->get('country') ? ', ' . $park->get('country') : '');
+        }
+
+        Output::setPageTitle($coaster->get('name') . ' at ' . $park->get('name') . ($parkLocation ? ' (' . $parkLocation . ')' : ''));
+
         if($approve === 'approve' && Output::getGlobalVariable('member')->get('is_admin') && !$coaster->get('approved')) {
             $coaster->update('approved', '1');
 
@@ -86,7 +94,5 @@ class Database_RollerCoaster extends \Maverick\Lib\Controller {
                                   'park'     => $park,
                                   'data'     => $data,
                                   'favorite' => $favorite));
-
-        Output::setPageTitle($coaster->get('name') . ' at ' . $park->get('name'));
     }
 }

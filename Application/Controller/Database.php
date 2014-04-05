@@ -11,7 +11,7 @@ class Database extends \Maverick\Lib\Controller {
     }
 
     public function main() {
-        Output::setPageTitle('Database');
+        Output::setPageTitle('Roller Coaster and Amusement Park Database');
 
         $topCoastersCache = new \Maverick\Lib\Cache('topRatedCoasters', 3600);
         $topCoasters      = $topCoastersCache->get();

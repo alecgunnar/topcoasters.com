@@ -10,7 +10,6 @@ class AppRoot {
         Output::addJsFile('main');
         Output::addCssFile('main');
         
-        Output::setGlobalVariable('title_suffix', ' - Top Coasters');
         Output::setGlobalVariable('url', \Maverick\Maverick::getConfig('System')->get('url'));
         Output::setGlobalVariable('redirect_msg', \Maverick\Lib\Http::getRedirectMessage());
         Output::setGlobalVariable('search_box_text', 'Search Top Coasters');

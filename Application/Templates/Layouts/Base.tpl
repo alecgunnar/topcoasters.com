@@ -2,13 +2,14 @@
 <html lang="en">
   <head lang="en">
     <meta charset="utf-8">
-    <title>{{ title|raw }}{{ title_suffix|raw }}</title>
+    <title>{{ title|raw }}</title>
     {% for file in cssFiles %}
     <link rel="stylesheet" href="{{ file }}?{{ build_id }}" />
     {% endfor %}
     {% for file in jsFiles %}
     <script src="{{ file }}?{{ build_id }}"></script>
     {% endfor %}
+    <meta name="description" content="Top Coasters is a fun and exciting, roller coaster and amusement park enthusiast website. There's a forum, a track exchange and a database of coasters and parks.">
   </head>
   <body id="{{ page_id }}">
     <div id="fb-root"></div>

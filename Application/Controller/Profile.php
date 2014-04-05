@@ -27,7 +27,7 @@ class Profile extends \Maverick\Lib\Controller {
 
         $this->member = $member;
 
-        Output::setPageTitle($this->member->getName());
+        Output::setPageTitle($this->member->getName() . '\'s Profile');
 
         $activePane = '';
         $activeName = $this->panes[$activePane];

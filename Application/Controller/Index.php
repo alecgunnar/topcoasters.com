@@ -21,7 +21,6 @@ class Index extends \Maverick\Lib\Controller {
 
     public function main() {
         Output::setPageTitle('Top Coasters - Experience the Top Thrill!');
-        Output::setGlobalVariable('title_suffix', '');
 
         $this->setupFlexslider();
         $this->getRecentNews();

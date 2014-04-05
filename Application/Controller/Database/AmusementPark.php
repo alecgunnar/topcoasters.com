@@ -21,7 +21,13 @@ class Database_AmusementPark extends \Maverick\Lib\Controller {
             \Maverick\Lib\Http::location($park->getUrl(), 'This amusement park has been approved.');
         }
 
-        Output::setPageTitle($park->get('name'));
+        $parkLocation = '';
+
+        if($park->get('city') && $park->get('region')) {
+            $parkLocation = $park->get('city') . ', ' . $park->get('region') . ($park->get('country') ? ', ' . $park->get('country') : '');
+        }
+
+        Output::setPageTitle($park->get('name') . ($parkLocation ? ' (' . $parkLocation . ')' : ''));
 
         $parkIsClosed = false;
         $time         = new \Application\Lib\Time;
