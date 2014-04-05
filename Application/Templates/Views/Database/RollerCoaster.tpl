@@ -40,8 +40,8 @@
   </div>
   {% endif %}
   {% if member.get('is_mod') %}
-  <div class="plainBox lighterBox textCenter">
-    <a href="/database/contribute/roller-coaster/{{ coaster.get('coaster_id') }}">Edit this Roller Coaster</a>
+  <div class="textCenter" style="margin-top: 15px;">
+    <a href="/database/contribute/roller-coaster/{{ coaster.get('coaster_id') }}" class="button">Edit this Roller Coaster</a>
   </div>
   {% endif %}
 </div>
