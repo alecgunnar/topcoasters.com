@@ -1,7 +1,7 @@
 <h1>Roller Coaster & Amusement Park Database</h1>
 <div class="left thirty">
   <div class="grayWrap">
-    <h3>Useful Links</h3>
+    <h3>Database Navigation</h3>
     <div class="verticalMenu">
       <ul>
         <li><a href="/database/roller-coasters">View Roller Coasters</a></li>

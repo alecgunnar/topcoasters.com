@@ -123,7 +123,7 @@ class Members {
         $sessions = new \Application\Service\Sessions;
         $session  = new \Maverick\Lib\Session;
 
-        $sess = $sessions->get($session->getCookies()->get('PHPSESSID'));
+        $sess = $sessions->get($session->getCookies()->get('session_id'));
 
         if($sess) {
             $now    = new \Application\Lib\Time;
@@ -169,7 +169,8 @@ class Members {
         $sessions = new \Application\Service\Sessions;
         $session  = new \Maverick\Lib\Session;
 
-        $sessions->delete($session->getCookies()->get('PHPSESSID'));
+        $sessions->delete($session->getCookies()->get('session_id'));
+        $session->setCookie('session_id', '', -1);
 
         self::$session = '';
         self::$member  = '';

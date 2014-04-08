@@ -18,19 +18,20 @@ class Sessions extends Standard {
     public function create(\Application\Model\Member $member) {
         $session = new \Maverick\Lib\Session;
         $time    = new \Application\Lib\Time;
-
-        $now = $time->now(true);
+        $now     = $time->now(true);
 
         $time->add(new \DateInterval('P7D'));
 
         $this->delete($member->get('member_id'));
 
-        $insert = array('session_id'  => $session->getCookies()->get('PHPSESSID'),
-                        'member_id'   => $member->get('member_id'),
-                        'last_active' => $now,
-                        'expire'      => $time->getTimestamp());
+        $sessionId = md5(\Maverick\Lib\Utility::generateToken(32));
 
-        $this->db->put($insert, 'sessions');
+        $session->setCookie('session_id', $sessionId, $time->format('U'));
+
+        $this->db->put(array('session_id'  => $sessionId,
+                             'member_id'   => $member->get('member_id'),
+                             'last_active' => $now,
+                             'expire'      => $time->getTimestamp()), 'sessions');
     }
 
     /**
