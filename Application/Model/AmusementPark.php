@@ -99,8 +99,8 @@ class AmusementPark extends Standard {
             if($start > $time) {
                 $diff = $time->diff($start);
 
-                if($diff->d >= 1) {
-                    $this->daysUntilOpen = $diff->format('%a');
+                if($diff->days >= 1) {
+                    $this->daysUntilOpen = $diff->days;
                 } elseif($diff->s || $diff->m) {
                     $this->daysUntilOpen = -1;
                 }
