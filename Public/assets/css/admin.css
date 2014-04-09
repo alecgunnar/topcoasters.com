@@ -1,26 +1,159 @@
-html {
-    font-size: 100%;
-}
-
+/**
+ * General containers
+ */
 body {
     background: #E1E1E1;
     font-family: Helvetica;
-    font-size: 1rem;
+    font-size: 16px;
     margin: 0;
     padding: 0;
 }
 
 #header {
-    background: #069;
-    height: 50px;
-    padding-left: 10px;
+    background: #4986E1;
+    height: 100px;
+    padding-left: 20px;
+    border-bottom: 5px solid #046;
 }
 
 #header #logo {
-    background: url('/assets/images/themes/maverick/logo.png') no-repeat;
+    background: url('/assets/images/themes/2014/logo.png') no-repeat;
     background-position: center center;
     display: block;
     text-indent: -99999px;
-    width: 198px;
-    height: 50px;
+    width: 201px;
+    height: 100px;
+}
+
+#header #navigation {
+    float: right;
+}
+
+#header #navigation * {
+    margin: 0;
+    padding: 0;
+}
+
+#header #navigation li {
+    display: inline;
+    list-style: none;
+    margin-right: -10px;
+}
+
+#header #navigation li:last-child {
+    margin-right: 0;
+}
+
+#header #navigation li a {
+    color: #FFF;
+    text-decoration: none;
+    line-height: 100px;
+    display: inline-block;
+    height: 100px;
+    padding: 0 20px;
+}
+
+#header #navigation li a:hover,
+#header #navigation li a.active {
+    background: #046;
+}
+
+#content {
+    background: #FFF;
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+}
+
+.alert {
+    background: #A00;
+    color: #FFF;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/**
+ * Typography
+ */
+
+a {
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    font-weight: 200;
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #000;
+}
+
+.textLeft {
+    text-align: left;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.textRight {
+    text-align: right;
+}
+
+/**
+ * Forms
+ */
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="number"] {
+    font-size: 1.2em;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+form input[type="submit"] {
+    background: #242424;
+    color: #FFF;
+    font-size: 1.1em;
+    font-weight: 100;
+    padding: 5px;
+    border: 0;
+    cursor: pointer;
+}
+
+form .field {
+    padding: 10px 0;
+}
+
+form .field .label {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+form .field .error {
+    color: #A00;
+}
+
+form .field:last-child {
+    text-align: center;
+    padding-top: 10px;
+}
+
+/**
+ * Pages
+ */
+#admin-signin #signin-form {
+    background: #FFF;
+    width: 500px;
+    margin: 50px auto 0;
+    padding: 20px;
+}
+
+#admin-signin #content {
+    background: transparent !important;
 }

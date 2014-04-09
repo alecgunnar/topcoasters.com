@@ -7,4 +7,5 @@ return array('public' => array('Home'     => '/',
              'admin'  => array('Dashboard' => '/admin',
                                'Members'   => '/admin/members',
                                'Database'  => '/admin/database',
-                               'Content'   => '/admin/content'));
+                               'Content'   => '/admin/content',
+                               'Sign Out'  => '/admin/sign-out'));

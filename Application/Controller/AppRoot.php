@@ -7,16 +7,21 @@ use Maverick\Lib\Output;
 class AppRoot {
     public function preload() {
         Output::addJsFile('http://code.jquery.com/jquery-2.1.0.min.js');
-        Output::addJsFile('main');
-        Output::addCssFile('main');
 
         if(strpos(\Maverick\Lib\Router::getUri()->getPath(), 'admin') === 0) {
             Output::addCssFile('admin');
             Output::setPageLayout('Admin');
+
+            if(array_key_exists('admin_key', $_SESSION)) {
+                $this->setNavigation('admin');
+            }
         } else {
             Output::addJsFile('main');
             Output::addCssFile('main');
+
+            $this->setNavigation();
         }
+
         Output::setGlobalVariable('url', \Maverick\Maverick::getConfig('System')->get('url'));
         Output::setGlobalVariable('redirect_msg', \Maverick\Lib\Http::getRedirectMessage());
         Output::setGlobalVariable('search_box_text', 'Search Top Coasters');
@@ -35,6 +40,24 @@ class AppRoot {
                 Output::setGlobalVariable('offline', true);
             }
         }
+    }
+
+    private function setNavigation($navigationLinksSet='public') {
+        $navigationLinks       = array();
+        $urlPath               = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
+        $navigationLinksConfig = \Maverick\Maverick::getConfig('MainNavigation')->get($navigationLinksSet)->getAsArray();
+
+        foreach($navigationLinksConfig as $label => $path) {
+            $isActive = (strpos($urlPath, $path) === 0);
+
+            if(($path == '/' && $urlPath != '/') || ($path == '/admin' && $urlPath != '/admin')) {
+                $isActive = false;
+            }
+
+            $navigationLinks[$label] = array($path, $isActive);
+        }
+
+        Output::setGlobalVariable('navigationLinks', $navigationLinks);
     }
 
     private function checkForAjaxRequest() {
