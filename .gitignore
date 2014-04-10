@@ -13,3 +13,4 @@ ENVIRONMENT
 /Public/assets/uploads/*
 /Public/assets/javascript/main.js
 /Public/assets/css/main.css
+/Application/Templates/Cache

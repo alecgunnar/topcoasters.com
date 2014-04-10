@@ -1,6 +1,6 @@
 <?php
 
-return array('mysql' => array('default' => array('username' => 'topcoaster_test',
-                                                 'password' => 'eYHDBXEhphu6csp4',
+return array('mysql' => array('default' => array('username' => 'topcoasters_test',
+                                                 'password' => 'QtQpD7CSsLe4uyQd',
                                                  'host'     => 'localhost',
-                                                 'name'     => 'topcoaster_test')));
+                                                 'name'     => 'topcoasters_test')));

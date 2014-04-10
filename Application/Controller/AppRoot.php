@@ -48,7 +48,7 @@ class AppRoot {
 
         Output::setGlobalVariable('mainNavigationLinks', $navLinks);
 
-        if(count($mainNavigationLinks[$navLinks[$activeLink][0]])) {
+        if(is_array($mainNavigationLinks[$navLinks[$activeLink][0]])) {
             $sideNavigationLinks         = $mainNavigationLinks[$navLinks[$activeLink][0]][1];
             list($navLinks, $activeLink) = $this->processMenuLinks($sideNavigationLinks);
 
