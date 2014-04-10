@@ -1,3 +1,4 @@
+{% import 'Macros/Navigation.tpl' as nav %}
 <div id="redirectWrapper">
   <div id="redirectMessage">{{ redirect_msg }}</div>
 </div>
@@ -46,11 +47,7 @@
       </form>
     </div>
     <div id="mainNavigation">
-      <ul>
-        {% for label, url in navigationLinks %}
-        <li><a href="{{ url.0 }}"{% if url.1 %} class="active"{% endif %}>{{ label }}</a></li>
-        {% endfor %}
-      </ul>
+      {{ nav.menu(mainNavigationLinks) }}
     </div>
     <a href="/" id="logo">Top Coasters</a>
   </div>

@@ -16,6 +16,8 @@ class Admin extends \Maverick\Lib\Controller {
     }
 
     public function main() {
+        Output::setPageTitle('Dashboard');
+
         $offlineCache  = new \Maverick\Lib\Cache('OfflineStatus');
         $offlineData   = $offlineCache->get();
 

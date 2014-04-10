@@ -43,21 +43,47 @@ class AppRoot {
     }
 
     private function setNavigation($navigationLinksSet='public') {
-        $navigationLinks       = array();
-        $urlPath               = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
-        $navigationLinksConfig = \Maverick\Maverick::getConfig('MainNavigation')->get($navigationLinksSet)->getAsArray();
+        $mainNavigationLinks         = \Maverick\Maverick::getConfig('MainNavigation')->get($navigationLinksSet)->getAsArray();
+        list($navLinks, $activeLink) = $this->processMenuLinks($mainNavigationLinks);
 
-        foreach($navigationLinksConfig as $label => $path) {
-            $isActive = (strpos($urlPath, $path) === 0);
+        Output::setGlobalVariable('mainNavigationLinks', $navLinks);
 
-            if(($path == '/' && $urlPath != '/') || ($path == '/admin' && $urlPath != '/admin')) {
-                $isActive = false;
+        if(count($mainNavigationLinks[$navLinks[$activeLink][0]])) {
+            $sideNavigationLinks         = $mainNavigationLinks[$navLinks[$activeLink][0]][1];
+            list($navLinks, $activeLink) = $this->processMenuLinks($sideNavigationLinks);
+
+            Output::setGlobalVariable('sideNavigationLinks', $navLinks);
+        }
+    }
+
+    private function processMenuLinks($links) {
+        $urlPath = '/' . trim(\Maverick\Lib\Router::getUri()->getPath(), '/');
+
+        $processedLinks = array();
+        $activeLink     = null;
+
+        if(count($links)) {
+            foreach($links as $label => $path) {
+                $checkPath = $path;
+
+                if(is_array($path)) {
+                    $checkPath = $path[0];
+                }
+
+                $processedLinks[] = array($label, $checkPath, false);
+
+                if(strpos($urlPath, $checkPath) === 0) {
+                    if(!is_null($activeLink)) {
+                        $processedLinks[$activeLink][2] = false;
+                    }
+
+                    $activeLink                     = count($processedLinks) - 1;
+                    $processedLinks[$activeLink][2] = true;
+                }
             }
-
-            $navigationLinks[$label] = array($path, $isActive);
         }
 
-        Output::setGlobalVariable('navigationLinks', $navigationLinks);
+        return array($processedLinks, $activeLink);
     }
 
     private function checkForAjaxRequest() {
