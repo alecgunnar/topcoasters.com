@@ -6,8 +6,6 @@ use Maverick\Lib\Output;
 
 class AppRoot {
     public function preload() {
-        Output::addJsFile('http://code.jquery.com/jquery-2.1.0.min.js');
-
         if(strpos(\Maverick\Lib\Router::getUri()->getPath(), 'admin') === 0) {
             Output::addCssFile('admin');
             Output::setPageLayout('Admin');
@@ -16,6 +14,7 @@ class AppRoot {
                 $this->setNavigation('admin');
             }
         } else {
+            Output::addJsFile('jquery');
             Output::addJsFile('main');
             Output::addCssFile('main');
 

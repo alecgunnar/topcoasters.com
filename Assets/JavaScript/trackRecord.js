@@ -77,8 +77,6 @@ function removeRecord(tr) {
 }
 
 function saveRecord(tr) {
-    working = false;
-
     var riddenEntryValue = $('#riddenEntry').val(),
         ratingEntryValue = $('#ratingEntry').val();
 
@@ -142,7 +140,8 @@ function finish(tr, riddenVal, ratingVal) {
 }
 
 function release() {
-    saving = false;
+    working = false;
+    saving  = false;
 }
 
 function editRecordOnLoad(id) {

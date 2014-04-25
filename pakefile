@@ -67,11 +67,24 @@ function run_compile_js() {
     $allJs        = '';
     $allCleanedJs = '';
     $jsDir        = opendir(PATH_TO_JS_FILES);
+    
+    $compileFiles = array('onload.js');
+    
+    $addToJs = function($file) use(&$allJs) {
+        if(file_exists(PATH_TO_JS_FILES . '/' . $file)) {
+            pake_echo(">>> " . $file);
+            $allJs .= file_get_contents(PATH_TO_JS_FILES . '/' . $file);
+        }
+    };
 
     if($jsDir) {
+        foreach($compileFiles as $file) {
+            $addToJs($file);
+        }
+
         while(($file = readdir($jsDir)) !== false) {
-            if($file[0] != '.') {
-                $allJs .= file_get_contents(PATH_TO_JS_FILES . '/' . $file);
+            if($file[0] != '.' && !array_key_exists($file, array_values($compileFiles))) {
+                $addToJs($file);
             }
         }
 
