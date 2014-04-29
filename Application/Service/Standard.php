@@ -69,7 +69,7 @@ abstract class Standard {
     }
 
     /**
-     * Gets roller coasters
+     * Gets "something"
      *
      * @param  mixed   $value
      * @param  string  $column=''

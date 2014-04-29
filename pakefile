@@ -28,25 +28,29 @@ function run_default() {
     run_compile_js();
 }
 
-pake_desc('Generates the Build ID');
+pake_desc('Generates the Build ID.');
 pake_task('build-id');
 
 function run_build_id() {
+    pake_echo('# Generate Build ID #');
+
     if(file_exists(BUILD_ID_FILE)) {
         $uniqueId = uniqid();
 
         file_put_contents(BUILD_ID_FILE, $uniqueId);
 
-        pake_echo('Generated the Build ID');
+        pake_echo('>>> Generated the Build ID');
     } else {
-        pake_echo('Unable to generate Build ID');
+        pake_echo('>>> Unable to generate Build ID');
     }
 }
 
-pake_desc('Compiles all of the LESS files into CSS');
+pake_desc('Compiles all of the LESS files into CSS.');
 pake_task('compile-less');
 
 function run_compile_less() {
+    pake_echo('# Compile CSS to LESS #');
+
     if(!file_exists(COMPILE_LESS_TO)) {
         touch(COMPILE_LESS_TO);
     }
@@ -57,13 +61,15 @@ function run_compile_less() {
 
     file_put_contents(COMPILE_LESS_TO, implode('', $less));
 
-    pake_echo('Compiled LESS');
+    pake_echo('>>> Compiled LESS');
 }
 
-pake_desc('Compiles all of the JavaScript files into one large file');
+pake_desc('Compiles all of the JavaScript files into one large file and minify it.');
 pake_task('compile-js');
 
 function run_compile_js() {
+    pake_echo('# Compile and Minify JavaScript #');
+
     $allJs        = '';
     $allCleanedJs = '';
     $jsDir        = opendir(PATH_TO_JS_FILES);
@@ -72,7 +78,7 @@ function run_compile_js() {
     
     $addToJs = function($file) use(&$allJs) {
         if(file_exists(PATH_TO_JS_FILES . '/' . $file)) {
-            pake_echo(">>> " . $file);
+            pake_echo(">>> Compiled: " . $file);
             $allJs .= file_get_contents(PATH_TO_JS_FILES . '/' . $file);
         }
     };
@@ -96,8 +102,16 @@ function run_compile_js() {
     }
 
     file_put_contents(COMPILE_JS_TO, $allJs);
-
-    pake_echo('Compiled JavaScript');
+    
+    if(shell_exec('uglifyjs -h')) {
+        $cmd      = 'uglifyjs ' . COMPILE_JS_TO;
+        $minified = shell_exec($cmd);
+        file_put_contents(COMPILE_JS_TO, $minified);
+        
+        pake_echo('>>> Ran: ' . $cmd);
+    } else {
+        pake_echo('>>> Unable to minify javascript. (UglifyJS is required)');
+    }
 }
 
 pake_desc('Turns the website offline');

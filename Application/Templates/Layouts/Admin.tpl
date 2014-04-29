@@ -11,7 +11,7 @@
     {{ nav.menu(sideNavigationLinks) }}
   </div>
   <div id="content">
-    <h1 id="pageTitle">{{ pageTitle }}</h1>
+    {% if NO_ADMIN_H1 == false %}<h1 id="pageTitle">{{ pageTitle }}</h1>{% endif %}
     {{ content|raw }}
   </div>
   <div class="clear"></div>

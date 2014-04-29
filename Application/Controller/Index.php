@@ -92,10 +92,8 @@ class Index extends \Maverick\Lib\Controller {
         $recentNews          = $featuredTopicsCache->get();
 
         if(!is_array($recentNews)) {
-            $topics     = new \Application\Service\Topics;
-            $recentNews = $topics->getRecentNews();
-
-            $featuredTopicsCache->set($recentNews);
+            $featuredTopicsCache->recache();
+            $recentNews = $featuredTopicsCache->get();
         }
 
         $this->setVariable('recentNews', $recentNews);
@@ -106,10 +104,8 @@ class Index extends \Maverick\Lib\Controller {
         $topCoasters      = $topCoastersCache->get();
 
         if(!$topCoasters) {
-            $rollerCoasters = new \Application\Service\RollerCoasters;
-            $topCoasters    = $rollerCoasters->getHighestRated();
-
-            $topCoastersCache->set($topCoasters);
+            $topCoastersCache->recache();
+            $topCoasters = $topCoastersCache->get();
         }
 
         $topParksCache = new \Maverick\Lib\Cache('topRatedParks', 3600);

@@ -145,6 +145,10 @@ h1 {
     border-bottom: 1px solid #000;
 }
 
+h2 {
+    margin: 0 0 10px;
+}
+
 .textLeft {
     text-align: left;
 }
@@ -155,6 +159,30 @@ h1 {
 
 .textRight {
     text-align: right;
+}
+
+.description {
+    font-size: .75em;
+}
+
+/**
+ * Boxes
+ */
+.box {
+    background: #E1E1E1;
+    padding: 10px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
 }
 
 /**
@@ -239,4 +267,32 @@ form .field:last-child {
     width: 100%;
     float: none;
     border: none;
+}
+
+/**
+ * Stuff....
+ */
+.dataSizeBar {
+    background: #CCC;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.dataSizeBar div {
+    color: #FFF;
+    font-size: .75em;
+    line-height: 20px;
+    display: inline-block;
+    height: 20px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.dataSizeBar .blue {
+    background: blue;
+}
+
+.dataSizeBar .green {
+    background: green;
 }

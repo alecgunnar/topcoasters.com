@@ -10,7 +10,7 @@ class RollerCoasters extends Standard {
     }
 
     /**
-     * Gets a roller coaster for the flex slider
+     * Gets a roller coaster for the homepage's flexslider
      *
      * @param  string $coaster
      * @param  string $park
@@ -40,7 +40,7 @@ class RollerCoasters extends Standard {
     public function getHighestRated($limit=7) {
         return $this->db->get(array('select' => 'coaster_id, seo_title, name, park_id, rating',
                                     'from'   => 'roller_coasters',
-                                    'order'  => 'rating desc, name asc',
+                                    'order'  => 'rating desc, times_ridden desc, name asc',
                                     'limit'  => $limit), 'RollerCoaster');
     }
 

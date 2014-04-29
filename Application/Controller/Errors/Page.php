@@ -10,6 +10,7 @@ class Errors_Page extends \Maverick\Lib\Controller {
 
         $msg = urldecode($msg) ?: 'An unknown error has occurred.';
 
+        Output::setGlobalVariable('NO_ADMIN_H1', true);
         $this->setVariable('message', $msg);
     }
 }

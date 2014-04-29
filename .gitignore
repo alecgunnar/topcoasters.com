@@ -9,7 +9,7 @@ ENVIRONMENT
 /Config/Master/Facebook.php
 /Config/Dev
 .DS_Store
-/Application/Cache/*
+/Application/Cache/Storage/*
 /Public/assets/uploads/*
 /Public/assets/javascript/main.js
 /Public/assets/css/main.css
