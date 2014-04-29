@@ -98,9 +98,7 @@ class TrackRecord extends \Maverick\Lib\Controller {
             $post = new \Maverick\Lib\Model_Input($_POST);
 
             if($isCoaster) {
-                $favorite->update('times_ridden', $post->get('timesRidden'));
-
-                if($post->get('rating') != $favorite->get('rating')) {
+                if($post->get('rating') != $favorite->get('rating') || $post->get('times_ridden') != $favorite->get('times_ridden')) {
                     $update  = array();
                     $change  = $post->get('rating') - $favorite->get('rating');
                     $coaster = $favorite->getCoaster();
@@ -115,14 +113,16 @@ class TrackRecord extends \Maverick\Lib\Controller {
                     $update['rating'] = $update['total_rates'] / $update['rates'];
 
                     $coaster->update($update);
+                    $coaster->increase('times_ridden', $post->get('timesRidden') - $favorite->get('times_ridden'));
 
                     $rollerCoasters = new \Application\Service\RollerCoasters;
                     $rollerCoasters->commitChanges($coaster);
 
                     $favorite->update('rating', $post->get('rating'));
+                    $favorite->update('times_ridden', $post->get('timesRidden'));
 
                     $topCoastersCache = new \Maverick\Lib\Cache('topRatedCoasters');
-                    $topCoastersCache->clear();
+                    $topCoastersCache->recache();
                 }
             } else {
                 if($post->get('rating') != $favorite->get('rating')) {
@@ -176,12 +176,13 @@ class TrackRecord extends \Maverick\Lib\Controller {
                     }
     
                     $coaster->update($update);
+                    $coaster->increase('times_ridden', -1 * $favorite->get('times_ridden'));
     
                     $rollerCoasters = new \Application\Service\RollerCoasters;
                     $rollerCoasters->commitChanges($coaster);
     
                     $topCoastersCache = new \Maverick\Lib\Cache('topRatedCoasters');
-                    $topCoastersCache->clear();
+                    $topCoastersCache->recache();
                 }
             } else {
                 if($favorite->get('rating')) {
