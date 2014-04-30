@@ -3,16 +3,6 @@
 namespace Application\Form;
 
 class Search extends \Maverick\Lib\Form {
-    private $placeholder = 'Search Top Coasters';
-    private $searchWhat  = '';
-
-    public function __construct($placeholder, $searchWhat) {
-        $this->placeholder = $placeholder;
-        $this->searchWhat  = $searchWhat;
-
-        parent::__construct();
-    }
-
     /**
      * Builds the form to be rendered later
      *
@@ -21,7 +11,8 @@ class Search extends \Maverick\Lib\Form {
     public function build() {
         $this->setName('search');
         $this->setMethod('get');
-        $this->setAction('/search' . ($this->searchWhat ? '/' . $this->searchWhat : ''));
+        $this->setAction('/search');
+        $this->setTpl('Search');
 
         $this->toggleSubmissionToken();
 
