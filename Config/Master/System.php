@@ -9,5 +9,5 @@ return array('site_name'    => 'Top Coasters',
              'admin_name'   => 'Administrator',
              'admin_email'  => 'topcoasters@gmail.com',
              'auto_route'   => true,
-             'timezone'     => 'Europe/London',
+             'timezone'     => 'US/Eastern',
              'url'          => 'http://www.topcoasters.com/');
