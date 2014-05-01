@@ -351,8 +351,8 @@ abstract class Standard {
         return $this->park;
     }
 
-    public function getDate($field) {
-        $time = new \Application\Lib\Time($this->get($field), true);
+    public function getDate($field, $timezone=null) {
+        $time = new \Application\Lib\Time($this->get($field), $timezone);
         $time->switchToUsersTime();
 
         return $time;

@@ -82,8 +82,8 @@ class Profile extends \Maverick\Lib\Controller {
             $generalInfo['Website']    = $this->member->getWebsiteLink();
         }
 
-        $generalInfo['Joined']      = ucfirst($this->member->getDate('reg_date')->getShortTime());
-        $generalInfo['Last Active'] = ucfirst($this->member->getDate('last_active')->getShortTime());
+        $generalInfo['Joined']      = ucfirst($this->member->getDate('reg_date')->getShortTime(false));
+        $generalInfo['Last Active'] = ucfirst($this->member->getDate('last_active')->getShortTime(false));
 
         $data['Top Amusement Parks'] = array();
         $favParks                    =& $data['Top Amusement Parks'];

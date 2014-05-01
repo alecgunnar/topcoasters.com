@@ -89,7 +89,7 @@ function run_compile_js() {
         }
 
         while(($file = readdir($jsDir)) !== false) {
-            if($file[0] != '.' && !array_key_exists($file, array_values($compileFiles))) {
+            if($file[0] != '.' && !array_key_exists($file, array_flip($compileFiles))) {
                 $addToJs($file);
             }
         }

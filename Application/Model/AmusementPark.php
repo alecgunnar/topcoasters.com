@@ -93,7 +93,7 @@ class AmusementPark extends Standard {
         $this->daysUntilOpen = '';
 
         if($this->get('season_start')) {
-            $time  = new \Application\Lib\Time(null, true);
+            $time  = new \Application\Lib\Time;
             $start = $this->getDate('season_start');
 
             if($start > $time) {

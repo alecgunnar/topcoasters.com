@@ -116,7 +116,7 @@ class ExchangeFileUpload extends \Maverick\Lib\Form {
         $image = '';
 
         if($files->get('file')->get('name')) {
-            if(!is_null($this->file)) {
+            if($this->file !== null) {
                 $trackFile = \Maverick\Maverick::getConfig('Exchange')->get('paths')->get('files') . $this->file->get('file');
 
                 if(file_exists($trackFile)) {
@@ -127,7 +127,7 @@ class ExchangeFileUpload extends \Maverick\Lib\Form {
             $file  = \Application\Lib\Uploads::uploadFile($files->get('file'), \Maverick\Maverick::getConfig('Exchange')->get('paths')->get('files'));
         }
 
-        if(is_null($this->file)) {
+        if($this->file === null) {
             if(!$file) {
                 return false;
             }

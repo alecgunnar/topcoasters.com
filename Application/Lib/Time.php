@@ -4,9 +4,9 @@ namespace Application\Lib;
 
 class Time extends \DateTime {
     /**
-     * The timezone to use
+     * The default timezone to use
      */
-    private static $timezone = '';
+    private static $defaultTimezone = '';
 
     /**
      * The format for timestamps
@@ -22,15 +22,15 @@ class Time extends \DateTime {
      * @param string $timezone=null
      */
     public function __construct($time=null, $timezone=null) {
-        $timezone = $timezone ?: (self::$timezone ?: \Maverick\Maverick::getConfig('System')->get('timezone'));
-
         if($timezone === true) {
-            $timezone = \Maverick\Maverick::getConfig('System')->get('timezone');
-        } elseif(!$timezone) {
-            $timezone = self::$timezone;
+            $timezone = self::$defaultTimezone;
         }
 
-        parent::__construct($time, new \DateTimezone($timezone));
+        parent::__construct($time, new \DateTimezone(\Maverick\Maverick::getConfig('System')->get('timezone')));
+
+        if($timezone) {
+            $this->setTimezone(new \DateTimezone($timezone));
+        }
     }
 
     /**
@@ -39,7 +39,7 @@ class Time extends \DateTime {
      * @param string $timezone
      */
     public static function setDefaultTimezone($timezone) {
-        self::$timezone = $timezone;
+        self::$defaultTimezone = $timezone;
     }
 
     /**
@@ -76,52 +76,57 @@ class Time extends \DateTime {
         return $this->format('F j, Y \a\t g:i a');
     }
 
+    
+
     /**
      * Switches the timezone to the user's timezone
      *
      * @return self
      */
     public function switchToUsersTime() {
-        $timezone = 'US/Eastern';
+        $this->setTimeZone(new \DateTimeZone(self::$defaultTimezone ?: \Maverick\Maverick::getConfig('System')->get('timezone')));
 
-        if(\Application\Lib\Members::checkUserStatus()) {
-            $timezone = \Maverick\Lib\Output::getGlobalVariable('member')->get('timezone');
-        }
+        return $this;
+    }
 
-        $this->setTimeZone(new \DateTimeZone($timezone ?: \Maverick\Maverick::getConfig('System')->get('timezone')));
+    /**
+     * Switches the timezone to the default timezone
+     *
+     * @return self
+     */
+    public function switchToDefaultTime() {
+        $this->setTimeZone(new \DateTimeZone(\Maverick\Maverick::getConfig('System')->get('timezone')));
 
         return $this;
     }
 
     /** 
      * Gets the shortest formatted time
+     *
+     * @param boolean $prefix=false
      */
-    public function getShortTime() {
+    public function getShortTime($prefix=true) {
         $now  = new self;
         $diff = $this->diff($now);
 
-        $h = intval($now->format('G'));
-
-        if($diff->format('%y') < 1) {
-            if($diff->format('%d') < 2) {
-                if($diff->format('%d') < 1 && $h - $diff->format('%h') >= 0) {
-                    if($diff->format('%h') < 1) {
-                        if($diff->format('%i') < 1) {
-                            return 'seconds ago';
-                        } else {
-                            return $diff->format('%i') . ' minutes ago';
-                        }
+        if($diff->y >= 1) {
+            return ($prefix ? 'on ' : '') . $this->getStandardDateTime();
+        } elseif($diff->days >= 1) {
+            return ($prefix ? 'on ' : '') . $this->format('F jS \a\t g:i a');
+        } else {
+            if($now->format('j') == $this->format('j')) {
+                if($diff->h < 1) {
+                    if($diff->i >= 1) {
+                        return $diff->format('%i') . ' minutes ago';
                     } else {
-                        return 'today at ' . $this->format('g:i a');
+                        return 'seconds ago';
                     }
                 } else {
-                    return 'yesterday at ' . $this->format('g:i a');
+                    return 'today at ' . $this->format('g:i a');
                 }
             } else {
-                return 'on ' . $this->format('F jS \a\t g:i a');
+                return 'yesterday at ' . $this->format('g:i a');
             }
-        } else {
-            return 'on ' . $this->getStandardDateTime();
         }
     }
 }

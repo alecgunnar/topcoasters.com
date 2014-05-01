@@ -10,7 +10,7 @@ class Topics extends Standard {
     }
 
     public function create($title, \Application\Model\Forum $forum) {
-        $time = new \Application\Lib\Time(null, true);
+        $time = new \Application\Lib\Time;
 
         $id = $this->db->put(array('name'      => $title,
                                    'forum_id'  => $forum->get('forum_id'),

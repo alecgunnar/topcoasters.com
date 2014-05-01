@@ -126,7 +126,7 @@ class Members {
         $sess = $sessions->get($session->getCookies()->get('session_id'));
 
         if($sess) {
-            $now    = new \Application\Lib\Time;
+            $now    = new \Application\Lib\Time(null);
             $expire = new \Application\Lib\Time($sess->get('expire'));
 
             if($now > $expire) {
