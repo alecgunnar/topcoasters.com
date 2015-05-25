@@ -1,0 +1,67 @@
+@import 'mixins/lists';
+
+$header-height: 100px;
+
+header {
+  background: #006594;
+  line-height: $header-height;
+}
+
+#branding a {
+  background: url('logos/standard.png') no-repeat;
+  position: relative;
+  text-indent: -99999px;
+  display: inline-block;
+  width: 210px;
+}
+
+#member_info {
+  @include inline-list;
+
+  background: #242424;
+  color: #FFF;
+
+  a {
+    color: #FFF;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 20px;
+
+    &:hover,
+    &:active {
+      background: darken(#006594, 5%);
+    }
+  }
+}
+
+.nav--active {
+  background: darken(#7BC342, 10%);
+}
+
+nav {
+  @include inline-list;
+
+  background: #7BC342;
+  line-height: $header-height / 1.5;
+
+  a {
+    color: #FFF;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 10px;
+    margin-left: -4px;
+
+    &:hover,
+    &:active {
+      @extend .nav--active;
+    }
+  }
+
+  li:first-of-type a {
+    margin-left: 0;
+  }
+}
+
+#nav__home {
+  @extend .nav--active;
+}
