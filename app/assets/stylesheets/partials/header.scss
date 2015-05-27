@@ -4,8 +4,13 @@ $logo-height: 35px;
 $logo-width: 188px;
 
 header {
-  background: transparent;
+  background: #006594;
   line-height: $logo-height;
+  padding: $standard-padding 0;
+  
+  a {
+    color: #FFF;
+  }
 }
 
 #branding a {
@@ -16,7 +21,6 @@ header {
   text-indent: -99999px;
   display: inline-block;
   width: $logo-width;
-  margin-bottom: $standard-padding;
 }
 
 .nav--active {
@@ -28,20 +32,16 @@ nav {
 
   background: #7BC342;
   color: #FFF;
-  border-radius: 10px;
   overflow: hidden;
+  border-bottom: 5px solid darken(#7BC342, 10%);
 
-  &>ul {
+  ul {
     width: 100%;
     display: table;
     table-layout: fixed;
 
     li {
       display: table-cell;
-
-      &:first-of-type a {
-        border: none;
-      }
     }
   }
 
@@ -50,7 +50,7 @@ nav {
     text-decoration: none;
     text-align: center;
     display: block;
-    border-left: 1px solid #FFF;
+    padding: $standard-padding;
 
     &:hover,
     &:active {
@@ -59,7 +59,7 @@ nav {
   }
 }
 
-.header__member-info {
+#header__member-info {
   @include inline-list;
 
   float: right;
@@ -72,4 +72,8 @@ nav {
 
 #nav__home {
   @extend .nav--active;
+}
+
+#nav__search {
+  padding-left: $standard-padding;
 }

@@ -1,6 +1,7 @@
-<div class="wrapper">
-  <header>
-    <section class="header__member-info">
+
+<header>
+  <div class="wrapper">
+    <section id="header__member-info">
       <ul>
         <li><a href="/">Create an Account</a>
         <li><a href="/">Sign In</a>
@@ -9,14 +10,16 @@
     <div id="branding">
       <%= link_to 'Top Coasters Home', root_path %>
     </div>
-    <nav>
-      <ul>
-        <li><%= link_to 'Home', root_path, {id: 'nav__home'} %>
-        <li><a href="/forums">Forums</a>
-        <li><a href="/database">Database</a>
-        <li><a href="/exchange">Exchange</a>
-        <li><a href="/search">Search</a>
-      </ul>
-    </nav>
-  </header>
-</div>
+  </div>
+</header>
+<nav>
+  <div class="wrapper">
+    <ul>
+      <li><%= link_to 'Home', root_path, {id: 'nav__home'} %></li>
+      <li><a href="/forums">Forums</a></li>
+      <li><a href="/database">Database</a></li>
+      <li><a href="/exchange">Exchange</a></li>
+      <li id="nav__search"><form><input type="text" placeholder="Search" /></form></li>
+    </ul>
+  </div>
+</nav>
