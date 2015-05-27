@@ -1,37 +1,22 @@
 @import 'mixins/lists';
 
-$header-height: 100px;
+$logo-height: 35px;
+$logo-width: 188px;
 
 header {
-  background: #006594;
-  line-height: $header-height;
+  background: transparent;
+  line-height: $logo-height;
 }
 
 #branding a {
-  background: url('logos/standard.png') no-repeat;
+  background-image: url('logos/standard.png');
+  background-repeat: no-repeat;
+  background-size: contain;
   position: relative;
   text-indent: -99999px;
   display: inline-block;
-  width: 210px;
-}
-
-#member_info {
-  @include inline-list;
-
-  background: #242424;
-  color: #FFF;
-
-  a {
-    color: #FFF;
-    text-decoration: none;
-    display: inline-block;
-    padding: 0 20px;
-
-    &:hover,
-    &:active {
-      background: darken(#006594, 5%);
-    }
-  }
+  width: $logo-width;
+  margin-bottom: $standard-padding;
 }
 
 .nav--active {
@@ -42,23 +27,46 @@ nav {
   @include inline-list;
 
   background: #7BC342;
-  line-height: $header-height / 1.5;
+  color: #FFF;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &>ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+
+    li {
+      display: table-cell;
+
+      &:first-of-type a {
+        border: none;
+      }
+    }
+  }
 
   a {
     color: #FFF;
     text-decoration: none;
-    display: inline-block;
-    padding: 0 10px;
-    margin-left: -4px;
+    text-align: center;
+    display: block;
+    border-left: 1px solid #FFF;
 
     &:hover,
     &:active {
       @extend .nav--active;
     }
   }
+}
 
-  li:first-of-type a {
-    margin-left: 0;
+.header__member-info {
+  @include inline-list;
+
+  float: right;
+
+  a {
+    display: inline-block;
+    margin-left: $standard-padding;
   }
 }
 

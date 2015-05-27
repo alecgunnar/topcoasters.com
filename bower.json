@@ -1,0 +1,19 @@
+{
+  "name": "topcoasters.com",
+  "version": "7.0.0",
+  "homepage": "https://github.com/gunnar94/topcoasters.com",
+  "authors": [
+    "Alec Carpenter <gunnar94@me.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
