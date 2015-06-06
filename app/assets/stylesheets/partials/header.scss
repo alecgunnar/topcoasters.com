@@ -7,6 +7,7 @@ header {
   background: #006594;
   line-height: $logo-height;
   padding: $standard-padding 0;
+  border-top: 5px solid darken(#006594, 10%);
   
   a {
     color: #FFF;
@@ -59,7 +60,7 @@ nav {
   }
 }
 
-#header__member-info {
+.header__member-nav {
   @include inline-list;
 
   float: right;

@@ -1,7 +1,58 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 #welcome {
-  
+	.slideshow {
+		@include inline-list;
+
+		width: 100%;
+		height: 430px;
+		position: relative;
+
+		li {
+			height: 100%;
+			display: none;
+
+			p {
+				color: #FFF;
+				margin: 0;
+				padding: $standard-padding * 2;
+				position: absolute;
+				bottom: 0;
+				z-index: 2;
+			}
+		}
+	}
+
+	.slideshow .slideshow__slide--first {
+		display: block;
+	}
+
+	.slideshow__slide--voyage-holiday-world-lift-hill {
+		background-image: url('slideshow/the_voyage_holiday_world_lift_hill.jpg');
+	}
+
+	.slideshow__slide--dragster-cedar-point-winter-chillout {
+		background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
+	}
+
+	.slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
+		background-image: url('slideshow/cheetah_hunt_busch_gardens_tampa_end.jpg');
+	}
+
+	.slideshow__slide--kraken-seaworld-orlando-turning-to-diving {
+		background-image: url('slideshow/kraken_seaworld_orlando_airtime.jpg');
+	}
+
+	.slideshow__slide--maverick-cedar-point-launched-lift {
+		background-image: url('slideshow/maverick_cedar_point_launch_lift.jpg');
+	}
+
+	.slideshow__slide__text-background {
+		background: #242424;
+		opacity: .75;
+		padding: $standard-padding * 2;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
 }
