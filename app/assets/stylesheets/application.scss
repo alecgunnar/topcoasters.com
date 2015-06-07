@@ -21,5 +21,22 @@ body {
   padding: 0;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.left, .right {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.clear {
+  clear: both;
+}
+
 @import 'partials/*';
 @import 'pages/**/*';
