@@ -1,17 +1,19 @@
 <header>
   <div class="wrapper">
+    <div class="header__main-nav-drop" data-nav="main">Main Nav</div>
+    <div class="header__member-nav-drop" data-nav="member">Member Nav</div>
+    <div id="branding">
+      <%= link_to 'Top Coasters Home', root_path %>
+    </div>
     <section class="header__member-nav member-nav--guest">
       <ul>
         <li><a href="/">Create an Account</a>
         <li><a href="/">Sign In</a>
       </ul>
     </section>
-    <div id="branding">
-      <%= link_to 'Top Coasters Home', root_path %>
-    </div>
   </div>
 </header>
-<nav>
+<nav class="nav__main">
   <div class="wrapper">
     <ul>
       <li><%= link_to 'Home', root_path, {id: 'nav__home'} %></li>

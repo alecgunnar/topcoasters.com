@@ -2,7 +2,7 @@ $slideshow-height: 430px;
 
 #welcome {
 	#nav__home {
-  	@extend .nav--active;
+  		@include activeNav;
 	}
 
 	.slideshow {
@@ -10,10 +10,14 @@ $slideshow-height: 430px;
 
 		width: 100%;
 		height: $slideshow-height;
-		position: relative;
+		margin-left: -1 * $standard-padding;
+		margin-bottom: $standard-padding;
+		position: absolute;
 		overflow: hidden;
 
 		li {
+			background-repeat: no-repeat;
+			background-size: cover;
 			width: 100%;
 			height: 100%;
 			position: absolute;
@@ -41,7 +45,6 @@ $slideshow-height: 430px;
 
 	.slideshow__slide--dragster-cedar-point-winter-chillout {
 		background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
-		display: block !important;
 	}
 
 	.slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
@@ -53,7 +56,7 @@ $slideshow-height: 430px;
 	}
 
 	.slideshow__slide--maverick-cedar-point-launched-lift {
-		background-image: url('slideshow/maverick_cedar_point_launch_lift.jpg');
+		background-image: url('slideshow/maverick_cedar_point_end_of_lift.jpg');
 	}
 
 	.slideshow__slide__text-background {
@@ -65,5 +68,11 @@ $slideshow-height: 430px;
 		left: 0;
 		right: 0;
 		z-index: 1;
+	}
+
+	@media #{$media-desktop} {
+		.slideshow {
+			margin-left: 0;
+		}
 	}
 }

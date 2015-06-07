@@ -1,13 +1,17 @@
-@import 'mixins/lists';
+@import "mixins/lists";
 
-$logo-height: 35px;
-$logo-width: 188px;
+$logo-height: 80px;
+$logo-width: 500px;
+
+@mixin activeNav {
+  background: $dark-green;
+}
 
 header {
-  background: #006594;
+  background-color: $blue;
   line-height: $logo-height;
   padding: $standard-padding 0;
-  border-top: 5px solid darken(#006594, 10%);
+  border-top: 5px solid $dark-blue;
   
   a {
     color: #FFF;
@@ -15,17 +19,50 @@ header {
 }
 
 #branding a {
-  background-image: url('logos/standard.png');
+  background-image: url('logos/mobile.png');
   background-repeat: no-repeat;
+  background-position: center center;
   background-size: contain;
   position: relative;
   text-indent: -99999px;
-  display: inline-block;
+  display: block;
   width: $logo-width;
+  margin: 0 auto;
 }
 
-.nav--active {
-  background: darken(#7BC342, 10%);
+.header__main-nav-drop,
+.header__member-nav-drop {
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+  text-indent: -99999px;
+  width: $logo-height;
+  height: $logo-height;
+  padding: $standard-padding;
+  position: absolute;
+  top: 5px;
+}
+
+.header__main-nav-drop {
+  background-image: url('nav/main_drop.png');
+  right: 0;
+}
+
+.header__member-nav-drop {
+  background-image: url('nav/member_drop.png');
+  left: 0;
+}
+
+.header__member-nav {
+  @include inline-list;
+
+  text-align: center;
+  display: none;
+
+  a {
+    display: inline-block;
+    margin-left: $standard-padding;
+  }
 }
 
 nav {
@@ -34,43 +71,79 @@ nav {
   background: #7BC342;
   color: #FFF;
   overflow: hidden;
-  border-bottom: 5px solid darken(#7BC342, 10%);
+  border-bottom: 5px solid $dark-green;
+  display: none;
 
-  ul {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-
-    li {
-      display: table-cell;
-    }
+  li {
+    display: block;
   }
 
   a {
+    @include activeNav;
+
     color: #FFF;
     text-decoration: none;
     text-align: center;
     display: block;
-    padding: $standard-padding;
+    padding: $standard-padding * 2 0;
+    margin: $standard-padding;
+  }
+}
 
-    &:hover,
-    &:active {
-      @extend .nav--active;
+@media #{$media-desktop}  {
+  header {
+    line-height: $logo-height / 2.75;
+
+    .wrapper {
+      position: relative;
     }
   }
-}
 
-.header__member-nav {
-  @include inline-list;
-
-  float: right;
-
-  a {
-    display: inline-block;
-    margin-left: $standard-padding;
+  .header__main-nav-drop,
+  .header__member-nav-drop {
+    display: none;
   }
-}
 
-#nav__search {
-  padding-left: $standard-padding;
+  #branding a {
+    background-image: url('logos/standard.png');
+    background-position: center left;
+    display: block;
+    margin: 0;
+  }
+
+  .header__member-nav {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  nav {
+    display: block;
+
+    ul {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+
+      li {
+        display: table-cell;
+      }
+    }
+
+    a {
+      background-color: $green;
+      color: #FFF;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      padding: $standard-padding;
+      margin: 0;
+
+      &:hover,
+      &:active {
+        @include activeNav;
+      }
+    }
+  }
 }

@@ -1,9 +1,7 @@
-$standard-padding: 10px;
-
-$wrapper-width: 960px;
+@import "variables";
 
 html {
-  font-size: 16px;
+  font-size: 32px;
 }
 
 body {
@@ -15,10 +13,9 @@ body {
   margin: 0;
 }
 
-.wrapper {
-  width: $wrapper-width;
-  margin: 0 auto;
-  padding: 0;
+main {
+  padding: 0 $standard-padding;
+  position: relative;
 }
 
 p {
@@ -27,22 +24,38 @@ p {
   }
 }
 
-.left {
-  float: left;
+@media #{$media-desktop} {
+  html {
+    font-size: 16px;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  .wrapper {
+    width: $wrapper-width;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  .left, .right {
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  .clear {
+    clear: both;
+  }
 }
 
-.right {
-  float: right;
-}
-
-.left, .right {
-  width: 50%;
-  box-sizing: border-box;
-}
-
-.clear {
-  clear: both;
-}
-
-@import 'partials/*';
-@import 'pages/**/*';
+@import "partials/*";
+@import "pages/**/*";
