@@ -71,10 +71,6 @@ nav {
   }
 }
 
-#nav__home {
-  @extend .nav--active;
-}
-
 #nav__search {
   padding-left: $standard-padding;
 }

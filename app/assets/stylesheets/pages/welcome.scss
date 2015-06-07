@@ -1,14 +1,24 @@
+$slideshow-height: 430px;
+
 #welcome {
+	#nav__home {
+  	@extend .nav--active;
+	}
+
 	.slideshow {
 		@include inline-list;
 
 		width: 100%;
-		height: 430px;
+		height: $slideshow-height;
 		position: relative;
+		overflow: hidden;
 
 		li {
+			width: 100%;
 			height: 100%;
+			position: absolute;
 			display: none;
+			top: 0;
 
 			p {
 				color: #FFF;
@@ -21,7 +31,7 @@
 		}
 	}
 
-	.slideshow .slideshow__slide--first {
+	.slideshow .slideshow__slide--active {
 		display: block;
 	}
 
@@ -31,6 +41,7 @@
 
 	.slideshow__slide--dragster-cedar-point-winter-chillout {
 		background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
+		display: block !important;
 	}
 
 	.slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
