@@ -15,9 +15,9 @@
             activeClass: 'slideshow__slide--active',
             waitTime:    5000,
             t: {
-                type:      'slide',
-                direction: 'left',
-                duration:  500,
+              type:      'slide',
+              direction: 'left',
+              duration:  500,
             }
         };
 
@@ -27,10 +27,10 @@
             var $s = slides[slides.length] = $(this);
 
             if($current && !$next)
-                $next = $s;
+              $next = $s;
 
             if($s.hasClass(options.activeClass))
-                $current = $s;
+              $current = $s;
         });
 
         if(!$next)
@@ -46,21 +46,21 @@
         valueNext    = 0;
 
         if(options.t.type == 'fade') {
-            style        = 'opacity';
-            valueCurrent = valueStage = 0;
-            valueNext    = 100;
-            return;
+          style        = 'opacity';
+          valueCurrent = valueStage = 0;
+          valueNext    = 100;
+          return;
         }
 
         switch(options.t.direction) {
-            case 'up':
-                style = 'top';
-                break;
-            case 'down':
-                style = 'bottom';
-                break;
-            default:
-                valueCurrent = $container.width();
+          case 'up':
+            style = 'top';
+            break;
+          case 'down':
+            style = 'bottom';
+            break;
+          default:
+            valueCurrent = $container.width();
         }
 
         valueStage    = valueCurrent;
@@ -72,19 +72,19 @@
       },
       waitToTransition: function() {
         if(timeout)
-            return;
+          return;
 
         if(!methods.stageNext())
-            return;
+          return;
 
         timeout = setTimeout(methods.transitionToNext, options.waitTime);
       },
       stageNext: function() {
         if(!$next)
-            return false;
+          return false;
 
         if(options.t.type == 'fade')
-            return true;
+          return true;
 
         $next.css(style, valueStage + 'px').addClass(options.activeClass);
 
@@ -105,7 +105,7 @@
 
         animateCurrent[style] = valueCurrent;
         $current.animate(animateCurrent, options.t.duration, function() {
-            this.removeClass(options.activeClass);
+          this.removeClass(options.activeClass);
         }.bind($current));
 
         animateNext[style] = valueNext;
