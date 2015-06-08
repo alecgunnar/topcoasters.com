@@ -1,16 +1,16 @@
 #errors {
-	.left {
-		text-align: center;
-		margin-bottom: $standard-padding;
-	}
+  .left {
+    text-align: center;
+    margin-bottom: $standard-padding;
+  }
 
-	@media #{$media-desktop} {
-		.left {
-			padding-right: $standard-padding;
-			
-			img {
-				max-width: 100%;
-			}
-		}
-	}
+  @media #{$media-desktop} {
+    .left {
+      padding-right: $standard-padding;
+      
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }

@@ -1,78 +1,78 @@
 $slideshow-height: 430px;
 
 #welcome {
-	#nav__home {
-  		@include activeNav;
-	}
+  #nav__home {
+      @include activeNav;
+  }
 
-	.slideshow {
-		@include inline-list;
+  .slideshow {
+    @include inline-list;
 
-		width: 100%;
-		height: $slideshow-height;
-		margin-left: -1 * $standard-padding;
-		margin-bottom: $standard-padding;
-		position: absolute;
-		overflow: hidden;
+    width: 100%;
+    height: $slideshow-height;
+    margin-left: -1 * $standard-padding;
+    margin-bottom: $standard-padding;
+    position: relative;
+    overflow: hidden;
 
-		li {
-			background-repeat: no-repeat;
-			background-size: cover;
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			display: none;
-			top: 0;
+    li {
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      display: none;
+      top: 0;
 
-			p {
-				color: #FFF;
-				margin: 0;
-				padding: $standard-padding * 2;
-				position: absolute;
-				bottom: 0;
-				z-index: 2;
-			}
-		}
-	}
+      p {
+        color: #FFF;
+        margin: 0;
+        padding: $standard-padding * 2;
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+      }
+    }
+  }
 
-	.slideshow .slideshow__slide--active {
-		display: block;
-	}
+  .slideshow .slideshow__slide--active {
+    display: block;
+  }
 
-	.slideshow__slide--voyage-holiday-world-lift-hill {
-		background-image: url('slideshow/the_voyage_holiday_world_lift_hill.jpg');
-	}
+  .slideshow__slide--voyage-holiday-world-lift-hill {
+    background-image: url('slideshow/the_voyage_holiday_world_lift_hill.jpg');
+  }
 
-	.slideshow__slide--dragster-cedar-point-winter-chillout {
-		background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
-	}
+  .slideshow__slide--dragster-cedar-point-winter-chillout {
+    background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
+  }
 
-	.slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
-		background-image: url('slideshow/cheetah_hunt_busch_gardens_tampa_end.jpg');
-	}
+  .slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
+    background-image: url('slideshow/cheetah_hunt_busch_gardens_tampa_end.jpg');
+  }
 
-	.slideshow__slide--kraken-seaworld-orlando-turning-to-diving {
-		background-image: url('slideshow/kraken_seaworld_orlando_airtime.jpg');
-	}
+  .slideshow__slide--kraken-seaworld-orlando-turning-to-diving {
+    background-image: url('slideshow/kraken_seaworld_orlando_airtime.jpg');
+  }
 
-	.slideshow__slide--maverick-cedar-point-launched-lift {
-		background-image: url('slideshow/maverick_cedar_point_end_of_lift.jpg');
-	}
+  .slideshow__slide--maverick-cedar-point-launched-lift {
+    background-image: url('slideshow/maverick_cedar_point_end_of_lift.jpg');
+  }
 
-	.slideshow__slide__text-background {
-		background: #242424;
-		opacity: .75;
-		padding: $standard-padding * 2;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-	}
+  .slideshow__slide__text-background {
+    background: #242424;
+    opacity: .75;
+    padding: $standard-padding * 2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
 
-	@media #{$media-desktop} {
-		.slideshow {
-			margin-left: 0;
-		}
-	}
+  @media #{$media-desktop} {
+    .slideshow {
+      margin-left: 0;
+    }
+  }
 }
