@@ -77,9 +77,7 @@
 				if(!methods.stageNext())
 					return;
 
-				timeout = setTimeout(function() {
-					methods.transitionToNext();
-				}, options.waitTime);
+				timeout = setTimeout(methods.transitionToNext, options.waitTime);
 			},
 			stageNext: function() {
 				if(!$next)
