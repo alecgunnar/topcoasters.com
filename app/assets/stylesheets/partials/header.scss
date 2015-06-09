@@ -20,7 +20,7 @@ header {
 }
 
 #branding a {
-  background-image: url('logos/mobile.png');
+  background-image: url('logos/standard.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -61,20 +61,11 @@ header {
   display: none;
 }
 
+.header__member-nav--member,
 .header__member-nav--guest {
   a {
     display: inline-block;
     margin-left: $standard-padding;
-  }
-}
-
-.header__member-nav--member {
-  a {
-    background: $dark-blue;
-    text-decoration: none;
-    font-size: .9rem;
-    padding: $standard-padding / 2;
-    border-radius: 5px;
   }
 }
 
@@ -86,6 +77,7 @@ nav {
   overflow: hidden;
   border-bottom: 5px solid $dark-green;
   display: none;
+  margin-bottom: $standard-padding;
 
   li {
     display: block;
@@ -118,7 +110,6 @@ nav {
   }
 
   #branding a {
-    background-image: url('logos/standard.png');
     background-position: center left;
     display: block;
     margin: 0;

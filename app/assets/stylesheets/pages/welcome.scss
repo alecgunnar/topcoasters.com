@@ -10,7 +10,7 @@ $slideshow-height: 430px;
 
     width: 100%;
     height: $slideshow-height;
-    margin-bottom: $standard-padding;
+    margin: -1 * $standard-padding 0 $standard-padding;
     position: relative;
     overflow: hidden;
 
