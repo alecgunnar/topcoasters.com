@@ -1,4 +1,16 @@
 form {
+  #error_explanation {
+    background: $alert-color;
+    color: #FFF;
+    padding: $standard-padding;
+    margin-bottom: $standard-padding;
+
+    h2 {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+  }
+
   .field {
     margin-bottom: $standard-padding;
 

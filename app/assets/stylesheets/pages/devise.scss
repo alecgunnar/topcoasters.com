@@ -1,0 +1,16 @@
+#sessions,
+#registrations,
+#passwords {
+	@media #{$media-tablet} {
+		.form__wrapper {
+			width: 50%;
+			margin: 0 auto;
+		}
+	}
+
+	.form__box {
+		background: #F1F1F1;
+		padding: $standard-padding;
+		margin: $standard-padding 0;
+	}
+}

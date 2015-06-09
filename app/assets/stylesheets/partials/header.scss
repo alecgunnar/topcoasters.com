@@ -68,6 +68,16 @@ header {
   }
 }
 
+.header__member-nav--member {
+  a {
+    background: $dark-blue;
+    text-decoration: none;
+    font-size: .9rem;
+    padding: $standard-padding / 2;
+    border-radius: 5px;
+  }
+}
+
 nav {
   @include inline-list;
 

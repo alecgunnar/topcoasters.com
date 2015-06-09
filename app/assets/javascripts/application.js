@@ -32,7 +32,7 @@ $(document).ready(function() {
     }
   });
 
-  $('#flash__message--notice, #flash__message--alert').each(function() {
+  $('#flash__message--notice').each(function() {
     setTimeout(function() {$(this).fadeOut();}.bind(this), 5000);
   });
 });
