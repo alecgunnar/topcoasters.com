@@ -5,11 +5,15 @@
     <div id="branding">
       <%= link_to 'Top Coasters Home', root_path %>
     </div>
-    <section class="header__member-nav member-nav--guest">
-      <ul>
-        <li><a href="/">Create an Account</a>
-        <li><a href="/">Sign In</a>
-      </ul>
+    <section class="header__member-nav">
+      <% if current_user %>
+        Welcome <%= link_to current_user.username, profile_path %> (<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>)
+      <% else %>
+        <ul class="header__member-nav--guest">
+          <li><%= link_to "Create an Account", new_user_registration_path %></li>
+          <li><%= link_to "Sign in", new_user_session_path %></li>
+        </ul>
+      <% end %>
     </section>
   </div>
 </header>

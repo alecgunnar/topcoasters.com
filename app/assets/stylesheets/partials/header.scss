@@ -9,6 +9,7 @@ $logo-width: 500px;
 
 header {
   background-color: $blue;
+  color: #FFF;
   line-height: $logo-height;
   padding: $standard-padding 0;
   border-top: 5px solid $dark-blue;
@@ -58,7 +59,9 @@ header {
 
   text-align: center;
   display: none;
+}
 
+.header__member-nav--guest {
   a {
     display: inline-block;
     margin-left: $standard-padding;

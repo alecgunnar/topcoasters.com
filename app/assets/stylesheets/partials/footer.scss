@@ -1,4 +1,9 @@
 footer {
   text-align: center;
-  margin-top: $standard-padding;
+  color: #CCC;
+  margin-top: $standard-padding * 2;
+
+  a {
+    color: #CCC;
+  }
 }

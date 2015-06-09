@@ -11,6 +11,10 @@
   <%= render 'layouts/parts/header' %>
 
   <div class="wrapper">
+    <section class="flash__container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </section>
     <main>
       <%= yield %>
     </main>

@@ -1,10 +1,28 @@
 form {
- input {
-   width: 100%;
-   font-size: 1em;
-   box-sizing: border-box;
-   border: 0;
-   padding: $standard-padding / 2;
-   outline: 0;
- } 
+  .field {
+    margin-bottom: $standard-padding;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  input {
+    font-size: 1rem;
+    width: 100%;
+    padding: $standard-padding / 2;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  input[type="checkbox"] {
+    width: auto;
+  }
+
+  input[type="submit"] {
+    background: $blue;
+    color: #FFF;
+    border: 0;
+    cursor: pointer;
+  }
 }
