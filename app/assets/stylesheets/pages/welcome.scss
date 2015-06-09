@@ -10,7 +10,6 @@ $slideshow-height: 430px;
 
     width: 100%;
     height: $slideshow-height;
-    margin-left: -1 * $standard-padding;
     margin-bottom: $standard-padding;
     position: relative;
     overflow: hidden;
@@ -73,6 +72,14 @@ $slideshow-height: 430px;
   @media #{$media-desktop} {
     .slideshow {
       margin-left: 0;
+    }
+
+    .left {
+      padding-right: $standard-padding / 2;
+    }
+
+    .right {
+      padding-left: $standard-padding / 2;
     }
   }
 }
