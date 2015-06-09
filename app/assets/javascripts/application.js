@@ -31,4 +31,13 @@ $(document).ready(function() {
       });
     }
   });
+
+  $('#flash__message--notice, #flash__message--alert').each(function() {
+    setTimeout(function() {
+      var $this = $(this);
+      $this.slideUp(function() {
+        this.remove();
+      }.bind($this));
+    }.bind(this), 5000);
+  });
 });
