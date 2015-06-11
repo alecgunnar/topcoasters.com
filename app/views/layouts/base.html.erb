@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Top Coasters - Experience the Top Thrill!</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="<%= controller_name %>">
+    <%= render 'layouts/parts/header' %>
+    <div class="wrapper">
+      <section id="flash__container">
+        <% if notice %><p id="flash__message--notice"><%= notice %></p><% end %>
+        <% if alert %><p id="flash__message--alert"><%= alert %></p><% end %>
+      </section>
+      <main>
+        <%= yield :main %>
+      </main>
+      <%= render 'layouts/parts/footer' %>
+    </div>
+  </body>
+</html>

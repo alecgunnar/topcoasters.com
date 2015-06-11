@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
+
+  def require_sign_in
+    if !user_signed_in?
+      redirect_to new_user_session_path, alert: "You must be signed in!"
+    end
+  end
 end

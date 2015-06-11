@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users
   
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all
@@ -10,6 +8,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/profile', to: 'profile#show'
+
+  # Account Settings
+  devise_scope :user do
+    get '/settings', to: 'users/settings#main'
+  end
 
   if Rails.env.development?
     get '/error/not-found', to:'errors#file_not_found'
