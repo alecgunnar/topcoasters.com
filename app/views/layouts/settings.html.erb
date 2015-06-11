@@ -1,0 +1,21 @@
+<% content_for :main do -%>
+  <h1>Account Settings</h1>
+  <section class="settings__sidebar">
+    <h3>Settings Navigation</h3>
+    <nav>
+      <ul>
+        <li><%= link_to "Account Overview", root_path %></li>
+        <li><%= link_to "Profile Information", root_path %></li>
+        <li><%= link_to "Profile Picture", root_path %></li>
+        <li><%= link_to "Update Track Record", root_path %></li>
+        <li><%= link_to "Change Username", root_path %></li>
+        <li><%= link_to "Change Email Address", root_path %></li>
+        <li><%= link_to "Change Password", root_path %></li>
+      </ul>
+    </nav>
+  </section>
+  <section class="settings__main"><%= yield %></section>
+  <div class="clear"></div>
+<% end -%>
+
+<%= render :file => 'layouts/base' %>

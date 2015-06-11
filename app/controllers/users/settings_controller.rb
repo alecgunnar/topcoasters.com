@@ -1,7 +1,7 @@
 class Users::SettingsController < DeviseController
   before_action :require_sign_in
 
-  layout 'account'
+  layout 'settings'
 
   def main
 

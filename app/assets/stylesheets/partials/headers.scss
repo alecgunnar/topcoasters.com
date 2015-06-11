@@ -1,4 +1,5 @@
 h1, h2, h3 {
+  font-weight: 100;
   margin: 0 0 $standard-padding 0;
   padding: 0;
 }
@@ -6,7 +7,6 @@ h1, h2, h3 {
 h3.header--pretty {
 	background: $green;
 	color: #FFF;
-	font-weight: 100;
 	padding: $standard-padding;
 	border-bottom: 3px solid $dark-green;
 }

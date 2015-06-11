@@ -1,0 +1,39 @@
+@import "mixins/_lists";
+
+@media #{$media-tablet} {
+  #settings {
+    .settings__sidebar {
+      float: left;
+      width: 30%;
+
+      h3 {
+        background: #CCC;
+        border-bottom: 3px solid #999;
+        padding: $standard-padding;
+        margin-bottom: 0;
+      }
+
+      nav {
+        @include inline-list;
+
+        a {
+          background: #E1E1E1;
+          color: #000;
+          padding: $standard-padding;
+          border-bottom: 1px solid #999;
+          display: block;
+
+          &:hover {
+            background: #F1F1F1;
+          }
+        }
+      }
+    }
+
+    .settings__main {
+      float: right;
+      width: 68%;
+      margin-left: 2%;
+    }
+  }
+}
