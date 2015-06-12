@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def require_sign_in
     if !user_signed_in?
-      redirect_to new_user_session_path, alert: "You must be signed in!"
+      redirect_to new_user_session_path, alert: "You must be signed in to view that page!"
     end
   end
 end

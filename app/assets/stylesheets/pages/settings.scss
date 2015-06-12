@@ -6,7 +6,7 @@
       float: left;
       width: 30%;
 
-      h3 {
+      h4 {
         background: #CCC;
         border-bottom: 3px solid #999;
         padding: $standard-padding;
@@ -34,6 +34,19 @@
       float: right;
       width: 68%;
       margin-left: 2%;
+
+      h2 {
+        padding: $standard-padding / 2 0;
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  #overview {
+    .overview__profile-pic {
+      float: left;
+      display: inline;
+      margin-right: $standard-padding;
     }
   }
 }

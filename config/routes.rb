@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
-  
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'sign-in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign-in' => 'devise/sessions#create', :as => :user_session
+    delete 'sign-out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all

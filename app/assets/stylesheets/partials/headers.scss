@@ -1,7 +1,24 @@
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-weight: 100;
   margin: 0 0 $standard-padding 0;
   padding: 0;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 2 * $standard-padding;
+}
+
+h2 {
+  font-size: 1.75em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.25em;
 }
 
 h3.header--pretty {

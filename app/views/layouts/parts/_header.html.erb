@@ -7,10 +7,13 @@
     </div>
     <section class="header__member-nav">
       <% if current_user %>
-        Welcome, <%= current_user.username %>
+        <% if current_user.profile_pic_url %>
+          <%= link_to raw("Welcome, #{current_user.username} #{image_tag current_user.profile_pic_url, :class => 'member-nav__profile-pic'}"), profile_path, :class => "member-nav__current-user" %>
+        <% else %>
+          <%= link_to "Welcome, #{current_user.username}", profile_path, :class => "member-nav__current-user" %>
+        <% end %>
         <ul class="header__member-nav--member">
-          <li><%= link_to "Profile", profile_path %></li>
-          <li><%= link_to "Settings", settings_path %></li>
+          <li><%= link_to "My Account", settings_path %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
         </ul>
       <% else %>
