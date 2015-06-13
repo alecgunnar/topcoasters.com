@@ -11,8 +11,11 @@ var mobileNavTogglers   = '.header__main-nav-drop, .header__member-nav-drop',
       member: '.header__member-nav'
     };
 
-$(document).ready(function() {
-  $(mobileNavTogglers).on('click', function() {
+var whenReady = function() {
+  /*
+   * Mobile navigation switches
+   */
+  $(mobileNavTogglers).on('tap', function() {
     var $this    = $(this),
         navClass = mobileNavContainers[$this.attr('data-nav')];
 
@@ -32,7 +35,24 @@ $(document).ready(function() {
     }
   });
 
-  $('#flash__message--notice').each(function() {
-    setTimeout(function() {$(this).fadeOut();}.bind(this), 5000);
+  /*
+   * Desktop/tablet member nav pop down setup
+   */
+  var $memberPopDown = $('.member-nav__member__pop-down');
+
+  $('.member-nav__member').on('click tap', function(e) {
+    e.stopPropagation();
+    console.log('click');
+    $memberPopDown.toggle();
   });
-});
+
+  /*
+   * Document events
+   */
+  $(document).on('click tap', function() {
+    $memberPopDown.hide();
+  });
+};
+
+$(document).ready(whenReady);
+$(document).on('page:load', whenReady);
