@@ -1,9 +1,11 @@
 <div id="overview">
   <h2>Account Overview</h2>
   <div class="message">
-    <div class="overview__profile-pic">
-      <%= image_tag current_user.profile_pic_url %>
-    </div>
+    <% if current_user.profile_pic_url %>
+      <div class="overview__profile-pic">
+        <%= image_tag current_user.profile_pic_url %>
+      </div>
+    <% end %>
     <div class="overview__account-info">
       <h4><%= current_user.username %></h4>
       <p><strong>Account Level:</strong> Member</p>
