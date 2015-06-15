@@ -17,6 +17,6 @@ class Users::AccountController < DeviseController
   private
 
   def profile_data_params
-    params.require(:profile_data).permit(:hometown, :occupation, :birthday)
+    params.require(:profile_data).permit(:hometown, :occupation, :birthday, :website, :interests)
   end
 end

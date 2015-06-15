@@ -13,6 +13,14 @@
       <%= label_tag :birthday %>
       <%= f.date_select :birthday, include_blank: true, start_year: 1920, end_year: 2002 %>
     </div>
+    <div class="form__field">
+      <%= label_tag :website %>
+      <%= f.text_field :website %>
+    </div>
+    <div class="form__field">
+      <%= label_tag :interests %>
+      <%= f.text_field :interests %>
+    </div>
     <%= f.submit 'Save Profile Information' %>
   <% end %>
 </div>
