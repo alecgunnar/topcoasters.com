@@ -2,6 +2,7 @@ require 'digest/md5'
 
 class User < ActiveRecord::Base
   has_one :profile_data, dependent: :destroy
+  belongs_to :level
   after_create :after_create_handler
 
   # Include default devise modules. Others available are:

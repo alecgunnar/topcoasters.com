@@ -19,5 +19,6 @@
 	background-color: $alert-color;
 	color: #FFF;
 	border: 5px solid $dark-alert-color;
-  margin-top: $standard-padding;
+  padding: $standard-padding;
+  margin-bottom: $standard-padding;
 }
