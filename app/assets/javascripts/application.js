@@ -3,6 +3,8 @@
 //= require turbolinks
 //= require_tree .
 
+'use strict';
+
 var mobileNavTogglers   = '.header__main-nav-drop, .header__member-nav-drop',
     mobileNavOpen       = false,
     whichMobileNav      = null,
@@ -12,6 +14,18 @@ var mobileNavTogglers   = '.header__main-nav-drop, .header__member-nav-drop',
     };
 
 var whenReady = function() {
+  /*
+   * Show the notice flash
+   */
+  var $flashContainer = $('#flash__message__container');
+
+  if(typeof $flashContainer !== 'undefined')
+    $flashContainer.fadeIn(function() {
+      setTimeout(function() {
+        $flashContainer.fadeOut();
+      }, 5000);
+    });
+
   /*
    * Mobile navigation switches
    */
@@ -38,11 +52,11 @@ var whenReady = function() {
   /*
    * Desktop/tablet member nav pop down setup
    */
-  var $memberPopDown = $('.member-nav__member__pop-down');
+  var $memberPopDown   = $('.member-nav__member__pop-down'),
+      clickedMemberNav = false;
 
   $('.member-nav__member').on('click tap', function(e) {
-    e.stopPropagation();
-    console.log('click');
+    clickedMemberNav = true;
     $memberPopDown.toggle();
   });
 
@@ -50,7 +64,10 @@ var whenReady = function() {
    * Document events
    */
   $(document).on('click tap', function() {
-    $memberPopDown.hide();
+    if(!clickedMemberNav)
+      $memberPopDown.hide();
+
+    clickedMemberNav = false
   });
 };
 

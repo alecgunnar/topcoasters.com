@@ -1,0 +1,27 @@
+<% content_for :main do -%>
+  <h1>My Account</h1>
+  <section class="account__sidebar">
+    <div class="account__sidebar__menu">
+      <h4>Active Alerts</h4>
+    </div>
+    <div class="account__sidebar__menu">
+      <h4>Private Messages</h4>
+    </div>
+    <div class="account__sidebar__menu">
+      <h4>Account Settings</h4>
+      <nav class="account_sidebar__menu__nav account_sidebar__menu__nav--active">
+        <ul>
+          <li><%= link_to "Profile Information", settings_profile_data_path %></li>
+          <li><%= link_to "Update Track Record", root_path %></li>
+          <li><%= link_to "Change Username", root_path %></li>
+          <li><%= link_to "Change Email Address", root_path %></li>
+          <li><%= link_to "Change Password", root_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+  <section class="account__main"><%= yield %></section>
+  <div class="clear"></div>
+<% end -%>
+
+<%= render :file => 'layouts/base' %>

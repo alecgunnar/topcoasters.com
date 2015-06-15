@@ -11,12 +11,22 @@ form {
     }
   }
 
-  .field {
+  .form__field {
     margin-bottom: $standard-padding;
 
     &:last-of-type {
       margin-bottom: 0;
     }
+
+    &.form__field--checkbox {
+      label {
+        display: inline;
+      }
+    }
+  }
+
+  label {
+    display: block;
   }
 
   input {

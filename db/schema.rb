@@ -11,9 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608234430) do
+ActiveRecord::Schema.define(version: 20150614155236) do
 
-  create_table "users", force: :cascade do |t|
+  create_table "profile_data", force: :cascade do |t|
+    t.string  "hometown"
+    t.date    "birthday"
+    t.string  "occupation"
+    t.string  "website"
+    t.text    "interests"
+    t.integer "first_park"
+    t.integer "home_park"
+    t.integer "favorite_park"
+    t.integer "first_coaster"
+    t.integer "favorite_coaster"
+    t.integer "favorite_steel_coaster"
+    t.integer "favorite_wood_coaster"
+    t.integer "favorite_twisted_coaster"
+    t.integer "favorite_out_and_back_coaster"
+    t.text    "extra_data"
+    t.integer "user_id"
+  end
+
+  add_index "profile_data", ["user_id"], name: "index_profile_data_on_user_id"
+
+  create_table "users", primary_key: "user_id", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

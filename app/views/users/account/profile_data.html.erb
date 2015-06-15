@@ -1,0 +1,18 @@
+<div id="profile_data">
+  <h2>Profile Information</h2>
+  <%= form_for current_user.profile_data, url: :settings_profile_data do |f| %>
+    <div class="form__field">
+      <%= label_tag :hometown %>
+      <%= f.text_field :hometown %>
+    </div>
+    <div class="form__field">
+      <%= label_tag :occupation %>
+      <%= f.text_field :occupation %>
+    </div>
+    <div class="form__field">
+      <%= label_tag :birthday %>
+      <%= f.date_select :birthday, include_blank: true, start_year: 1920, end_year: 2002 %>
+    </div>
+    <%= f.submit 'Save Profile Information' %>
+  <% end %>
+</div>

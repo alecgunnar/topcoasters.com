@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:sessions]
-  as :user do
-    get 'sign-in' => 'devise/sessions#new', :as => :new_user_session
-    post 'sign-in' => 'devise/sessions#create', :as => :user_session
-    delete 'sign-out' => 'devise/sessions#destroy', :as => :destroy_user_session
-  end
-
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all
@@ -14,9 +7,22 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'profile#show'
 
+  devise_for :user, :skip => [:sessions]
+
+  as :user do
+    get 'sign-in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign-in' => 'devise/sessions#create', :as => :user_session
+    delete 'sign-out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   # Account Settings
   devise_scope :user do
-    get '/settings', to: 'users/settings#main'
+    get '/account', to: 'users/account#main'
+
+    scope '/account' do
+      get '/profile', to: 'users/account#profile_data', :as => :settings_profile_data
+      patch '/profile', to: 'users/account#profile_data'
+    end
   end
 
   if Rails.env.development?

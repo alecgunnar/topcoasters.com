@@ -8,13 +8,11 @@
     <%= csrf_meta_tags %>
   </head>
   <body id="<%= controller_name %>">
+    <% if notice %><div id="flash__message__container"><p id="flash__message--notice"><%= notice %></p></div><% end %>
     <%= render 'layouts/parts/header' %>
     <div class="wrapper">
-      <section id="flash__container">
-        <% if notice %><p id="flash__message--notice"><%= notice %></p><% end %>
-        <% if alert %><p id="flash__message--alert"><%= alert %></p><% end %>
-      </section>
       <main>
+        <% if alert %><p id="flash__message--alert"><%= alert %></p><% end %>
         <%= yield :main %>
       </main>
       <%= render 'layouts/parts/footer' %>

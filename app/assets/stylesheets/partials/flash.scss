@@ -1,17 +1,23 @@
-#flash__message--notice,
-#flash__message--alert {
-	padding: $standard-padding;
-	margin: -1 * $standard-padding 0 $standard-padding;
-	border: 5px solid $dark-notice-color;
-	border-top: 0;
+#flash__message__container {
+  width: 100%;
+  height: 0;
+  top: $standard-padding;
+  position: absolute;
+  display: none;
 }
 
 #flash__message--notice {
 	background-color: $notice-color;
+  font-size: .75rem;
+  border: 3px solid $dark-notice-color;
+  width: 300px;
+  margin: 0 auto;
+  padding: $standard-padding / 2;
 }
 
 #flash__message--alert {
 	background-color: $alert-color;
 	color: #FFF;
-	border-color: $dark-alert-color;
+	border: 5px solid $dark-alert-color;
+  margin-top: $standard-padding;
 }
