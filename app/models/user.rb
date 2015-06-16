@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :username, :presence => true, :uniqueness => true
 
@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}"
   end
 
-  def after_create_handler
-    self.create_profile_data user_id: self.user_id
-  end
+  private
+
+    def after_create_handler
+      self.create_profile_data user_id: self.user_id
+    end
 end

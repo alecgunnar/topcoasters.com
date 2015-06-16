@@ -1,6 +1,7 @@
 #sessions,
 #registrations,
-#passwords {
+#passwords,
+#confirmations {
 	@media #{$media-tablet} {
 		.form__wrapper {
 			width: 50%;

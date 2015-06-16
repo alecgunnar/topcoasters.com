@@ -4,8 +4,9 @@ class AddLevelsTable < ActiveRecord::Migration
       t.string :name
       t.boolean :is_admin, default: false
       t.boolean :is_moderator, default: false
+      t.boolean :is_default, default: false
     end
 
-    add_column :users, :level_id, :integer, default: 4
+    add_column :users, :level_id, :integer, default: 4, null: false
   end
 end
