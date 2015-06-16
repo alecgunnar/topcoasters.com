@@ -6,7 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin_level = Level.create name: 'Administrator', is_admin: true, is_moderator: true
+root_level = Level.create name: 'Root', is_admin: true, is_moderator: true
+Level.create name: 'Administrator', is_admin: true, is_moderator: true
 Level.create name: 'Moderator', is_moderator: true
 Level.create name: 'Contributor'
 Level.create name: 'Member', is_default: true
@@ -14,7 +15,7 @@ Level.create name: 'Member', is_default: true
 root                       = User.new
 root.username              = 'Root'
 root.email                 = 'root@domain.com'
-root.level_id              = admin_level.level_id
+root.level_id              = root_level.level_id
 root.password              = '$iamroot'
 root.password_confirmation = '$iamroot'
 root.skip_confirmation!
