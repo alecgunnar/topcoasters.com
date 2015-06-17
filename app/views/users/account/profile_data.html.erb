@@ -1,5 +1,15 @@
 <div id="profile_data">
   <h2>Profile Information</h2>
+  <% if !current_user.profile_data.valid? %>
+    <div class="message message--errors">
+      <p>Please correct the following errors before continuing.</p>
+      <ul>
+      <% current_user.profile_data.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="form__box">
     <%= form_for current_user.profile_data, url: :settings_profile_data do |f| %>
       <div class="form__field">

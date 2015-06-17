@@ -9,8 +9,12 @@ class Users::AccountController < DeviseController
 
   def profile_data
     if request.patch?
-      current_user.profile_data.update profile_data_params
-      redirect_to settings_profile_data_path, notice: 'Your profile information has been saved.'
+      current_user.profile_data.assign_attributes profile_data_params
+
+      if current_user.profile_data.valid?
+        current_user.profile_data.save!
+        redirect_to settings_profile_data_path, notice: 'Your profile information has been saved.'
+      end
     end
   end
 

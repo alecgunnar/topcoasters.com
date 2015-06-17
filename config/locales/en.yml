@@ -22,4 +22,7 @@
 en:
   time:
     formats:
-      datetime: "%B %e, %Y %l:%M %P"
+      datetime: '%B %e, %Y %l:%M %P'
+  errors:
+    messages:
+      on_or_before: 'must be on or before %{restriction}'

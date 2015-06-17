@@ -1,5 +1,10 @@
 .message {
-  background: #F1F1F1;
+  background-color: #F1F1F1;
   padding: $standard-padding;
   margin-bottom: $standard-padding;
+}
+
+.message--errors {
+  background-color: #A00;
+  color: #FFF;
 }
