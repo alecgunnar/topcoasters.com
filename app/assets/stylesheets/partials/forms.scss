@@ -1,3 +1,9 @@
+.form__box {
+  background: #F1F1F1;
+  padding: $standard-padding;
+  margin: $standard-padding 0;
+}
+  
 form {
   #error_explanation {
     background: $alert-color;
