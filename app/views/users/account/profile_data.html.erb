@@ -22,7 +22,7 @@
       </div>
       <div class="form__field">
         <%= label_tag :birthday %>
-        <%= f.date_select :birthday, include_blank: true, start_year: 1920, end_year: 2002 %>
+        <%= f.date_select :birthday, include_blank: true, start_year: Time.now.year - 85, end_year: 13.years.ago.year, :order => [:month, :day, :year] %>
       </div>
       <div class="form__field">
         <%= label_tag :website %>

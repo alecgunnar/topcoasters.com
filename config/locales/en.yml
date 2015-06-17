@@ -20,8 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      default: '%B %e, %Y'
   time:
     formats:
+      default: '%B %e, %Y %l:%M %P'
       datetime: '%B %e, %Y %l:%M %P'
   errors:
     messages:
