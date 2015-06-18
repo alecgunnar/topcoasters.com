@@ -1,4 +1,4 @@
-require 'digest/md5'
+include Gravtastic
 
 class User < ActiveRecord::Base
   has_one :profile_data, dependent: :destroy
@@ -12,10 +12,7 @@ class User < ActiveRecord::Base
 
   validates :username, :presence => true, :uniqueness => true
 
-  def profile_pic_url
-    hash = Digest::MD5.hexdigest(self.email)
-    "http://www.gravatar.com/avatar/#{hash}"
-  end
+  gravtastic :email, :secure => true, :default => :identicon
 
   private
 

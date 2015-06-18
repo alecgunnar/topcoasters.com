@@ -10,7 +10,7 @@
         <div class="member-nav__member">
           Welcome, <%= current_user.username %> <span class="member-nav__alert-count">0</span>
           <div class="member-nav__member__pop-down">
-            <%= image_tag current_user.profile_pic_url, :class => 'member-nav__profile-pic' %>
+            <%= image_tag current_user.gravatar_url, :class => 'member-nav__profile-pic' %>
             <ul>
               <li><%= link_to "My Account", account_path %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>

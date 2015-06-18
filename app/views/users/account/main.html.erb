@@ -1,9 +1,9 @@
 <div id="overview">
   <h2>Account Overview</h2>
   <div class="message">
-    <% if current_user.profile_pic_url %>
+    <% if current_user.gravatar_url %>
       <div class="overview__profile-pic">
-        <%= image_tag current_user.profile_pic_url %>
+        <%= image_tag current_user.gravatar_url %>
       </div>
     <% end %>
     <div class="overview__account-info">
