@@ -1,9 +1,8 @@
 <div class="form__wrapper">
   <h2>Create an Account</h2>
-
+  <%= devise_error_messages! %>
   <div class="form__box">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
 
       <div class="form__field">
         <%= f.label :username %>

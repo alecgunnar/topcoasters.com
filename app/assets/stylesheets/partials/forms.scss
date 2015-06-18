@@ -3,20 +3,8 @@
   padding: $standard-padding;
   margin: $standard-padding 0;
 }
-  
+
 form {
-  #error_explanation {
-    background: $alert-color;
-    color: #FFF;
-    padding: $standard-padding;
-    margin-bottom: $standard-padding;
-
-    h2 {
-      font-size: 1rem;
-      margin-top: 0;
-    }
-  }
-
   .form__field {
     margin-bottom: $standard-padding;
 
@@ -35,10 +23,13 @@ form {
     display: block;
   }
 
-  input {
+  input,
+  select {
+    background: #FFF;
     font-size: 1rem;
     width: 100%;
     padding: $standard-padding / 2;
+    border: 1px solid #999;
     box-sizing: border-box;
     outline: none;
   }
@@ -52,5 +43,10 @@ form {
     color: #FFF;
     border: 0;
     cursor: pointer;
+  }
+
+  select {
+    display: inline;
+    width: auto;
   }
 }
