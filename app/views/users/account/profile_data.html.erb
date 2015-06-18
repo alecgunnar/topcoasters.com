@@ -1,5 +1,5 @@
 <div id="profile_data">
-  <h2>Profile Information</h2>
+  <h2>Account &amp; Profile Settings</h2>
   <% if !current_user.profile_data.valid? %>
     <div class="message message--errors">
       <p>Please correct the following errors before continuing.</p>
@@ -12,27 +12,30 @@
   <% end %>
   <div class="form__box">
     <%= form_for current_user.profile_data, url: :settings_profile_data do |f| %>
-      <div class="form__field">
-        <%= label_tag :hometown %>
-        <%= f.text_field :hometown %>
-      </div>
-      <div class="form__field">
-        <%= label_tag :occupation %>
-        <%= f.text_field :occupation %>
-      </div>
-      <div class="form__field">
-        <%= label_tag :birthday %>
-        <%= f.date_select :birthday, include_blank: true, start_year: Time.now.year - 85, end_year: 13.years.ago.year, :order => [:month, :day, :year] %>
-      </div>
-      <div class="form__field">
-        <%= label_tag :website %>
-        <%= f.text_field :website %>
-      </div>
-      <div class="form__field">
-        <%= label_tag :interests %>
-        <%= f.text_field :interests %>
-      </div>
-      <div class="form__field">
+      <fieldset class="form__section">
+        <h3 class="form__section__head">Profile Information</h3>
+        <div class="form__field">
+          <%= label_tag :hometown %>
+          <%= f.text_field :hometown %>
+        </div>
+        <div class="form__field">
+          <%= label_tag :occupation %>
+          <%= f.text_field :occupation %>
+        </div>
+        <div class="form__field">
+          <%= label_tag :birthday %>
+          <%= f.date_select :birthday, include_blank: true, start_year: Time.now.year - 85, end_year: 13.years.ago.year, :order => [:month, :day, :year] %>
+        </div>
+        <div class="form__field">
+          <%= label_tag :website %>
+          <%= f.text_field :website %>
+        </div>
+        <div class="form__field">
+          <%= label_tag :interests %>
+          <%= f.text_field :interests %>
+        </div>
+      </fieldset>
+      <div class="form__submit">
         <%= f.submit 'Save Profile Information' %>
       </div>
     <% end %>
