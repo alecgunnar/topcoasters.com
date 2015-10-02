@@ -29,7 +29,7 @@ var whenReady = function() {
   /*
    * Mobile navigation switches
    */
-  $(mobileNavTogglers).on('tap', function() {
+  $(mobileNavTogglers).on('tap click', function() {
     var $this    = $(this),
         navClass = mobileNavContainers[$this.attr('data-nav')];
 

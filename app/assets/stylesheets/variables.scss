@@ -1,10 +1,14 @@
-$standard-padding: .6rem;
+$standard-padding: 10px;
+$standard-margin: 10px;
+
 $wrapper-width: 960px;
+$wrapper-large-width: 1200px;
 
 /* Source: https://scotch.io/quick-tips/default-sizes-for-twitter-bootstraps-media-queries */
 $media-phone: "only screen and (min-device-width : 480px)";
 $media-tablet: "only screen and (min-device-width : 768px)";
 $media-desktop: "only screen and (min-device-width : 992px)";
+$media-large-desktop: "only screen and (min-device-width : 1300px)";
 
 $blue: #006594;
 $dark-blue: darken($blue, 10%);
