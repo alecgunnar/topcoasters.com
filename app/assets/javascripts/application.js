@@ -53,6 +53,7 @@ var whenReady = function() {
    * Desktop/tablet member nav pop down setup
    */
   var $memberPopDown   = $('.member-nav__member__pop-down'),
+      permanentPopDown = $memberPopDown.css('display') == 'block',
       clickedMemberNav = false;
 
   $('.member-nav__member').on('click tap', function(e) {
@@ -64,7 +65,7 @@ var whenReady = function() {
    * Document events
    */
   $(document).on('click tap', function() {
-    if(!clickedMemberNav)
+    if(!clickedMemberNav && !permanentPopDown)
       $memberPopDown.hide();
 
     clickedMemberNav = false

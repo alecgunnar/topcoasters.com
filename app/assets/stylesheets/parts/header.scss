@@ -65,13 +65,14 @@ header {
 .nav__main,
 .header__member-nav {
   @include inline-list;
+  display: none;
+}
 
+.nav__main {
   background: #7BC342;
   color: #FFF;
   overflow: hidden;
   border-bottom: 5px solid $dark-green;
-  display: none;
-  margin-bottom: $standard-margin;
 
   li {
     display: block;
@@ -90,12 +91,47 @@ header {
 }
 
 .header__member-nav {
-  background: transparent;
-  border-bottom: 0;
   margin: $standard-margin 0 0;
 
   li a {
     background: $dark-blue;
+  }
+}
+
+.member-nav__member {
+  padding: 0 $standard-padding;
+}
+
+.member-nav__member__pop-down {
+  background: $dark-blue;
+  padding: $standard-padding;
+  display: block;
+
+
+  li {
+    display: block;
+    
+    a {
+      background: transparent;
+    }
+  }
+}
+
+.member-nav__profile-pic {
+  width: 85px;
+  float: left;
+  margin-right: $standard-margin;
+}
+
+.member-nav__alert-count {
+  background: $dark-blue;
+  font-size: .75rem;
+  padding: $standard-padding / 5 $standard-padding / 2;
+  margin-left: $standard-padding * .8;
+  border-radius: 3px;
+
+  &.member-nav__alert-count--alerts {
+    background: #F00;
   }
 }
 
@@ -129,7 +165,7 @@ header {
     .member-nav__member {
       background: $dark-blue;
       border-radius: 5px;
-      padding: $standard-padding / 4 $standard-padding * 4 $standard-padding / 4 $standard-padding;
+      padding: ($standard-padding / 4) ($standard-padding * 4) ($standard-padding / 4) $standard-padding;
       margin-top: -2px;
       float: right;
       cursor: pointer;
@@ -149,18 +185,9 @@ header {
 
     .member-nav__alert-count {
       background: $blue;
-      font-size: .75rem;
-      padding: $standard-padding / 3 $standard-padding / 2;
-      margin-left: $standard-padding * .8;
-      border-radius: 3px;
-
-      &.member-nav__alert-count--alerts {
-        background: #F00;
-      }
     }
 
     .member-nav__member__pop-down {
-      background: $dark-blue;
       border-radius: 5px;
       width: 300px;
       padding: $standard-padding;
@@ -181,11 +208,6 @@ header {
         right: 0;
         top: -3 * $standard-padding;
       }
-    }
-
-    .member-nav__profile-pic {
-      width: 75px;
-      float: left;
     }
   }
 
