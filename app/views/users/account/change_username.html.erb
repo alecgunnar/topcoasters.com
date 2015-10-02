@@ -1,0 +1,19 @@
+<div id="profile_data">
+  <h2>Change Username</h2>
+  <%= error_messages! %>
+  <div class="form__box">
+    <%= form_for resource, :url => :change_username do |f| %>
+      <div class="form__field">
+        <%= label_tag 'New Username' %>
+        <%= f.text_field :username %>
+      </div>
+      <div class="form__field">
+        <%= label_tag 'Password' %>
+        <%= f.password_field :password %>
+      </div>
+      <div class="form__submit">
+        <%= f.submit 'Save Username' %>
+      </div>
+    <% end %>
+  </div>
+</div>

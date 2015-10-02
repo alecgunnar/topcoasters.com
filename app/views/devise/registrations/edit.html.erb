@@ -1,5 +1,5 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-<%= devise_error_messages! %>
+<%= error_messages! %>
 <div class="form__wrapper">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <div class="form__field">

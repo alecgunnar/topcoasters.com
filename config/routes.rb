@@ -20,14 +20,17 @@ Rails.application.routes.draw do
     get '/account', to: 'users/account#main'
 
     scope '/account' do
-      get '/profile', to: 'users/account#profile_data', :as => :settings_profile_data
-      patch '/profile', to: 'users/account#profile_data'
+      get   '/profile-settings'  => 'users/account#profile_data', :as => :profile_settings
+      patch '/profile-settings'  => 'users/account#profile_data'
+
+      get   '/change-username' => 'users/account#change_username', :as => :change_username
+      patch '/change-username' => 'users/account#change_username'
     end
   end
 
   if Rails.env.development?
-    get '/error/not-found', to:'errors#file_not_found'
-    get '/error/server', to:'errors#internal_server_error'
-    get '/error/unprocessable', to:'errors#unprocessable'
+    get '/error/not-found' => 'errors#file_not_found'
+    get '/error/server' => 'errors#internal_server_error'
+    get '/error/unprocessable' => 'errors#unprocessable'
   end
 end
