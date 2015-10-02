@@ -1,0 +1,29 @@
+h1, h2, h3, h4 {
+  font-weight: 100;
+  margin: 0 0 $standard-padding 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.4em;
+  margin-bottom: 2 * $standard-padding;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+h3 {
+  font-size: 1.1em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h2.header--pretty {
+	background: $green;
+	color: #FFF;
+	padding: $standard-padding;
+	border-bottom: 3px solid $dark-green;
+}
