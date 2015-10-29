@@ -40,23 +40,23 @@
   }
 
   .slideshow__slide--voyage-holiday-world-lift-hill {
-    background-image: url('slideshow/the_voyage_holiday_world_lift_hill.jpg');
+    background-image: image-url('slideshow/the_voyage_holiday_world_lift_hill.jpg');
   }
 
   .slideshow__slide--dragster-cedar-point-winter-chillout {
-    background-image: url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
+    background-image: image-url('slideshow/top_thrill_dragster_cedar_point_winter_chillout_2014.jpg');
   }
 
   .slideshow__slide--cheetah-hunt-busch-gardens-tampa-turn {
-    background-image: url('slideshow/cheetah_hunt_busch_gardens_tampa_end.jpg');
+    background-image: image-url('slideshow/cheetah_hunt_busch_gardens_tampa_end.jpg');
   }
 
   .slideshow__slide--kraken-seaworld-orlando-turning-to-diving {
-    background-image: url('slideshow/kraken_seaworld_orlando_airtime.jpg');
+    background-image: image-url('slideshow/kraken_seaworld_orlando_airtime.jpg');
   }
 
   .slideshow__slide--maverick-cedar-point-launched-lift {
-    background-image: url('slideshow/maverick_cedar_point_end_of_lift.jpg');
+    background-image: image-url('slideshow/maverick_cedar_point_end_of_lift.jpg');
   }
 
   .slideshow__slide__text-background {
@@ -72,7 +72,7 @@
 
   @media #{$media-desktop} {
     .slideshow-wrapper {
-      margin: 0 0 $standard-margin;
+      margin: -1 * $standard-margin 0 $standard-margin;
     }
 
     .slideshow {

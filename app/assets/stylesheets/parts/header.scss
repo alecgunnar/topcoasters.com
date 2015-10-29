@@ -7,7 +7,7 @@ $logo-width: 165px;
   background: $dark-green;
 }
 
-header {
+.header {
   background-color: $blue;
   color: #FFF;
   line-height: $logo-height / 3;
@@ -20,7 +20,7 @@ header {
 }
 
 #branding a {
-  background-image: url('logos/standard.png');
+  background-image: image-url('logos/standard.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -45,12 +45,12 @@ header {
 }
 
 .header__main-nav-drop {
-  background-image: url('nav/main_drop.png');
+  background-image: image-url('nav/main_drop.png');
   right: 0;
 }
 
 .header__member-nav-drop {
-  background-image: url('nav/member_drop.png');
+  background-image: image-url('nav/member_drop.png');
   left: 0;
 }
 
@@ -69,7 +69,7 @@ header {
 }
 
 .nav__main {
-  background: #7BC342;
+  background: $green;
   color: #FFF;
   overflow: hidden;
   border-bottom: 5px solid $dark-green;
@@ -91,14 +91,18 @@ header {
 }
 
 .header__member-nav {
+  text-align: center;
   margin: $standard-margin 0 0;
+}
 
+.header__member-nav--member {
   li a {
     background: $dark-blue;
   }
 }
 
 .member-nav__member {
+  text-align: left;
   padding: 0 $standard-padding;
 }
 
@@ -136,7 +140,7 @@ header {
 }
 
 @media #{$media-desktop}  {
-  header {
+  .header {
     line-height: $logo-height / 2.75;
 
     .wrapper {
@@ -213,6 +217,7 @@ header {
 
   .nav__main {
     display: block;
+    margin-bottom: $standard-margin;
 
     ul {
       width: 100%;

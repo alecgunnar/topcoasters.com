@@ -1,4 +1,4 @@
-<header>
+<header class="header">
   <div class="wrapper">
     <div class="header__main-nav-drop" data-nav="main">Main Nav</div>
     <div class="header__member-nav-drop" data-nav="member">Member Nav</div>
@@ -13,7 +13,7 @@
             <%= image_tag current_user.gravatar_url, :class => 'member-nav__profile-pic' %>
             <ul>
               <li><%= link_to "My Profile", profile_path %></li>
-              <li><%= link_to "My Account", account_path %></li>
+              <li><%= link_to "Account Settings", account_path %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
             </ul>
             <div class="clear"></div>
@@ -32,7 +32,6 @@
   <div class="wrapper">
     <ul>
       <li><%= link_to 'Home', root_path, {id: 'nav__home'} %></li>
-      <li><a href="/forum">Forum</a></li>
       <li><a href="/database">Database</a></li>
       <li><a href="/search">Search</a></li>
     </ul>
