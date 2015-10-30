@@ -18,7 +18,7 @@ class AddUserProfileTable < ActiveRecord::Migration
       t.text :extra_data
     end
 
-    add_belongs_to :profile_data, :user, index: true, foreign_key: true
+    add_foreign_key :profile_data, :user
 
     User.all do |u|
       ProfileData.create user_id: u.id
