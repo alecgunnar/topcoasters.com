@@ -1,0 +1,8 @@
+db:
+  adapter: mysql
+  pool: 5
+  timeout: 5000
+  database: topcoasters
+  username: root
+  password: 
+  host: localhost

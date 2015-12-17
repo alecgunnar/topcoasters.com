@@ -2,24 +2,17 @@ default: &default
   adapter: mysql
   pool: 5
   timeout: 5000
+  database: <%= PRIVATE['database']['database'] %>
+  username: <%= PRIVATE['database']['username'] %>
+  password: <%= PRIVATE['database']['password'] %>
+  host: <%= PRIVATE['database']['host'] %>
 
 development:
   <<: *default
-  database: topcoasters
-  username: root
-  password: 
-  host: localhost
 
 test:
   <<: *default
-  database: topcoasters
-  username: root
-  password: 
-  host: localhost
 
 production:
   <<: *default
-  database: <%= ENV["DATABASE_NAME"] %>
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_HOST"] %>
+
