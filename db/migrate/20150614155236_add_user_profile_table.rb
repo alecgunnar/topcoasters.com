@@ -16,12 +16,13 @@ class AddUserProfileTable < ActiveRecord::Migration
       t.integer :favorite_twisted_coaster
       t.integer :favorite_out_and_back_coaster
       t.text :extra_data
+      t.integer :user_id
     end
 
-    add_foreign_key :profile_data, :user
+    add_foreign_key :profile_data, :users
 
     User.all do |u|
-      ProfileData.create user_id: u.id
+      ProfileData.create :user_id => u.id
     end
   end
 end

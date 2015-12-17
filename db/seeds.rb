@@ -15,7 +15,7 @@ Level.create name: 'Member', is_default: true
 root                       = User.new
 root.username              = 'Root'
 root.email                 = 'root@domain.com'
-root.level_id              = root_level.level_id
+root.level_id              = root_level.id
 root.password              = '$iamroot'
 root.password_confirmation = '$iamroot'
 root.skip_confirmation!

@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
   gravtastic :email, :secure => true, :default => :identicon
 
   private
-
     def after_create_handler
-      self.create_profile_data user_id: self.user_id
+      ProfileData.create :user_id => self.id
     end
 end
