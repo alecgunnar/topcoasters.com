@@ -56,7 +56,7 @@
     {{ content|raw }}
   </div>
   <div id="footer">
-    Top Coasters &copy; 2009 - {{ "now"|date('Y') }} <a href="http://www.aleccarpenter.me/" target="_blank">Alec Carpenter</a> <strong>&middot;</strong> <a href="/terms-of-use">Terms of Use & Privacy Policy</a>
+    Top Coasters &copy; 2009 - {{ "now"|date('Y') }} <a href="http://www.aleccarpenter.com/" target="_blank">Alec Carpenter</a> <strong>&middot;</strong> <a href="/terms-of-use">Terms of Use &amp; Privacy Policy</a>
   </div>
 </div>
 <div id="scrollToTop" title="Jump to Top">Top</div>
